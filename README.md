@@ -12,7 +12,16 @@ text, plus **Teal** and **Rose** Islands accents. Accent presets keep the palett
 syntax colors. All palettes include coordinated diff and console colors.
 
 Requires **IntelliJ Platform 2025.3 or newer**.
-See [IDE screenshots](docs/screenshots/README.md).
+
+## Preview
+
+Spectrum Islands Contrast, compact mode, with No Italics:
+
+![Spectrum Islands Contrast editor preview](docs/screenshots/spectrum-contrast-compact.png)
+
+Spectrum Islands Teal in the diff viewer:
+
+![Spectrum Islands Teal diff preview](docs/screenshots/spectrum-teal-diff.png)
 
 ## Build and install
 
