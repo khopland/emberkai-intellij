@@ -1,0 +1,28 @@
+{
+  "name": "Emberkai Islands (Machine Teal)",
+  "dark": true,
+  "author": "khopland",
+  "parentTheme": "001053df-86c9-4105-943d-fc0fc7441e95",
+  "editorScheme": "/schemes/machine.xml",
+  "colors": {
+    "accent": "#7cd5f1",
+    "accent-brand-bg": "#7cd5f1",
+    "accent-brand-border": "#7cd5f1",
+    "text-link": "#7cd5f1",
+    "popup-completion-match-text": "#7cd5f1",
+    "accent-muted": "#364f58",
+    "accent-brand-bg-secondary": "#364f58",
+    "toolbar-selected-bg": "#364f58",
+    "selection-bg-active": "#364f58",
+    "selection-bg-active-muted": "#364f58",
+    "tab-selected-bg-active": "#364f58",
+    "SelectionActive": "#364f58",
+    "accent-brand-border-secondary": "#528394",
+    "toolbar-selected-bg-hovered": "#528394",
+    "tab-selected-border-active": "#528394"
+  },
+  "ui": {
+    "EditorTabs.underlinedTabForeground": "foreground",
+    "ToolWindow.Button.selectedForeground": "surface"
+  }
+}

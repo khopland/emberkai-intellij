@@ -1,0 +1,28 @@
+{
+  "name": "Emberkai Islands (Ristretto Teal)",
+  "dark": true,
+  "author": "khopland",
+  "parentTheme": "c371d97a-eb44-40e1-ab8a-0a0cd87656e1",
+  "editorScheme": "/schemes/ristretto.xml",
+  "colors": {
+    "accent": "#85dacc",
+    "accent-brand-bg": "#85dacc",
+    "accent-brand-border": "#85dacc",
+    "text-link": "#85dacc",
+    "popup-completion-match-text": "#85dacc",
+    "accent-muted": "#3c4643",
+    "accent-brand-bg-secondary": "#3c4643",
+    "toolbar-selected-bg": "#3c4643",
+    "selection-bg-active": "#3c4643",
+    "selection-bg-active-muted": "#3c4643",
+    "tab-selected-bg-active": "#3c4643",
+    "SelectionActive": "#3c4643",
+    "accent-brand-border-secondary": "#588078",
+    "toolbar-selected-bg-hovered": "#588078",
+    "tab-selected-border-active": "#588078"
+  },
+  "ui": {
+    "EditorTabs.underlinedTabForeground": "foreground",
+    "ToolWindow.Button.selectedForeground": "surface"
+  }
+}

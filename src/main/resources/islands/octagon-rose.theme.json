@@ -1,0 +1,28 @@
+{
+  "name": "Emberkai Islands (Octagon Rose)",
+  "dark": true,
+  "author": "khopland",
+  "parentTheme": "118660e7-13b1-4d5f-8989-3ed31a3c2df6",
+  "editorScheme": "/schemes/octagon.xml",
+  "colors": {
+    "accent": "#ff657a",
+    "accent-brand-bg": "#ff657a",
+    "accent-brand-border": "#ff657a",
+    "text-link": "#ff657a",
+    "popup-completion-match-text": "#ff657a",
+    "accent-muted": "#4f3546",
+    "accent-brand-bg-secondary": "#4f3546",
+    "toolbar-selected-bg": "#4f3546",
+    "selection-bg-active": "#4f3546",
+    "selection-bg-active-muted": "#4f3546",
+    "tab-selected-bg-active": "#4f3546",
+    "SelectionActive": "#4f3546",
+    "accent-brand-border-secondary": "#94485a",
+    "toolbar-selected-bg-hovered": "#94485a",
+    "tab-selected-border-active": "#94485a"
+  },
+  "ui": {
+    "EditorTabs.underlinedTabForeground": "foreground",
+    "ToolWindow.Button.selectedForeground": "surface"
+  }
+}

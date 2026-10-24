@@ -109,6 +109,10 @@
       "Stripe": {
         "background": "main-window-bg",
         "borderColor": "transparent"
+      },
+      "Button": {
+        "selectedForeground": "surface",
+        "selectedBackground": "accent"
       }
     },
     "Editor.background": "editor-bg",

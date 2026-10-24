@@ -1,0 +1,28 @@
+{
+  "name": "Emberkai Islands (Rose)",
+  "dark": true,
+  "author": "khopland",
+  "parentTheme": "cb4ef67d-a446-4ffc-a0d8-75b28f21e5b3",
+  "editorScheme": "/schemes/default.xml",
+  "colors": {
+    "accent": "#ff6188",
+    "accent-brand-bg": "#ff6188",
+    "accent-brand-border": "#ff6188",
+    "text-link": "#ff6188",
+    "popup-completion-match-text": "#ff6188",
+    "accent-muted": "#53343e",
+    "accent-brand-bg-secondary": "#53343e",
+    "toolbar-selected-bg": "#53343e",
+    "selection-bg-active": "#53343e",
+    "selection-bg-active-muted": "#53343e",
+    "tab-selected-bg-active": "#53343e",
+    "SelectionActive": "#53343e",
+    "accent-brand-border-secondary": "#96465b",
+    "toolbar-selected-bg-hovered": "#96465b",
+    "tab-selected-border-active": "#96465b"
+  },
+  "ui": {
+    "EditorTabs.underlinedTabForeground": "foreground",
+    "ToolWindow.Button.selectedForeground": "surface"
+  }
+}
