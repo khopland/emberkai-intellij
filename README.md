@@ -5,6 +5,10 @@ A dark theme collection for IntelliJ-based IDEs, with original and Islands style
 Includes six palettes: Default, Classic, Machine, Octagon, Ristretto, and Spectrum,
 plus optional **No Italics** editor schemes.
 
+Spectrum includes palette-matched diff and console colors, a **Spectrum Contrast**
+option with brighter comments and secondary text, and **Spectrum Teal** and
+**Spectrum Rose** Islands accents. The accent presets keep Spectrum's syntax colors.
+
 Requires **IntelliJ Platform 2025.3 or newer**.
 
 ## Build and install

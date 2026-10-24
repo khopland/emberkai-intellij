@@ -1,0 +1,28 @@
+{
+  "name": "Emberkai Islands (Spectrum Rose)",
+  "dark": true,
+  "author": "khopland",
+  "parentTheme": "6f67444a-949d-4956-9d05-bb6ceae75572",
+  "editorScheme": "/schemes/spectrum.xml",
+  "colors": {
+    "accent": "#fc618d",
+    "accent-brand-bg": "#fc618d",
+    "accent-brand-border": "#fc618d",
+    "text-link": "#fc618d",
+    "popup-completion-match-text": "#fc618d",
+    "accent-muted": "#492d35",
+    "accent-brand-bg-secondary": "#492d35",
+    "toolbar-selected-bg": "#492d35",
+    "selection-bg-active": "#492d35",
+    "selection-bg-active-muted": "#492d35",
+    "tab-selected-bg-active": "#492d35",
+    "SelectionActive": "#492d35",
+    "accent-brand-border-secondary": "#8f4258",
+    "toolbar-selected-bg-hovered": "#8f4258",
+    "tab-selected-border-active": "#8f4258"
+  },
+  "ui": {
+    "EditorTabs.underlinedTabForeground": "foreground",
+    "ToolWindow.Button.selectedForeground": "surface"
+  }
+}

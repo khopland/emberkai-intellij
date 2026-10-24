@@ -9,7 +9,8 @@
   <p>Emberkai is a dark theme collection for IntelliJ-based IDEs.</p>
   <p>Includes Classic, Filter Machine, Filter Octagon, Filter Ristretto, and
   Filter Spectrum variants, with optional No Italics editor color schemes.
-  Every palette is available with the original layout and the Islands design.</p>
+  Every palette is available with the original layout and the Islands design.
+  Spectrum also includes a Contrast variant and Teal and Rose Islands accents.</p>
   <p>Theme color credits:
   <a href="https://github.com/tautastic/neokai">Neokai by tautastic</a> and
   Monokai Pro Theme 1.10.</p>
@@ -31,11 +32,17 @@
     <themeProvider id="c371d97a-eb44-40e1-ab8a-0a0cd87656e1" path="/islands/ristretto.theme.json"/>
     <themeProvider id="6f67444a-949d-4956-9d05-bb6ceae75572" path="/islands/spectrum.theme.json"/>
 
+    <themeProvider id="60645b55-7ac6-44b4-a23e-3ce35df829fa" path="/spectrum-contrast.theme.json"/>
+    <themeProvider id="3201fbb7-59f3-4f47-9803-c70924cd923f" path="/islands/spectrum-contrast.theme.json"/>
+    <themeProvider id="6d2e5f19-84f2-4590-a3b2-04c56e299c43" path="/islands/spectrum-teal.theme.json"/>
+    <themeProvider id="68794a74-fbdf-4cc3-b010-23a06b405f54" path="/islands/spectrum-rose.theme.json"/>
+
     <bundledColorScheme id="Emberkai (Classic) - No Italics" path="schemes/classic-no-italics"/>
     <bundledColorScheme id="Emberkai (Filter Machine) - No Italics" path="schemes/machine-no-italics"/>
     <bundledColorScheme id="Emberkai (Filter Octagon) - No Italics" path="schemes/octagon-no-italics"/>
     <bundledColorScheme id="Emberkai (Filter Ristretto) - No Italics" path="schemes/ristretto-no-italics"/>
     <bundledColorScheme id="Emberkai (Filter Spectrum) - No Italics" path="schemes/spectrum-no-italics"/>
     <bundledColorScheme id="Emberkai - No Italics" path="schemes/default-no-italics"/>
+    <bundledColorScheme id="Emberkai (Spectrum Contrast) - No Italics" path="schemes/spectrum-contrast-no-italics"/>
   </extensions>
 </idea-plugin>
