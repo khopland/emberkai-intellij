@@ -7,7 +7,7 @@ plus optional **No Italics** editor schemes.
 
 Every palette includes a **Contrast** option with brighter comments and secondary
 text, plus **Teal** and **Rose** Islands accents. Accent presets keep the palette's
-syntax colors. Spectrum also includes refined diff and console colors.
+syntax colors. All palettes include coordinated diff and console colors.
 
 Requires **IntelliJ Platform 2025.3 or newer**.
 
