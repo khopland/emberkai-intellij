@@ -24,6 +24,13 @@
     <themeProvider id="5382b69b-44d5-496a-9c58-f8985fa87747" path="/spectrum.theme.json"/>
     <themeProvider id="086b65ab-cd57-47b0-a122-5ddc7cd45535" path="/default.theme.json"/>
 
+    <themeProvider id="cb4ef67d-a446-4ffc-a0d8-75b28f21e5b3" path="/islands/default.theme.json"/>
+    <themeProvider id="1937d546-63a4-48a2-9172-497d76ffdd7a" path="/islands/classic.theme.json"/>
+    <themeProvider id="001053df-86c9-4105-943d-fc0fc7441e95" path="/islands/machine.theme.json"/>
+    <themeProvider id="118660e7-13b1-4d5f-8989-3ed31a3c2df6" path="/islands/octagon.theme.json"/>
+    <themeProvider id="c371d97a-eb44-40e1-ab8a-0a0cd87656e1" path="/islands/ristretto.theme.json"/>
+    <themeProvider id="6f67444a-949d-4956-9d05-bb6ceae75572" path="/islands/spectrum.theme.json"/>
+
     <bundledColorScheme id="Emberkai (Classic) - No Italics" path="schemes/classic-no-italics"/>
     <bundledColorScheme id="Emberkai (Filter Machine) - No Italics" path="schemes/machine-no-italics"/>
     <bundledColorScheme id="Emberkai (Filter Octagon) - No Italics" path="schemes/octagon-no-italics"/>
