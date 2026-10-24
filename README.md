@@ -29,8 +29,11 @@ Optional [semantic highlighting](docs/semantic-highlighting.md) gives individual
 parameters and local variables colors from a range matched to your palette.
 
 To preview in a development IDE, run `./gradlew runIde`.
-Checks: `./gradlew check verifyPluginStructure`. See [validation](docs/validation.md)
+Checks: `./gradlew check verifyPluginStructure verifyPlugin`. See [validation](docs/validation.md)
 for the visual smoke test.
+
+[Release instructions](docs/releasing.md) · [Changelog](CHANGELOG.md) ·
+[Report an issue](https://github.com/khopland/emberkai-intellij/issues)
 
 ## Credits
 

@@ -1,6 +1,6 @@
 # Theme validation
 
-Run `./gradlew check verifyPluginStructure buildPlugin` before submitting changes.
+Run `./gradlew check verifyPluginStructure verifyPlugin buildPlugin` before submitting changes.
 Use `-PplatformVersion=2025.3.6.1` to check the oldest supported IDE, or
 `-PplatformLocalPath=/path/to/IDE` to use a local installation.
 
@@ -12,7 +12,9 @@ It also checks the five native semantic color stops in every scheme, all 21
 interpolated shades against the editor and caret-row backgrounds (4.5:1, or
 5.5:1 for Contrast), and the native opt-in toggle. A running IDE may further
 adjust semantic shades around its language-specific diagnostic colors.
-GitHub Actions runs this check and the plugin packaging checks on IntelliJ
+`verifyPlugin` also runs JetBrains Plugin Verifier against the selected IDE,
+with reports under `build/reports/pluginVerifier/`.
+GitHub Actions runs these checks on IntelliJ
 2025.3, 2026.1, and 2026.2. The newest target also uploads an installable ZIP.
 
 These checks are headless. Use `./gradlew runIde` for a visual smoke test:
@@ -48,6 +50,8 @@ Checked in an isolated IntelliJ IDEA 2026.2.3 instance on macOS:
   explicit Java mappings now follow each palette's generic static-method style.
 - Spectrum Teal in the native diff viewer. [Screenshots](screenshots/README.md)
   are direct IDE captures.
+- Installed the prepared 1.0.0 ZIP through Install Plugin from Disk in a fresh
+  IDE profile, restarted, and confirmed Emberkai Theme 1.0.0 was enabled.
 
-The 2025.3 and 2026.1 compatibility checks use the native readers headlessly;
+The 2025.3 and 2026.1 compatibility checks use native readers and Plugin Verifier;
 live UI checks were performed on 2026.2.3.

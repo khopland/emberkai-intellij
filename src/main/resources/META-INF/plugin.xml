@@ -7,15 +7,33 @@
   <description>
   <![CDATA[
   <p>Emberkai is a dark theme collection for IntelliJ-based IDEs.</p>
-  <p>Includes Classic, Filter Machine, Filter Octagon, Filter Ristretto, and
-  Filter Spectrum variants, with optional No Italics editor color schemes.
-  Every palette is available with the original layout and the Islands design.
-  Every palette also includes a Contrast variant and Teal and Rose Islands accents.</p>
+  <p>Choose from six palettes: Default, Classic, Machine, Octagon, Ristretto, and
+  Spectrum. Each includes original and Islands layouts, a Contrast option with
+  brighter secondary text, and Teal and Rose Islands accents.</p>
+  <p>Includes optional No Italics editor schemes, coordinated diff and console
+  colors, and palette-matched semantic highlighting for parameters and local
+  variables. Semantic highlighting is off by default.</p>
+  <p>Requires IntelliJ Platform 2025.3 or newer. Select a theme under
+  Settings &gt; Appearance &amp; Behavior &gt; Appearance.</p>
+  <p><a href="https://github.com/khopland/emberkai-intellij/issues">Report an issue</a> |
+  <a href="https://github.com/khopland/emberkai-intellij">Source code</a> |
+  <a href="https://github.com/khopland/emberkai-intellij/blob/main/LICENSE">Apache 2.0 license</a></p>
   <p>Theme color credits:
   <a href="https://github.com/tautastic/neokai">Neokai by tautastic</a> and
   <a href="https://github.com/espositocode/monokai-pro">Monokai Pro Theme 1.10 by Subtheme</a>.</p>
   ]]>
   </description>
+
+  <change-notes>
+  <![CDATA[
+  <p>1.0.0 — Initial Emberkai release.</p>
+  <ul>
+    <li>Six palettes with original and Islands layouts, Contrast variants, and Teal and Rose Islands accents.</li>
+    <li>Matching No Italics editor schemes.</li>
+    <li>Coordinated diff, console, and optional semantic highlighting colors.</li>
+  </ul>
+  ]]>
+  </change-notes>
 
   <extensions defaultExtensionNs="com.intellij">
     <themeProvider id="5ba1cb0f-1e76-484f-9a4d-f053b22d61a9" path="/classic.theme.json"/>
