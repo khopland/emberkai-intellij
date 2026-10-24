@@ -25,6 +25,9 @@ See [IDE screenshots](docs/screenshots/README.md).
 2. Choose an Emberkai theme under **Settings → Appearance & Behavior → Appearance**.
 3. For no italics, choose the matching scheme under **Settings → Editor → Color Scheme**.
 
+Optional [semantic highlighting](docs/semantic-highlighting.md) gives individual
+parameters and local variables colors from a range matched to your palette.
+
 To preview in a development IDE, run `./gradlew runIde`.
 Checks: `./gradlew check verifyPluginStructure`. See [validation](docs/validation.md)
 for the visual smoke test.
