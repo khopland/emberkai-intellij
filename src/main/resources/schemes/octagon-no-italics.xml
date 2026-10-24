@@ -3628,5 +3628,17 @@
         <option name="FOREGROUND" value="#a4abae" />
       </value>
     </option>
+    <option name="STATIC_METHOD_ATTRIBUTES">
+      <value>
+        <option name="FOREGROUND" value="#bad761" />
+        
+      </value>
+    </option>
+    <option name="STATIC_METHOD_IMPORTED_ATTRIBUTES">
+      <value>
+        <option name="FOREGROUND" value="#bad761" />
+        
+      </value>
+    </option>
   </attributes>
 </scheme>

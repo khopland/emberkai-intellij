@@ -138,6 +138,8 @@ class ThemeCheck {
       var attrs=attributes(scheme); var colors=colors(scheme);
       var original=attributes(xml(RESOURCES.resolve("schemes/"+family+".xml")));
       Color background=attrs.get("TEXT").getBackgroundColor();
+      for (String key : List.of("STATIC_METHOD_ATTRIBUTES", "STATIC_METHOD_IMPORTED_ATTRIBUTES"))
+        check(attrs.get("DEFAULT_STATIC_METHOD").equals(attrs.get(key)), "Java static methods follow palette/font style: " + key);
       check(background.equals(original.get("TEXT").getBackgroundColor()),"Preserved background: "+theme.getName());
       for (String key : original.keySet()) {
         if (key.startsWith("DEFAULT_") && !key.contains("COMMENT"))
