@@ -14,8 +14,8 @@
     <option name="CARET_ROW_COLOR" value="#2b2b2b" />
     <option name="CONSOLE_BACKGROUND_KEY" value="#222222" />
     <option name="DELETED_LINES_COLOR" value="#fc618d" />
-    <option name="DIFF_SEPARATORS_BACKGROUND" value="1e2a30" />
-    <option name="DIFF_SEPARATORS_TOP_BORDER" value="1b262b" />
+    <option name="DIFF_SEPARATORS_BACKGROUND" value="#222222" />
+    <option name="DIFF_SEPARATORS_TOP_BORDER" value="#363537" />
     <option name="DOCUMENTATION_COLOR" value="#363537" />
     <option name="FILESTATUS_ADDED" value="#7bd88f" />
     <option name="FILESTATUS_COPIED" value="#7bd88f" />
@@ -34,9 +34,9 @@
     <option name="FILESTATUS_NOT_CHANGED_RECURSIVE" value="#5ad4e6" />
     <option name="FILESTATUS_SUPPRESSED" value="#69676c" />
     <option name="FILESTATUS_SWITCHED" value="#948ae3" />
-    <option name="FILESTATUS_UNKNOWN" value="f59762" />
+    <option name="FILESTATUS_UNKNOWN" value="#fd9353" />
     <option name="FILESTATUS_addedOutside" value="#7bd88f" />
-    <option name="FILESTATUS_changelistConflict" value="f65f87" />
+    <option name="FILESTATUS_changelistConflict" value="#fd9353" />
     <option name="FILESTATUS_modifiedOutside" value="#5ad4e6" />
     <option name="GUTTER_BACKGROUND" value="#222222" />
     <option name="INDENT_GUIDE" value="#2b2b2b" />
@@ -45,7 +45,7 @@
     <option name="LINE_NUMBER_ON_CARET_ROW_COLOR" value="c1c0c0" />
     <option name="LOOKUP_COLOR" value="#363537" />
     <option name="METHOD_SEPARATORS_COLOR" value="59575a" />
-    <option name="MODIFIED_LINES_COLOR" value="#fd9353" />
+    <option name="MODIFIED_LINES_COLOR" value="#5ad4e6" />
     <option name="MT_IGNORE.PROJECT_VIEW.IGNORED" value="ab7967" />
     <option name="MT_SUPPRESSED" value="eeffff" />
     <option name="NOTIFICATION_BACKGROUND" value="19181a" />
@@ -254,17 +254,17 @@
     </option>
     <option name="CONSOLE_BLUE_BRIGHT_OUTPUT">
       <value>
-        <option name="FOREGROUND" value="#fd9353" />
+        <option name="FOREGROUND" value="#9ab5ea" />
       </value>
     </option>
     <option name="CONSOLE_BLUE_OUTPUT">
       <value>
-        <option name="FOREGROUND" value="#fd9353" />
+        <option name="FOREGROUND" value="#80a4e4" />
       </value>
     </option>
     <option name="CONSOLE_CYAN_BRIGHT_OUTPUT">
       <value>
-        <option name="FOREGROUND" value="#5ad4e6" />
+        <option name="FOREGROUND" value="#7ddaec" />
       </value>
     </option>
     <option name="CONSOLE_CYAN_OUTPUT">
@@ -279,12 +279,12 @@
     </option>
     <option name="CONSOLE_GRAY_OUTPUT">
       <value>
-        <option name="FOREGROUND" value="#8b888f" />
+        <option name="FOREGROUND" value="#c8c0d2" />
       </value>
     </option>
     <option name="CONSOLE_GREEN_BRIGHT_OUTPUT">
       <value>
-        <option name="FOREGROUND" value="#7bd88f" />
+        <option name="FOREGROUND" value="#96dea8" />
       </value>
     </option>
     <option name="CONSOLE_GREEN_OUTPUT">
@@ -294,7 +294,7 @@
     </option>
     <option name="CONSOLE_MAGENTA_BRIGHT_OUTPUT">
       <value>
-        <option name="FOREGROUND" value="#948ae3" />
+        <option name="FOREGROUND" value="#aaa1e9" />
       </value>
     </option>
     <option name="CONSOLE_MAGENTA_OUTPUT">
@@ -307,17 +307,12 @@
         <option name="FOREGROUND" value="#f7f1ff" />
       </value>
     </option>
-    <option name="CONSOLE_OUTPUT">
-      <value>
-        <option name="BACKGROUND" value="#f7f1ff" />
-      </value>
-    </option>
     <option name="CONSOLE_RANGE_TO_EXECUTE">
       <value />
     </option>
     <option name="CONSOLE_RED_BRIGHT_OUTPUT">
       <value>
-        <option name="FOREGROUND" value="#fc618d" />
+        <option name="FOREGROUND" value="#fb81a6" />
       </value>
     </option>
     <option name="CONSOLE_RED_OUTPUT">
@@ -327,7 +322,7 @@
     </option>
     <option name="CONSOLE_SYSTEM_OUTPUT">
       <value>
-        <option name="FOREGROUND" value="#f7f1ff" />
+        <option name="FOREGROUND" value="#aaa3b3" />
       </value>
     </option>
     <option name="CONSOLE_USER_INPUT">
@@ -345,7 +340,7 @@
     </option>
     <option name="CONSOLE_YELLOW_BRIGHT_OUTPUT">
       <value>
-        <option name="FOREGROUND" value="#fce566" />
+        <option name="FOREGROUND" value="#fbe888" />
       </value>
     </option>
     <option name="CONSOLE_YELLOW_OUTPUT">
@@ -722,26 +717,30 @@
     </option>
     <option name="DIFF_CONFLICT">
       <value>
-        <option name="BACKGROUND" value="4b1515" />
-        <option name="ERROR_STRIPE_COLOR" value="b03435" />
+        <option name="BACKGROUND" value="4e392c" />
+        <option name="ERROR_STRIPE_COLOR" value="fd9353" />
+        <option name="FOREGROUND" value="382d27" />
       </value>
     </option>
     <option name="DIFF_DELETED">
       <value>
-        <option name="BACKGROUND" value="41454b" />
-        <option name="ERROR_STRIPE_COLOR" value="656e76" />
+        <option name="BACKGROUND" value="4e2f37" />
+        <option name="ERROR_STRIPE_COLOR" value="fc618d" />
+        <option name="FOREGROUND" value="38282d" />
       </value>
     </option>
     <option name="DIFF_INSERTED">
       <value>
-        <option name="BACKGROUND" value="264b33" />
-        <option name="ERROR_STRIPE_COLOR" value="447152" />
+        <option name="BACKGROUND" value="344638" />
+        <option name="ERROR_STRIPE_COLOR" value="7bd88f" />
+        <option name="FOREGROUND" value="2b342d" />
       </value>
     </option>
     <option name="DIFF_MODIFIED">
       <value>
-        <option name="BACKGROUND" value="12404b" />
-        <option name="ERROR_STRIPE_COLOR" value="43698d" />
+        <option name="BACKGROUND" value="2d4649" />
+        <option name="ERROR_STRIPE_COLOR" value="5ad4e6" />
+        <option name="FOREGROUND" value="283436" />
       </value>
     </option>
     <option name="DUPLICATE_FROM_SERVER">
@@ -3857,6 +3856,16 @@
       <value>
         <option name="FOREGROUND" value="#fce566" />
         <option name="EFFECT_TYPE" value="5" />
+      </value>
+    </option>
+    <option name="CONSOLE_BLACK_OUTPUT">
+      <value>
+        <option name="FOREGROUND" value="#777080" />
+      </value>
+    </option>
+    <option name="CONSOLE_DARKGRAY_OUTPUT">
+      <value>
+        <option name="FOREGROUND" value="#a59cae" />
       </value>
     </option>
   </attributes>
