@@ -13,6 +13,9 @@ GitHub Actions runs this check and the plugin packaging checks on IntelliJ
 
 These checks are headless. Use `./gradlew runIde` for a visual smoke test:
 
+Open `docs/samples/pom.xml` as a Maven project to run `EmberkaiDemo.main()`
+and inspect ANSI output in the Run console. The sample requires Java 21+.
+
 - Switch through the six original palettes and their Contrast variants.
 - In Islands, check Spectrum, Contrast, Teal, and Rose with regular and compact
   spacing. Open another window to inspect the inactive frame.
@@ -23,3 +26,21 @@ These checks are headless. Use `./gradlew runIde` for a visual smoke test:
   can be customized separately from the console scheme.
 - Select a matching No Italics scheme under Editor → Color Scheme, then check
   comments, strings, keywords, selection, and the gutter in the sample Java file.
+
+## Visual check, 24 October 2026
+
+Checked in an isolated IntelliJ IDEA 2026.2.3 instance on macOS:
+
+- All six original palettes in the native diff viewer, with added, deleted, and
+  modified lines. Conflict colors were inspected in the IDE's Diff & Merge preview.
+- Islands theme switching, with Spectrum editor syntax, selected tabs and tool
+  windows, regular and compact spacing, and active/inactive window colors.
+- Spectrum ANSI output in the Run console: 16 colors and successful execution.
+- Spectrum Contrast with its No Italics scheme, including comments, class names,
+  and Java static method calls. The check exposed inherited Java method styles;
+  explicit Java mappings now follow each palette's generic static-method style.
+- Spectrum Teal in the native diff viewer. [Screenshots](screenshots/README.md)
+  are direct IDE captures.
+
+The 2025.3 and 2026.1 compatibility checks use the native readers headlessly;
+live UI checks were performed on 2026.2.3.

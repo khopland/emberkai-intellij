@@ -3863,5 +3863,21 @@
         <option name="FOREGROUND" value="#aaa3b3" />
       </value>
     </option>
+    <option name="STATIC_METHOD_ATTRIBUTES">
+      <value>
+        <option name="FOREGROUND" value="#7bd88f" />
+        
+        <option name="FONT_TYPE" value="0" />
+        
+      </value>
+    </option>
+    <option name="STATIC_METHOD_IMPORTED_ATTRIBUTES">
+      <value>
+        <option name="FOREGROUND" value="#7bd88f" />
+        
+        <option name="FONT_TYPE" value="0" />
+        
+      </value>
+    </option>
   </attributes>
 </scheme>

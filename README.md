@@ -1,5 +1,7 @@
 # Emberkai Theme
 
+<img src="src/main/resources/META-INF/pluginIcon.svg" alt="Emberkai ember logo" width="64" height="64">
+
 A dark theme collection for IntelliJ-based IDEs, with original and Islands styles.
 
 Includes six palettes: Default, Classic, Machine, Octagon, Ristretto, and Spectrum,
@@ -10,6 +12,7 @@ text, plus **Teal** and **Rose** Islands accents. Accent presets keep the palett
 syntax colors. All palettes include coordinated diff and console colors.
 
 Requires **IntelliJ Platform 2025.3 or newer**.
+See [IDE screenshots](docs/screenshots/README.md).
 
 ## Build and install
 
@@ -23,8 +26,13 @@ Requires **IntelliJ Platform 2025.3 or newer**.
 3. For no italics, choose the matching scheme under **Settings → Editor → Color Scheme**.
 
 To preview in a development IDE, run `./gradlew runIde`.
+Checks: `./gradlew check verifyPluginStructure`. See [validation](docs/validation.md)
+for the visual smoke test.
 
 ## Credits
 
-[Neokai by tautastic](https://github.com/tautastic/neokai) and Monokai Pro
-Theme 1.10.
+[Neokai by tautastic](https://github.com/tautastic/neokai),
+[Monokai Pro Theme by Subtheme](https://github.com/espositocode/monokai-pro),
+and the original [Monokai color design](https://monokai.pro).
+
+Licensed under [Apache 2.0](LICENSE), with inherited [MIT notices](NOTICE).
