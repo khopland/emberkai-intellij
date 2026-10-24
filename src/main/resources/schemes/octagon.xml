@@ -307,11 +307,6 @@
         <option name="FOREGROUND" value="#eaf2f1" />
       </value>
     </option>
-    <option name="CONSOLE_OUTPUT">
-      <value>
-        <option name="BACKGROUND" value="#eaf2f1" />
-      </value>
-    </option>
     <option name="CONSOLE_RANGE_TO_EXECUTE">
       <value />
     </option>

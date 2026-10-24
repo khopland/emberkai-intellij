@@ -297,11 +297,6 @@
         <option name="FOREGROUND" value="#f2fffc" />
       </value>
     </option>
-    <option name="CONSOLE_OUTPUT">
-      <value>
-        <option name="BACKGROUND" value="#f2fffc" />
-      </value>
-    </option>
     <option name="CONSOLE_RANGE_TO_EXECUTE">
       <value />
     </option>
@@ -324,7 +319,7 @@
       <value>
         <option name="FOREGROUND" value="#7cd5f1" />
         
-        <option name="FONT_TYPE" value="2" />
+        <option name="FONT_TYPE" value="0" />
         
       </value>
     </option>
