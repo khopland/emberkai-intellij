@@ -73,11 +73,14 @@ intellijPlatform {
     pluginVerification {
         // Reuse the target IDE, including each version selected by the CI matrix.
         ides { current() }
-        failureLevel.addAll(
+        failureLevel.set(listOf(
+            VerifyPluginTask.FailureLevel.COMPATIBILITY_PROBLEMS,
+            VerifyPluginTask.FailureLevel.INTERNAL_API_USAGES,
+            VerifyPluginTask.FailureLevel.OVERRIDE_ONLY_API_USAGES,
             VerifyPluginTask.FailureLevel.INVALID_PLUGIN,
             VerifyPluginTask.FailureLevel.MISSING_DEPENDENCIES,
             VerifyPluginTask.FailureLevel.PLUGIN_STRUCTURE_WARNINGS,
-        )
+        ))
     }
 
     signing {
