@@ -2,6 +2,12 @@ import com.intellij.ide.ui.UITheme;
 import com.intellij.ide.ui.UIThemeBean;
 import com.intellij.ide.ui.UIThemeBeanKt;
 import com.intellij.ide.ui.ColorMapKt;
+import com.intellij.codeHighlighting.RainbowHighlighter;
+import com.intellij.lang.Language;
+import com.intellij.openapi.editor.colors.TextAttributesKey;
+import com.intellij.openapi.editor.colors.TextAttributesScheme;
+import com.intellij.openapi.editor.markup.TextAttributes;
+import com.intellij.openapi.options.SchemeMetaInfo;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 import java.awt.Color;
@@ -100,6 +106,52 @@ class ThemeCheck {
     }
     return result;
   }
+
+  // Use the real semantic keys and gradient generator without starting an IDE.
+  // A lightweight scheme avoids application services used to adjust colors
+  // around language-specific diagnostics in a running editor.
+  record SemanticScheme(Map<String,TextAttributes> attributes, Properties getMetaProperties)
+      implements TextAttributesScheme, SchemeMetaInfo {
+    public TextAttributes getAttributes(TextAttributesKey key) {
+      return attributes.get(key.getExternalName());
+    }
+  }
+
+  static void checkSemanticRange(Path path) throws Exception {
+    var root = xml(path);
+    var attrs = attributes(root);
+    var properties = new Properties();
+    if (root.getChild("metaInfo") != null) {
+      for (var entry : root.getChild("metaInfo").getChildren("property"))
+        properties.setProperty(entry.getAttributeValue("name"), entry.getText());
+    }
+    var scheme = new SemanticScheme(attrs, properties);
+    check(!RainbowHighlighter.isRainbowEnabledWithInheritance(scheme, Language.ANY),
+          "Semantic highlighting must remain opt-in: " + path);
+    check(properties.stringPropertyNames().stream().noneMatch(RainbowHighlighter::isRainbowKey),
+          "Do not override language-specific semantic preferences: " + path);
+    check(attrs.keySet().stream().noneMatch(k -> k.startsWith("RAINBOW_TEMP_")),
+          "Do not persist IDE-generated semantic colors: " + path);
+    for (var key : RainbowHighlighter.RAINBOW_COLOR_KEYS) {
+      var value = attrs.get(key.getExternalName());
+      check(value != null && value.getForegroundColor() != null && value.getFontType() == 0,
+            "Plain semantic color stop: " + path + " / " + key);
+    }
+    Color[] generated = RainbowHighlighter.testRainbowGenerateColors(scheme);
+    check(generated.length == 21 && new HashSet<>(List.of(generated)).size() == 21,
+          "Distinct interpolated semantic colors: " + path);
+    Color background = attrs.get("TEXT").getBackgroundColor();
+    Color caretRow = colors(root).get("CARET_ROW_COLOR");
+    double threshold = path.getFileName().toString().contains("-contrast") ? 5.5 : 4.5;
+    for (Color value : generated)
+      check(contrast(value, background) >= threshold && contrast(value, caretRow) >= threshold,
+            "Semantic range readability: " + path);
+    // Check the native on/off toggle against a copy of this scheme's metadata.
+    RainbowHighlighter.setRainbowEnabled(scheme, null, true);
+    check(RainbowHighlighter.isRainbowEnabledWithInheritance(scheme, Language.ANY), "Enable semantics");
+    RainbowHighlighter.setRainbowEnabled(scheme, null, false);
+    check(!RainbowHighlighter.isRainbowEnabledWithInheritance(scheme, Language.ANY), "Disable semantics");
+  }
   public static void main(String[] args) throws Exception {
     RESOURCES = Path.of(args[0]);
     UITheme darcula = builtin(null,"themes/darcula.theme.json","Darcula");
@@ -186,9 +238,12 @@ class ThemeCheck {
         accentThemes++;
       }
     }
-    int noItalics=0;
+    int noItalics=0, semanticRanges=0;
     try(var schemePaths=Files.list(RESOURCES.resolve("schemes"))) {
-      for(Path path:schemePaths.filter(p->p.getFileName().toString().endsWith("-no-italics.xml")).toList()) {
+      for(Path path:schemePaths.filter(p->p.getFileName().toString().endsWith(".xml")).toList()) {
+        checkSemanticRange(path);
+        semanticRanges++;
+        if (!path.getFileName().toString().endsWith("-no-italics.xml")) continue;
         var regular = xml(path.resolveSibling(path.getFileName().toString().replace("-no-italics", "")));
         var plain = xml(path);
         check(colors(regular).equals(colors(plain)), "No Italics colors: " + path);
@@ -203,7 +258,8 @@ class ThemeCheck {
         noItalics++;
       }
     }
-    check(PROVIDERS.size()==36&&contrastThemes==12&&accentThemes==12&&islandThemes==24&&noItalics==12,"Complete preset matrix");
+    check(PROVIDERS.size()==36&&contrastThemes==12&&accentThemes==12&&islandThemes==24&&noItalics==12&&semanticRanges==24,"Complete preset matrix");
     System.out.printf("Validated %d inheritance chains, %d Contrast themes, %d accent themes, and %d No Italics schemes.%n",PROVIDERS.size(),contrastThemes,accentThemes,noItalics);
+    System.out.printf("Validated %d opt-in semantic ranges, including all 21 interpolated colors per scheme.%n",semanticRanges);
   }
 }

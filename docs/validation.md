@@ -8,6 +8,10 @@ Use `-PplatformVersion=2025.3.6.1` to check the oldest supported IDE, or
 checks all theme registrations and inheritance chains, matching No Italics
 schemes, preserved syntax colors, 16 distinct ANSI colors, diff readability,
 Contrast text thresholds, and Islands geometry and selected controls.
+It also checks the five native semantic color stops in every scheme, all 21
+interpolated shades against the editor and caret-row backgrounds (4.5:1, or
+5.5:1 for Contrast), and the native opt-in toggle. A running IDE may further
+adjust semantic shades around its language-specific diagnostic colors.
 GitHub Actions runs this check and the plugin packaging checks on IntelliJ
 2025.3, 2026.1, and 2026.2. The newest target also uploads an installable ZIP.
 
@@ -26,6 +30,9 @@ and inspect ANSI output in the Run console. The sample requires Java 21+.
   can be customized separately from the console scheme.
 - Select a matching No Italics scheme under Editor → Color Scheme, then check
   comments, strings, keywords, selection, and the gutter in the sample Java file.
+- Open `SemanticDemo.java`, enable semantic highlighting in Language Defaults,
+  and check that declarations and references share colors. Disable it again to
+  check the original parameter/variable colors. Repeat with Contrast and No Italics.
 
 ## Visual check, 24 October 2026
 
