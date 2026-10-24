@@ -1,0 +1,35 @@
+{
+  "name": "Emberkai Islands (Octagon Contrast)",
+  "dark": true,
+  "author": "khopland",
+  "parentTheme": "118660e7-13b1-4d5f-8989-3ed31a3c2df6",
+  "editorScheme": "/schemes/octagon-contrast.xml",
+  "colors": {
+    "text-muted": "#abb2b5",
+    "text-secondary": "#abb2b5",
+    "text-disabled": "#70747e",
+    "border": "#888d95",
+    "layer-1-border": "#888d95",
+    "control-border": "#888d95",
+    "control-border-raised": "#abb2b5",
+    "control-bg-small": "#888d95",
+    "tab-selected-border-active": "#ffd76d",
+    "tab-selected-border-inactive": "#888d95",
+    "tree-indent-guide-border": "#5b5f6a",
+    "icon-default-stroke": "#abb2b5",
+    "BorderLight": "#888d95",
+    "PopupBorder": "#888d95",
+    "TooltipBorder": "#888d95"
+  },
+  "ui": {
+    "Label.infoForeground": "text-secondary",
+    "StatusBar": {
+      "Widget.foreground": "text-secondary",
+      "Breadcrumbs.foreground": "text-secondary"
+    },
+    "Component.disabledBorderColor": "border",
+    "EditorTabs.underlinedTabForeground": "foreground",
+    "ToolWindow.Button.selectedForeground": "surface",
+    "ToolWindow.Button.foreground": "text-secondary"
+  }
+}

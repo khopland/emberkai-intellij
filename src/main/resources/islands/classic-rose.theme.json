@@ -1,0 +1,28 @@
+{
+  "name": "Emberkai Islands (Classic Rose)",
+  "dark": true,
+  "author": "khopland",
+  "parentTheme": "1937d546-63a4-48a2-9172-497d76ffdd7a",
+  "editorScheme": "/schemes/classic.xml",
+  "colors": {
+    "accent": "#fa548d",
+    "accent-brand-bg": "#fa548d",
+    "accent-brand-border": "#fa548d",
+    "text-link": "#fa548d",
+    "popup-completion-match-text": "#fa548d",
+    "accent-muted": "#4d3035",
+    "accent-brand-bg-secondary": "#4d3035",
+    "toolbar-selected-bg": "#4d3035",
+    "selection-bg-active": "#4d3035",
+    "selection-bg-active-muted": "#4d3035",
+    "tab-selected-bg-active": "#4d3035",
+    "SelectionActive": "#4d3035",
+    "accent-brand-border-secondary": "#903e58",
+    "toolbar-selected-bg-hovered": "#903e58",
+    "tab-selected-border-active": "#903e58"
+  },
+  "ui": {
+    "EditorTabs.underlinedTabForeground": "foreground",
+    "ToolWindow.Button.selectedForeground": "surface"
+  }
+}
