@@ -3,5 +3,6 @@
 .idea/
 *.iml
 build/
+docs/samples/target/
 out/
 .DS_Store

@@ -24,6 +24,15 @@ tasks.check {
     dependsOn(validateThemes)
 }
 
+tasks.processResources {
+    from(listOf("LICENSE", "NOTICE")) {
+        into("META-INF")
+    }
+    from("licenses") {
+        into("META-INF/licenses")
+    }
+}
+
 group = "com.github.khopland.emberkai"
 version = providers.gradleProperty("pluginVersion").get()
 

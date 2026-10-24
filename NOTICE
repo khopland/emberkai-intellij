@@ -1,0 +1,22 @@
+Emberkai Theme
+Copyright 2026 Kristoffer Larsen Hopland and Emberkai contributors
+
+Emberkai's original contributions, build tooling, validation, documentation,
+and ember logo are licensed under the Apache License, Version 2.0 (LICENSE).
+Modified theme resources also contain the MIT-licensed material listed below;
+its notices and permissions remain applicable.
+
+Neokai Theme by tautastic (Marketplace vendor: Ahmed Sami)
+Source: https://github.com/tautastic/neokai
+MIT declaration: https://plugins.jetbrains.com/plugin/26553-neokai-theme
+License text and attribution: licenses/Neokai-MIT.txt
+
+Monokai Pro Theme 1.10, adapted for JetBrains by Subtheme / espositocode
+Source: https://github.com/espositocode/monokai-pro
+License: MIT; preserved verbatim in licenses/Monokai-Pro-MIT.txt
+Original color design credited upstream to Monokai: https://monokai.pro
+
+Emberkai adds the buildable plugin project, Islands layouts, Contrast and accent
+variants, readability refinements, and the new logo. It is an independent project
+and is not endorsed by Neokai, Subtheme, or Monokai. No rights to their names or
+trademarks are granted by Emberkai's Apache license.
