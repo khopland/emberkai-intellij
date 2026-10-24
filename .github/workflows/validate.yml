@@ -1,0 +1,43 @@
+name: Validate themes
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: themes-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: IntelliJ ${{ matrix.platform }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: ['2025.3.6.1', '2026.1.4', '2026.2.3']
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad # v6
+        with:
+          distribution: temurin
+          java-version: '25'
+      - uses: gradle/actions/setup-gradle@07d1f8453baaff67fb503883367f8b13e6158a54 # v6
+        with:
+          cache-provider: basic
+      - name: Validate resources and build plugin
+        run: ./gradlew check verifyPluginStructure buildPlugin --no-daemon --console=plain -PplatformVersion=${{ matrix.platform }}
+      - name: Save installable plugin
+        if: matrix.platform == '2026.2.3'
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: emberkai-plugin
+          path: build/distributions/*.zip
+          if-no-files-found: error
+          retention-days: 14
