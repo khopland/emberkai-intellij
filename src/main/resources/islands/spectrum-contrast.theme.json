@@ -29,6 +29,7 @@
     },
     "Component.disabledBorderColor": "border",
     "EditorTabs.underlinedTabForeground": "foreground",
-    "ToolWindow.Button.selectedForeground": "surface"
+    "ToolWindow.Button.selectedForeground": "surface",
+    "ToolWindow.Button.foreground": "text-secondary"
   }
 }

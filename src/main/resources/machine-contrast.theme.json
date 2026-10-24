@@ -1,0 +1,42 @@
+{
+  "name": "Emberkai (Machine Contrast)",
+  "dark": true,
+  "author": "khopland",
+  "parentTheme": "92996a53-7921-4485-b012-5347729d0839",
+  "editorScheme": "/schemes/machine-contrast.xml",
+  "colors": {
+    "foreground": "#f2fffc",
+    "secondary": "#aebab9",
+    "disabled": "#6f7a7c",
+    "border": "#8a9596",
+    "accent": "#ffed72"
+  },
+  "ui": {
+    "*": {
+      "infoForeground": "secondary",
+      "inactiveForeground": "secondary",
+      "disabledForeground": "disabled",
+      "disabledText": "disabled",
+      "borderColor": "border"
+    },
+    "Label": {
+      "foreground": "foreground",
+      "infoForeground": "secondary",
+      "disabledForeground": "disabled",
+      "disabledText": "disabled"
+    },
+    "Panel.foreground": "foreground",
+    "Tree.foreground": "foreground",
+    "Table.foreground": "foreground",
+    "EditorTabs.underlinedTabForeground": "foreground",
+    "Component": {
+      "borderColor": "border",
+      "disabledBorderColor": "border",
+      "focusColor": "accent"
+    },
+    "TextField.inactiveForeground": "secondary",
+    "TextArea.inactiveForeground": "secondary",
+    "TextPane.inactiveForeground": "secondary",
+    "Button.disabledText": "disabled"
+  }
+}

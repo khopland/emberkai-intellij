@@ -1,0 +1,28 @@
+{
+  "name": "Emberkai Islands (Machine Rose)",
+  "dark": true,
+  "author": "khopland",
+  "parentTheme": "001053df-86c9-4105-943d-fc0fc7441e95",
+  "editorScheme": "/schemes/machine.xml",
+  "colors": {
+    "accent": "#ff6d7e",
+    "accent-brand-bg": "#ff6d7e",
+    "accent-brand-border": "#ff6d7e",
+    "text-link": "#ff6d7e",
+    "popup-completion-match-text": "#ff6d7e",
+    "accent-muted": "#4e3c43",
+    "accent-brand-bg-secondary": "#4e3c43",
+    "toolbar-selected-bg": "#4e3c43",
+    "selection-bg-active": "#4e3c43",
+    "selection-bg-active-muted": "#4e3c43",
+    "tab-selected-bg-active": "#4e3c43",
+    "SelectionActive": "#4e3c43",
+    "accent-brand-border-secondary": "#934f5a",
+    "toolbar-selected-bg-hovered": "#934f5a",
+    "tab-selected-border-active": "#934f5a"
+  },
+  "ui": {
+    "EditorTabs.underlinedTabForeground": "foreground",
+    "ToolWindow.Button.selectedForeground": "surface"
+  }
+}

@@ -10,7 +10,7 @@
   <p>Includes Classic, Filter Machine, Filter Octagon, Filter Ristretto, and
   Filter Spectrum variants, with optional No Italics editor color schemes.
   Every palette is available with the original layout and the Islands design.
-  Spectrum also includes a Contrast variant and Teal and Rose Islands accents.</p>
+  Every palette also includes a Contrast variant and Teal and Rose Islands accents.</p>
   <p>Theme color credits:
   <a href="https://github.com/tautastic/neokai">Neokai by tautastic</a> and
   Monokai Pro Theme 1.10.</p>
@@ -37,6 +37,27 @@
     <themeProvider id="6d2e5f19-84f2-4590-a3b2-04c56e299c43" path="/islands/spectrum-teal.theme.json"/>
     <themeProvider id="68794a74-fbdf-4cc3-b010-23a06b405f54" path="/islands/spectrum-rose.theme.json"/>
 
+    <themeProvider id="e49593cf-2ed0-49ac-95b0-0d89b3ed4166" path="/default-contrast.theme.json"/>
+    <themeProvider id="4d6855b2-0380-4162-9abf-ea8983206de2" path="/islands/default-contrast.theme.json"/>
+    <themeProvider id="8871c6f0-c727-48f7-bcec-bfa1b31c8d37" path="/islands/default-teal.theme.json"/>
+    <themeProvider id="dd00462f-9202-4b1c-9c10-baf2e344d05d" path="/islands/default-rose.theme.json"/>
+    <themeProvider id="a154e5a8-51a1-4110-ba9a-b3c437860318" path="/classic-contrast.theme.json"/>
+    <themeProvider id="8c692c0e-f6a0-44a2-b54b-77b4370f077b" path="/islands/classic-contrast.theme.json"/>
+    <themeProvider id="08d6d225-4baa-48e4-bc36-a2a3b232a21f" path="/islands/classic-teal.theme.json"/>
+    <themeProvider id="ea05bf0e-eaec-4bed-9bfd-8245f7da95a8" path="/islands/classic-rose.theme.json"/>
+    <themeProvider id="e6cbf4d8-0dbb-47ae-9d01-0577080e94ec" path="/machine-contrast.theme.json"/>
+    <themeProvider id="72f0f5aa-3744-43ec-a385-0672337152c6" path="/islands/machine-contrast.theme.json"/>
+    <themeProvider id="80560795-3d8b-40bc-bd3c-bae0df2f4f51" path="/islands/machine-teal.theme.json"/>
+    <themeProvider id="196e4b63-7479-43aa-9d2f-93bcc3cbad84" path="/islands/machine-rose.theme.json"/>
+    <themeProvider id="8fc37aba-9919-43bc-8d7e-cbcc1c5447e1" path="/octagon-contrast.theme.json"/>
+    <themeProvider id="758a5879-0c96-4649-be7f-9cb33d6db530" path="/islands/octagon-contrast.theme.json"/>
+    <themeProvider id="8740966c-2582-4872-a794-783cf050a14a" path="/islands/octagon-teal.theme.json"/>
+    <themeProvider id="6d77fe77-b2aa-4a1f-bf00-378509e847e5" path="/islands/octagon-rose.theme.json"/>
+    <themeProvider id="aef80f8c-a769-48fc-a70b-6db5ab78e606" path="/ristretto-contrast.theme.json"/>
+    <themeProvider id="fee005fc-b8b1-48ba-a032-97ba7ef22653" path="/islands/ristretto-contrast.theme.json"/>
+    <themeProvider id="f4ebd1f0-989d-4f4d-9e2b-0800912a88e9" path="/islands/ristretto-teal.theme.json"/>
+    <themeProvider id="ef59857a-6d4c-4ba5-9770-4511a58ea0f2" path="/islands/ristretto-rose.theme.json"/>
+
     <bundledColorScheme id="Emberkai (Classic) - No Italics" path="schemes/classic-no-italics"/>
     <bundledColorScheme id="Emberkai (Filter Machine) - No Italics" path="schemes/machine-no-italics"/>
     <bundledColorScheme id="Emberkai (Filter Octagon) - No Italics" path="schemes/octagon-no-italics"/>
@@ -44,5 +65,10 @@
     <bundledColorScheme id="Emberkai (Filter Spectrum) - No Italics" path="schemes/spectrum-no-italics"/>
     <bundledColorScheme id="Emberkai - No Italics" path="schemes/default-no-italics"/>
     <bundledColorScheme id="Emberkai (Spectrum Contrast) - No Italics" path="schemes/spectrum-contrast-no-italics"/>
+    <bundledColorScheme id="Emberkai Contrast - No Italics" path="schemes/default-contrast-no-italics"/>
+    <bundledColorScheme id="Emberkai (Classic Contrast) - No Italics" path="schemes/classic-contrast-no-italics"/>
+    <bundledColorScheme id="Emberkai (Machine Contrast) - No Italics" path="schemes/machine-contrast-no-italics"/>
+    <bundledColorScheme id="Emberkai (Octagon Contrast) - No Italics" path="schemes/octagon-contrast-no-italics"/>
+    <bundledColorScheme id="Emberkai (Ristretto Contrast) - No Italics" path="schemes/ristretto-contrast-no-italics"/>
   </extensions>
 </idea-plugin>

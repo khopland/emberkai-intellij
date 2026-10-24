@@ -1,0 +1,28 @@
+{
+  "name": "Emberkai Islands (Ristretto Rose)",
+  "dark": true,
+  "author": "khopland",
+  "parentTheme": "c371d97a-eb44-40e1-ab8a-0a0cd87656e1",
+  "editorScheme": "/schemes/ristretto.xml",
+  "colors": {
+    "accent": "#fd6883",
+    "accent-brand-bg": "#fd6883",
+    "accent-brand-border": "#fd6883",
+    "text-link": "#fd6883",
+    "popup-completion-match-text": "#fd6883",
+    "accent-muted": "#523136",
+    "accent-brand-bg-secondary": "#523136",
+    "toolbar-selected-bg": "#523136",
+    "selection-bg-active": "#523136",
+    "selection-bg-active-muted": "#523136",
+    "tab-selected-bg-active": "#523136",
+    "SelectionActive": "#523136",
+    "accent-brand-border-secondary": "#944654",
+    "toolbar-selected-bg-hovered": "#944654",
+    "tab-selected-border-active": "#944654"
+  },
+  "ui": {
+    "EditorTabs.underlinedTabForeground": "foreground",
+    "ToolWindow.Button.selectedForeground": "surface"
+  }
+}

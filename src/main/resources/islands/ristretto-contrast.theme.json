@@ -1,0 +1,35 @@
+{
+  "name": "Emberkai Islands (Ristretto Contrast)",
+  "dark": true,
+  "author": "khopland",
+  "parentTheme": "c371d97a-eb44-40e1-ab8a-0a0cd87656e1",
+  "editorScheme": "/schemes/ristretto-contrast.xml",
+  "colors": {
+    "text-muted": "#b4aaab",
+    "text-secondary": "#b4aaab",
+    "text-disabled": "#776e6e",
+    "border": "#8f8686",
+    "layer-1-border": "#8f8686",
+    "control-border": "#8f8686",
+    "control-border-raised": "#b4aaab",
+    "control-bg-small": "#8f8686",
+    "tab-selected-border-active": "#f9cc6c",
+    "tab-selected-border-inactive": "#8f8686",
+    "tree-indent-guide-border": "#615959",
+    "icon-default-stroke": "#b4aaab",
+    "BorderLight": "#8f8686",
+    "PopupBorder": "#8f8686",
+    "TooltipBorder": "#8f8686"
+  },
+  "ui": {
+    "Label.infoForeground": "text-secondary",
+    "StatusBar": {
+      "Widget.foreground": "text-secondary",
+      "Breadcrumbs.foreground": "text-secondary"
+    },
+    "Component.disabledBorderColor": "border",
+    "EditorTabs.underlinedTabForeground": "foreground",
+    "ToolWindow.Button.selectedForeground": "surface",
+    "ToolWindow.Button.foreground": "text-secondary"
+  }
+}
