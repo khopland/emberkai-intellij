@@ -1,0 +1,34 @@
+<idea-plugin>
+  <id>com.github.khopland.emberkai</id>
+  <name>Emberkai Theme</name>
+  <vendor url="https://github.com/khopland/emberkai-intellij">khopland</vendor>
+  <depends>com.intellij.modules.lang</depends>
+
+  <description>
+  <![CDATA[
+  <p>Emberkai is a dark theme collection for IntelliJ-based IDEs.</p>
+  <p>Includes Classic, Filter Machine, Filter Octagon, Filter Ristretto, and
+  Filter Spectrum variants, with optional No Italics editor color schemes.
+  Every palette is available with the original layout and the Islands design.</p>
+  <p>Theme color credits:
+  <a href="https://github.com/tautastic/neokai">Neokai by tautastic</a> and
+  Monokai Pro Theme 1.10.</p>
+  ]]>
+  </description>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <themeProvider id="5ba1cb0f-1e76-484f-9a4d-f053b22d61a9" path="/classic.theme.json"/>
+    <themeProvider id="92996a53-7921-4485-b012-5347729d0839" path="/machine.theme.json"/>
+    <themeProvider id="966552d5-cb46-41ab-8e6a-78ebb2751962" path="/octagon.theme.json"/>
+    <themeProvider id="680b0ae2-5821-4169-8641-e4919650cf99" path="/ristretto.theme.json"/>
+    <themeProvider id="5382b69b-44d5-496a-9c58-f8985fa87747" path="/spectrum.theme.json"/>
+    <themeProvider id="086b65ab-cd57-47b0-a122-5ddc7cd45535" path="/default.theme.json"/>
+
+    <bundledColorScheme id="Emberkai (Classic) - No Italics" path="schemes/classic-no-italics"/>
+    <bundledColorScheme id="Emberkai (Filter Machine) - No Italics" path="schemes/machine-no-italics"/>
+    <bundledColorScheme id="Emberkai (Filter Octagon) - No Italics" path="schemes/octagon-no-italics"/>
+    <bundledColorScheme id="Emberkai (Filter Ristretto) - No Italics" path="schemes/ristretto-no-italics"/>
+    <bundledColorScheme id="Emberkai (Filter Spectrum) - No Italics" path="schemes/spectrum-no-italics"/>
+    <bundledColorScheme id="Emberkai - No Italics" path="schemes/default-no-italics"/>
+  </extensions>
+</idea-plugin>
