@@ -90,7 +90,6 @@
         "nonEditableBackground": "#273136"
       },
       "background": "#303a3e",
-      "disabledBackground": "#1d2528",
       "disabledForeground": "#545f62",
       "foreground": "#f2fffc",
       "modifiedItemForeground": "#ffed72",
@@ -149,8 +148,8 @@
     },
     "DragAndDrop": {
       "areaBackground": "#273136",
-      "areaBorderColor": "#273136",
-      "areaForeground": "#f2fffc"
+      "areaForeground": "#f2fffc",
+      "borderColor": "#273136"
     },
     "Editor": {
       "background": "#1d2528",
@@ -174,7 +173,7 @@
       "underlinedTabForeground": "#b8c4c3"
     },
     "FileColor": {
-      "Yellow": "00000000"
+      "Yellow": "#00000000"
     },
     "FormattedTextField": {
       "background": "#303a3e",
@@ -194,8 +193,7 @@
       "lineSeparatorColor": "#273136"
     },
     "HelpTooltip": {
-      "borderColor": "#273136",
-      "infoForeground": "#798384"
+      "borderColor": "#273136"
     },
     "InformationHint": {
       "borderColor": "#273136"
@@ -331,8 +329,7 @@
         "updateForeground": "#f2fffc"
       },
       "SearchField": {
-        "background": "#303a3e",
-        "borderColor": "#303a3e"
+        "background": "#303a3e"
       },
       "SectionHeader": {
         "background": "#273136",
@@ -457,7 +454,9 @@
     },
     "StatusBar": {
       "borderColor": "#303a3e",
-      "hoverBackground": "#303a3e"
+      "Widget": {
+        "hoverBackground": "#303a3e"
+      }
     },
     "TabbedPane": {
       "background": "#273136",
