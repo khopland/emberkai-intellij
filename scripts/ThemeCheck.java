@@ -2,18 +2,20 @@ import com.intellij.ide.ui.UITheme;
 import com.intellij.ide.ui.UIThemeBean;
 import com.intellij.ide.ui.UIThemeBeanKt;
 import com.intellij.ide.ui.ColorMapKt;
-import com.intellij.ide.ui.UiThemePaletteScopeManager;
 import com.intellij.codeHighlighting.RainbowHighlighter;
 import com.intellij.lang.Language;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.editor.colors.TextAttributesScheme;
 import com.intellij.openapi.editor.markup.TextAttributes;
 import com.intellij.openapi.options.SchemeMetaInfo;
+import com.intellij.openapi.util.IconLoader;
 import com.intellij.ui.ExperimentalUI;
+import com.intellij.ui.svg.SvgKt;
 import com.intellij.util.SVGLoader;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 import java.awt.Color;
+import java.awt.image.BufferedImage;
 import java.io.InputStream;
 import java.nio.file.*;
 import java.util.*;
@@ -156,7 +158,7 @@ class ThemeCheck {
     check(!RainbowHighlighter.isRainbowEnabledWithInheritance(scheme, Language.ANY), "Disable semantics");
   }
 
-  static void checkIconPalette(UITheme theme, Map<String,TextAttributes> attrs) {
+  static void checkIconPalette(UITheme theme, Map<String,TextAttributes> attrs, String family) throws Exception {
     UIThemeBean bean = BEANS.get(theme);
     var colors = bean.colorMap.map;
     for (var entry : Map.of("icon-yellow", "DEFAULT_STRING", "icon-blue", "CONSOLE_BLUE_OUTPUT",
@@ -172,8 +174,16 @@ class ThemeCheck {
     iconTheme.dark = bean.dark;
     iconTheme.colorMap = bean.colorMap;
     iconTheme.icons = bean.icons;
-    var provider = new UiThemePaletteScopeManager(iconTheme).configureIcons(iconTheme, iconTheme.icons);
+    iconTheme.iconColorOnSelectionMap = bean.iconColorOnSelectionMap;
+    var factory = Arrays.stream(Class.forName("com.intellij.ide.ui.UIThemeKt").getDeclaredMethods())
+      .filter(method -> method.getName().equals("createTheme")).findFirst().orElseThrow();
+    factory.setAccessible(true);
+    var nativeTheme = (UITheme)factory.invoke(null, iconTheme, null, LOADER, null, theme.getId(), WARN);
+    var provider = nativeTheme.getColorPatcher();
     check(provider != null, "Missing icon color patcher: " + theme.getName());
+    var selectedProvider = nativeTheme.selectionColorPatcher;
+    check(selectedProvider != null, "Missing selected icon color patcher: " + theme.getName());
+    checkIconColor(selectedProvider, "/symbols/icons/files/xml.svg", "#EA580C", colors.get("text-warning"));
     var mappings = (Map<?,?>)bean.icons.get("ColorPalette");
     for (var entry : mappings.entrySet()) {
       // Parent themes also contribute palette entries for built-in controls.
@@ -183,13 +193,56 @@ class ThemeCheck {
       checkIconColor(provider, "/symbols/icons/files/java.svg", entry.getKey().toString(), expected);
       checkIconColor(provider, "/symbols/icons/folders/folder.svg", entry.getKey().toString(), expected);
     }
+    var base = read(Files.readAllBytes(RESOURCES.resolve("islands/" + family + ".theme.json")));
+    var symbolsMappings = (Map<?,?>)base.icons.get("ColorPalette");
+    for (var entry : symbolsMappings.entrySet()) {
+      Color expected = colors.get(entry.getValue());
+      checkIconColor(selectedProvider, "/symbols/icons/files/java.svg", entry.getKey().toString(), expected);
+      checkIconColor(selectedProvider, "/symbols/icons/folders/folder.svg", entry.getKey().toString(), expected);
+    }
+    // Built-in selected icons must keep their inherited selection colors too.
+    for (var entry : bean.iconColorOnSelectionMap.map.entrySet())
+      checkIconColor(selectedProvider, "/actions/test.svg", entry.getKey(), entry.getValue());
     checkIconColor(provider, "/symbols/icons/files/java.svg", "#F87171", attrs.get("DEFAULT_KEYWORD").getForegroundColor());
     checkIconColor(provider, "/symbols/icons/files/js.svg", "#F59E0B", attrs.get("DEFAULT_STRING").getForegroundColor());
     checkIconColor(provider, "/symbols/icons/files/code-blue.svg", "#2563EB", attrs.get("CONSOLE_BLUE_OUTPUT").getForegroundColor());
     checkIconColor(provider, "/symbols/icons/files/code-green.svg", "#16A34A", attrs.get("DEFAULT_FUNCTION_DECLARATION").getForegroundColor());
     checkIconColor(provider, "/symbols/icons/folders/folder.svg", "#64748B", colors.get("icon-default-stroke"));
     checkIconColor(provider, "/symbols/icons/files/claude.svg", "#D97656", Color.decode("#D97656"));
+    checkIconColor(selectedProvider, "/symbols/icons/files/claude.svg", "#D97656", Color.decode("#D97656"));
     checkIconColor(provider, "/other-plugin/icon.svg", "#F87171", attrs.get("DEFAULT_KEYWORD").getForegroundColor());
+    checkIconSelectionPainting(nativeTheme, colors.get("text-warning"));
+  }
+
+  static void checkIconSelectionPainting(UITheme theme, Color expected) throws Exception {
+    Path fixture = Files.createTempFile("emberkai-selected-icon-", ".svg");
+    var previousProvider = SVGLoader.getColorPatcherProvider();
+    try {
+      Files.writeString(fixture, """
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16">
+          <rect x="2" y="2" width="12" height="12" fill="#EA580C"/>
+        </svg>
+        """);
+      IconLoader.activate();
+      SVGLoader.setColorPatcherProvider(theme.getColorPatcher());
+      var icon = IconLoader.findIcon(fixture.toUri().toURL(), true);
+      check(icon != null, "Load selection fixture");
+      // The selected renderer calls colorPatchedIcon, replacing the normal
+      // patcher. Paint the cached icon before, during, and after selection.
+      for (var state : List.of(icon, SvgKt.colorPatchedIcon(icon, theme.selectionColorPatcher), icon)) {
+        var image = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+        var graphics = image.createGraphics();
+        try {
+          state.paintIcon(null, graphics, 0, 0);
+        } finally {
+          graphics.dispose();
+        }
+        check(image.getRGB(8, 8) == expected.getRGB(), "Preserve rendered icon color on selection: " + theme.getId());
+      }
+    } finally {
+      SVGLoader.setColorPatcherProvider(previousProvider);
+      Files.deleteIfExists(fixture);
+    }
   }
 
   static void checkIconColor(SVGLoader.SvgElementColorPatcherProvider provider, String path, String source, Color expected) {
@@ -258,7 +311,7 @@ class ThemeCheck {
       check(scheme.getAttributeValue("name").equals(bundledSchemes.get(schemePath)),
             "Theme scheme must be explicitly bundled for reloads: " + theme.getName() + " / " + schemePath);
       var attrs=attributes(scheme); var colors=colors(scheme);
-      checkIconPalette(theme, attrs);
+      checkIconPalette(theme, attrs, family);
       var original=attributes(xml(RESOURCES.resolve("schemes/"+family+".xml")));
       Color background=attrs.get("TEXT").getBackgroundColor();
       for (String key : List.of("STATIC_METHOD_ATTRIBUTES", "STATIC_METHOD_IMPORTED_ATTRIBUTES"))
@@ -338,7 +391,7 @@ class ThemeCheck {
     check(PROVIDERS.size()==20&&contrastThemes==5&&accentThemes==10&&islandThemes==20&&noItalics==10&&semanticRanges==20,"Complete preset matrix");
     System.out.printf("Validated %d inheritance chains, %d Contrast themes, %d accent themes, and %d No Italics schemes.%n",PROVIDERS.size(),contrastThemes,accentThemes,noItalics);
     System.out.printf("Validated %d opt-in semantic ranges, including all 21 interpolated colors per scheme.%n",semanticRanges);
-    System.out.printf("Validated inherited Symbols SVG fill and stroke colors in all %d presets.%n",PROVIDERS.size());
+    System.out.printf("Validated normal and selected Symbols SVG fill and stroke colors in all %d presets.%n",PROVIDERS.size());
     System.out.printf("Validated %d explicitly bundled editor schemes for theme reloads.%n",bundledSchemes.size());
   }
 }

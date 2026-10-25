@@ -228,5 +228,31 @@
       "#71717A": "icon-default-stroke",
       "#A1A1AA": "icon-default-stroke"
     }
+  },
+  "iconColorsOnSelection": {
+    "#f87171": "text-error",
+    "#f472b6": "text-error",
+    "#ea580c": "text-warning",
+    "#fb923c": "text-warning",
+    "#f59e0b": "icon-yellow",
+    "#fbbf24": "icon-yellow",
+    "#eab308": "icon-yellow",
+    "#fde047": "icon-yellow",
+    "#16a34a": "text-success",
+    "#22c55e": "text-success",
+    "#4ade80": "text-success",
+    "#2563eb": "icon-blue",
+    "#60a5fa": "icon-blue",
+    "#0ea5e9": "icon-cyan",
+    "#38bdf8": "icon-cyan",
+    "#14b8a6": "icon-cyan",
+    "#2dd4bf": "icon-cyan",
+    "#8b5cf6": "icon-purple",
+    "#a855f7": "icon-purple",
+    "#c084fc": "icon-purple",
+    "#a78bfa": "icon-purple",
+    "#64748b": "icon-default-stroke",
+    "#71717a": "icon-default-stroke",
+    "#a1a1aa": "icon-default-stroke"
   }
 }

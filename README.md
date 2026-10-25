@@ -65,7 +65,8 @@ parameters and local variables colors from a range matched to your palette.
 Install [Symbols Icons](https://github.com/joansgarcia/jetbrains-symbols) separately
 to use its file and folder icons with Emberkai. The common Symbols colors follow
 the selected Emberkai palette automatically. Contrast variants brighten neutral
-icons; Teal and Rose keep their palette's icon colors.
+icons; Teal and Rose keep their palette's icon colors. Icons keep their colors
+when selected in the Project panel.
 
 Emberkai uses JetBrains' global SVG color replacements. Other icons using the
 same source colors can also change. The replacements are active whenever an

@@ -2,7 +2,8 @@
 
 ## Unreleased
 
-- Match common Symbols file and folder icon colors to the selected Emberkai palette.
+- Match common Symbols file and folder icon colors to the selected Emberkai
+  palette, including selected rows in the Project panel.
 
 ## 1.0.0
 
