@@ -22,6 +22,7 @@
     "tab-selected-border-active": "#52838b"
   },
   "ui": {
+    "ToolWindow.Button.selectedBackground": "accent",
     "EditorTabs.underlinedTabForeground": "foreground",
     "ToolWindow.Button.selectedForeground": "surface"
   }

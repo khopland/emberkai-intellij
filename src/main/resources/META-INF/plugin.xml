@@ -7,9 +7,9 @@
   <description>
   <![CDATA[
   <p>Emberkai is a dark theme collection for IntelliJ-based IDEs.</p>
-  <p>Choose from six palettes: Default, Classic, Machine, Octagon, Ristretto, and
-  Spectrum. Each includes original and Islands layouts, a Contrast option with
-  brighter secondary text, and Teal and Rose Islands accents.</p>
+  <p>Choose from five palettes: Default, Machine, Octagon, Ristretto, and
+  Spectrum. Each uses the Islands layout, with a Contrast option for
+  brighter secondary text and Teal and Rose accents.</p>
   <p>Includes optional No Italics editor schemes, coordinated diff and console
   colors, and palette-matched semantic highlighting for parameters and local
   variables. Semantic highlighting is off by default.</p>
@@ -28,7 +28,7 @@
   <![CDATA[
   <p>1.0.0 — Initial Emberkai release.</p>
   <ul>
-    <li>Six palettes with original and Islands layouts, Contrast variants, and Teal and Rose Islands accents.</li>
+    <li>Five Islands palettes with Contrast variants and Teal and Rose accents.</li>
     <li>Matching No Italics editor schemes.</li>
     <li>Coordinated diff, console, and optional semantic highlighting colors.</li>
   </ul>
@@ -36,47 +36,29 @@
   </change-notes>
 
   <extensions defaultExtensionNs="com.intellij">
-    <themeProvider id="5ba1cb0f-1e76-484f-9a4d-f053b22d61a9" path="/classic.theme.json"/>
-    <themeProvider id="92996a53-7921-4485-b012-5347729d0839" path="/machine.theme.json"/>
-    <themeProvider id="966552d5-cb46-41ab-8e6a-78ebb2751962" path="/octagon.theme.json"/>
-    <themeProvider id="680b0ae2-5821-4169-8641-e4919650cf99" path="/ristretto.theme.json"/>
-    <themeProvider id="5382b69b-44d5-496a-9c58-f8985fa87747" path="/spectrum.theme.json"/>
-    <themeProvider id="086b65ab-cd57-47b0-a122-5ddc7cd45535" path="/default.theme.json"/>
-
     <themeProvider id="cb4ef67d-a446-4ffc-a0d8-75b28f21e5b3" path="/islands/default.theme.json"/>
-    <themeProvider id="1937d546-63a4-48a2-9172-497d76ffdd7a" path="/islands/classic.theme.json"/>
     <themeProvider id="001053df-86c9-4105-943d-fc0fc7441e95" path="/islands/machine.theme.json"/>
     <themeProvider id="118660e7-13b1-4d5f-8989-3ed31a3c2df6" path="/islands/octagon.theme.json"/>
     <themeProvider id="c371d97a-eb44-40e1-ab8a-0a0cd87656e1" path="/islands/ristretto.theme.json"/>
     <themeProvider id="6f67444a-949d-4956-9d05-bb6ceae75572" path="/islands/spectrum.theme.json"/>
 
-    <themeProvider id="60645b55-7ac6-44b4-a23e-3ce35df829fa" path="/spectrum-contrast.theme.json"/>
     <themeProvider id="3201fbb7-59f3-4f47-9803-c70924cd923f" path="/islands/spectrum-contrast.theme.json"/>
     <themeProvider id="6d2e5f19-84f2-4590-a3b2-04c56e299c43" path="/islands/spectrum-teal.theme.json"/>
     <themeProvider id="68794a74-fbdf-4cc3-b010-23a06b405f54" path="/islands/spectrum-rose.theme.json"/>
 
-    <themeProvider id="e49593cf-2ed0-49ac-95b0-0d89b3ed4166" path="/default-contrast.theme.json"/>
     <themeProvider id="4d6855b2-0380-4162-9abf-ea8983206de2" path="/islands/default-contrast.theme.json"/>
     <themeProvider id="8871c6f0-c727-48f7-bcec-bfa1b31c8d37" path="/islands/default-teal.theme.json"/>
     <themeProvider id="dd00462f-9202-4b1c-9c10-baf2e344d05d" path="/islands/default-rose.theme.json"/>
-    <themeProvider id="a154e5a8-51a1-4110-ba9a-b3c437860318" path="/classic-contrast.theme.json"/>
-    <themeProvider id="8c692c0e-f6a0-44a2-b54b-77b4370f077b" path="/islands/classic-contrast.theme.json"/>
-    <themeProvider id="08d6d225-4baa-48e4-bc36-a2a3b232a21f" path="/islands/classic-teal.theme.json"/>
-    <themeProvider id="ea05bf0e-eaec-4bed-9bfd-8245f7da95a8" path="/islands/classic-rose.theme.json"/>
-    <themeProvider id="e6cbf4d8-0dbb-47ae-9d01-0577080e94ec" path="/machine-contrast.theme.json"/>
     <themeProvider id="72f0f5aa-3744-43ec-a385-0672337152c6" path="/islands/machine-contrast.theme.json"/>
     <themeProvider id="80560795-3d8b-40bc-bd3c-bae0df2f4f51" path="/islands/machine-teal.theme.json"/>
     <themeProvider id="196e4b63-7479-43aa-9d2f-93bcc3cbad84" path="/islands/machine-rose.theme.json"/>
-    <themeProvider id="8fc37aba-9919-43bc-8d7e-cbcc1c5447e1" path="/octagon-contrast.theme.json"/>
     <themeProvider id="758a5879-0c96-4649-be7f-9cb33d6db530" path="/islands/octagon-contrast.theme.json"/>
     <themeProvider id="8740966c-2582-4872-a794-783cf050a14a" path="/islands/octagon-teal.theme.json"/>
     <themeProvider id="6d77fe77-b2aa-4a1f-bf00-378509e847e5" path="/islands/octagon-rose.theme.json"/>
-    <themeProvider id="aef80f8c-a769-48fc-a70b-6db5ab78e606" path="/ristretto-contrast.theme.json"/>
     <themeProvider id="fee005fc-b8b1-48ba-a032-97ba7ef22653" path="/islands/ristretto-contrast.theme.json"/>
     <themeProvider id="f4ebd1f0-989d-4f4d-9e2b-0800912a88e9" path="/islands/ristretto-teal.theme.json"/>
     <themeProvider id="ef59857a-6d4c-4ba5-9770-4511a58ea0f2" path="/islands/ristretto-rose.theme.json"/>
 
-    <bundledColorScheme id="Emberkai (Classic) - No Italics" path="schemes/classic-no-italics"/>
     <bundledColorScheme id="Emberkai (Filter Machine) - No Italics" path="schemes/machine-no-italics"/>
     <bundledColorScheme id="Emberkai (Filter Octagon) - No Italics" path="schemes/octagon-no-italics"/>
     <bundledColorScheme id="Emberkai (Filter Ristretto) - No Italics" path="schemes/ristretto-no-italics"/>
@@ -84,7 +66,6 @@
     <bundledColorScheme id="Emberkai - No Italics" path="schemes/default-no-italics"/>
     <bundledColorScheme id="Emberkai (Spectrum Contrast) - No Italics" path="schemes/spectrum-contrast-no-italics"/>
     <bundledColorScheme id="Emberkai Contrast - No Italics" path="schemes/default-contrast-no-italics"/>
-    <bundledColorScheme id="Emberkai (Classic Contrast) - No Italics" path="schemes/classic-contrast-no-italics"/>
     <bundledColorScheme id="Emberkai (Machine Contrast) - No Italics" path="schemes/machine-contrast-no-italics"/>
     <bundledColorScheme id="Emberkai (Octagon Contrast) - No Italics" path="schemes/octagon-contrast-no-italics"/>
     <bundledColorScheme id="Emberkai (Ristretto Contrast) - No Italics" path="schemes/ristretto-contrast-no-italics"/>

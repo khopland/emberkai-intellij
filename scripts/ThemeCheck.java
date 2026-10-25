@@ -8,6 +8,7 @@ import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.editor.colors.TextAttributesScheme;
 import com.intellij.openapi.editor.markup.TextAttributes;
 import com.intellij.openapi.options.SchemeMetaInfo;
+import com.intellij.ui.ExperimentalUI;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 import java.awt.Color;
@@ -153,6 +154,7 @@ class ThemeCheck {
     check(!RainbowHighlighter.isRainbowEnabledWithInheritance(scheme, Language.ANY), "Disable semantics");
   }
   public static void main(String[] args) throws Exception {
+    check(ExperimentalUI.isNewUI(), "Validate the same New UI defaults used by the IDE");
     RESOURCES = Path.of(args[0]);
     UITheme darcula = builtin(null,"themes/darcula.theme.json","Darcula");
     UITheme dark = builtin(darcula,"themes/expUI/expUI_dark.theme.json","ExperimentalDark");
@@ -169,6 +171,11 @@ class ThemeCheck {
       check(bean.dark, "Expected dark theme: " + path);
       check(PROVIDERS.put(id, new String[]{id, path, bean.parentTheme == null ? "" : bean.parentTheme}) == null, "Duplicate provider id: " + id);
     }
+    Set<String> expectedPaths = new HashSet<>();
+    for (String family : List.of("default", "machine", "octagon", "ristretto", "spectrum"))
+      for (String variant : List.of("", "-contrast", "-teal", "-rose"))
+        expectedPaths.add("islands/" + family + variant + ".theme.json");
+    check(paths.equals(expectedPaths), "Complete Islands preset matrix");
     try (var files = Files.walk(RESOURCES)) {
       Set<String> actual = new HashSet<>(files.filter(p -> p.toString().endsWith(".theme.json")).map(p -> RESOURCES.relativize(p).toString().replace('\\', '/')).toList());
       check(actual.equals(paths), "Unregistered or missing theme resources");
@@ -212,6 +219,9 @@ class ThemeCheck {
         check(colors.get("MODIFIED_LINES_COLOR").equals(attrs.get("DIFF_MODIFIED").getErrorStripeColor()), "Matching diff/gutter color");
       }
       if(defaults.getInt("Islands")==1) {
+        var palette=BEANS.get(theme).colorMap.map;
+        check(color(defaults,"ToolWindow.Button.selectedBackground").equals(palette.get("accent")),"Selected tool window uses preset accent: "+theme.getName());
+        check(color(defaults,"ToolWindow.Button.selectedForeground").equals(palette.get("surface")),"Selected tool window icon uses contrasting foreground: "+theme.getName());
         check(defaults.getInt("Island.arc")==20&&defaults.getInt("Island.arc.compact")==16,"Native geometry");
         check(color(defaults,"Island.borderColor").equals(color(defaults,"ToolWindow.background")),"Panel edge");
         check(contrast(color(defaults,"ToolWindow.background"),color(defaults,"MainWindow.background"))>=1.2,"Panel separation");
@@ -258,7 +268,7 @@ class ThemeCheck {
         noItalics++;
       }
     }
-    check(PROVIDERS.size()==36&&contrastThemes==12&&accentThemes==12&&islandThemes==24&&noItalics==12&&semanticRanges==24,"Complete preset matrix");
+    check(PROVIDERS.size()==20&&contrastThemes==5&&accentThemes==10&&islandThemes==20&&noItalics==10&&semanticRanges==20,"Complete preset matrix");
     System.out.printf("Validated %d inheritance chains, %d Contrast themes, %d accent themes, and %d No Italics schemes.%n",PROVIDERS.size(),contrastThemes,accentThemes,noItalics);
     System.out.printf("Validated %d opt-in semantic ranges, including all 21 interpolated colors per scheme.%n",semanticRanges);
   }

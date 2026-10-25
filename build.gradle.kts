@@ -13,7 +13,7 @@ val validateThemes = tasks.register<ThemeCheckTask>("validateThemes") {
     description = "Parses every theme with the target IDE and checks palette and scheme consistency."
     inputs.dir("src/main/resources")
     inputs.file("scripts/ThemeCheck.java")
-    jvmArgs("-Djava.awt.headless=true")
+    jvmArgs("-Djava.awt.headless=true", "-Dide.experimental.ui=true")
     mainClass = layout.projectDirectory.file("scripts/ThemeCheck.java").asFile.absolutePath
     args(layout.projectDirectory.dir("src/main/resources").asFile.absolutePath)
     // Include module jars too: recent IDEs keep UITheme and the scheme reader there.

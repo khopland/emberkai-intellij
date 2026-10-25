@@ -2,9 +2,9 @@
 
 <img src="src/main/resources/META-INF/pluginIcon.svg" alt="Emberkai ember logo" width="64" height="64">
 
-A dark theme collection for IntelliJ-based IDEs, with original and Islands styles.
+A dark theme collection for IntelliJ-based IDEs, using the Islands layout.
 
-Includes six palettes: Default, Classic, Machine, Octagon, Ristretto, and Spectrum,
+Includes five palettes: Default, Machine, Octagon, Ristretto, and Spectrum,
 plus optional **No Italics** editor schemes.
 
 Every palette includes a **Contrast** option with brighter comments and secondary
@@ -16,19 +16,19 @@ Requires **IntelliJ Platform 2025.3 or newer**.
 ## Preview
 
 Direct IntelliJ IDEA captures, with no mouse pointer. See the
-[full screenshot gallery](docs/screenshots/README.md) for layouts, accents, and features.
+[full screenshot gallery](docs/screenshots/README.md) for palettes, accents, and features.
 
 ### Color palettes
 
-All six palettes in the Islands layout. Click a preview to see it at full size.
+All five palettes in the Islands layout. Click a preview to see it at full size.
 
 | Spectrum | Default |
 | --- | --- |
 | [![Spectrum Islands palette](docs/screenshots/spectrum-islands.png)](docs/screenshots/spectrum-islands.png) | [![Default Islands palette](docs/screenshots/default-islands.png)](docs/screenshots/default-islands.png) |
-| **Classic** | **Machine** |
-| [![Classic Islands palette](docs/screenshots/classic-islands.png)](docs/screenshots/classic-islands.png) | [![Machine Islands palette](docs/screenshots/machine-islands.png)](docs/screenshots/machine-islands.png) |
-| **Octagon** | **Ristretto** |
-| [![Octagon Islands palette](docs/screenshots/octagon-islands.png)](docs/screenshots/octagon-islands.png) | [![Ristretto Islands palette](docs/screenshots/ristretto-islands.png)](docs/screenshots/ristretto-islands.png) |
+| **Machine** | **Octagon** |
+| [![Machine Islands palette](docs/screenshots/machine-islands.png)](docs/screenshots/machine-islands.png) | [![Octagon Islands palette](docs/screenshots/octagon-islands.png)](docs/screenshots/octagon-islands.png) |
+| **Ristretto** | |
+| [![Ristretto Islands palette](docs/screenshots/ristretto-islands.png)](docs/screenshots/ristretto-islands.png) | |
 
 ### Features
 
@@ -44,8 +44,7 @@ Spectrum Islands Teal in the diff viewer:
 | --- | --- |
 | [![Spectrum Teal normal and bright ANSI console colors](docs/screenshots/spectrum-teal-console.png)](docs/screenshots/spectrum-teal-console.png) | [![Spectrum Contrast semantic highlighting for parameters and local variables](docs/screenshots/spectrum-semantic-highlighting.png)](docs/screenshots/spectrum-semantic-highlighting.png) |
 
-The gallery also compares [original and Islands layouts](docs/screenshots/README.md#original-and-islands-layouts)
-and [Teal and Rose accents](docs/screenshots/README.md#teal-and-rose-accents).
+The gallery also compares [Teal and Rose accents](docs/screenshots/README.md#teal-and-rose-accents).
 
 ## Build and install
 

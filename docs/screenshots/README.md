@@ -4,25 +4,17 @@ Direct captures from IntelliJ IDEA 2026.2.3 on macOS, taken on 25 October 2026
 using the [sample project](../samples/pom.xml). Images are 2800 × 2000 pixels
 and contain no mouse pointer. Click any preview to open the full-size image.
 
-## Six color palettes
+## Five color palettes
 
 The same Java fixture and compact Islands layout in each palette.
 
 | Spectrum | Default |
 | --- | --- |
 | [![Spectrum Islands](spectrum-islands.png)](spectrum-islands.png) | [![Default Islands](default-islands.png)](default-islands.png) |
-| **Classic** | **Machine** |
-| [![Classic Islands](classic-islands.png)](classic-islands.png) | [![Machine Islands](machine-islands.png)](machine-islands.png) |
-| **Octagon** | **Ristretto** |
-| [![Octagon Islands](octagon-islands.png)](octagon-islands.png) | [![Ristretto Islands](ristretto-islands.png)](ristretto-islands.png) |
-
-## Original and Islands layouts
-
-Spectrum syntax colors with the original UI and the rounded Islands layout.
-
-| Original | Islands |
-| --- | --- |
-| [![Spectrum original layout](spectrum-original.png)](spectrum-original.png) | [![Spectrum Islands layout](spectrum-islands.png)](spectrum-islands.png) |
+| **Machine** | **Octagon** |
+| [![Machine Islands](machine-islands.png)](machine-islands.png) | [![Octagon Islands](octagon-islands.png)](octagon-islands.png) |
+| **Ristretto** | |
+| [![Ristretto Islands](ristretto-islands.png)](ristretto-islands.png) | |
 
 ## Teal and Rose accents
 

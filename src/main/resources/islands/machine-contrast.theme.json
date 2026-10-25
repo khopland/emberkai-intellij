@@ -22,6 +22,7 @@
     "TooltipBorder": "#8a9596"
   },
   "ui": {
+    "ToolWindow.Button.selectedBackground": "accent",
     "Label.infoForeground": "text-secondary",
     "StatusBar": {
       "Widget.foreground": "text-secondary",

@@ -15,8 +15,8 @@ for language inheritance and customization.
 
 The five color stops follow each palette's teal, violet, rose, orange, and green
 tones. Contrast schemes use brighter ranges; matching No Italics schemes share
-the same colors. Original and Islands layouts, including Teal and Rose accents,
-use the range from their selected editor scheme.
+the same colors. Islands themes, including Teal and Rose accents, use the range
+from their selected editor scheme.
 
 IntelliJ generates intermediate shades and can adjust them to distinguish them
 from diagnostics and other editor colors. The IDE assigns colors; a specific
