@@ -153,6 +153,7 @@ class ThemeCheck {
     RainbowHighlighter.setRainbowEnabled(scheme, null, false);
     check(!RainbowHighlighter.isRainbowEnabledWithInheritance(scheme, Language.ANY), "Disable semantics");
   }
+
   public static void main(String[] args) throws Exception {
     check(ExperimentalUI.isNewUI(), "Validate the same New UI defaults used by the IDE");
     RESOURCES = Path.of(args[0]);
@@ -180,9 +181,15 @@ class ThemeCheck {
       Set<String> actual = new HashSet<>(files.filter(p -> p.toString().endsWith(".theme.json")).map(p -> RESOURCES.relativize(p).toString().replace('\\', '/')).toList());
       check(actual.equals(paths), "Unregistered or missing theme resources");
     }
+    Map<String,String> bundledSchemes = new HashMap<>();
+    Set<String> schemeNames = new HashSet<>();
     for (var entry : descriptor.getChild("extensions").getChildren("bundledColorScheme")) {
-      var scheme = xml(RESOURCES.resolve(entry.getAttributeValue("path") + ".xml"));
-      check(entry.getAttributeValue("id").equals(scheme.getAttributeValue("name")), "Scheme registration name");
+      String path = entry.getAttributeValue("path") + ".xml";
+      String name = entry.getAttributeValue("id");
+      var scheme = xml(RESOURCES.resolve(path));
+      check(name != null && name.equals(scheme.getAttributeValue("name")), "Scheme registration name: " + path);
+      check(bundledSchemes.put(path, name) == null, "Duplicate scheme path: " + path);
+      check(schemeNames.add(name), "Duplicate scheme name: " + name);
     }
     int contrastThemes=0, accentThemes=0, islandThemes=0;
     String[] ansi={"BLACK","RED","GREEN","YELLOW","BLUE","MAGENTA","CYAN","GRAY","DARKGRAY","RED_BRIGHT","GREEN_BRIGHT","YELLOW_BRIGHT","BLUE_BRIGHT","MAGENTA_BRIGHT","CYAN_BRIGHT","WHITE"};
@@ -193,7 +200,12 @@ class ThemeCheck {
       boolean isContrast=file.contains("-contrast");
       boolean isAccent=file.contains("-teal")||file.contains("-rose");
       UIDefaults defaults=new UIDefaults(); theme.applyTheme(defaults);
-      var scheme=xml(RESOURCES.resolve(theme.getEditorSchemeId().substring(1)));
+      String schemePath = theme.getEditorSchemeId().substring(1);
+      var scheme=xml(RESOURCES.resolve(schemePath));
+      // Project/plugin reloads must be able to load the scheme independently of
+      // theme discovery, which replaces the theme's XML path with its scheme name.
+      check(scheme.getAttributeValue("name").equals(bundledSchemes.get(schemePath)),
+            "Theme scheme must be explicitly bundled for reloads: " + theme.getName() + " / " + schemePath);
       var attrs=attributes(scheme); var colors=colors(scheme);
       var original=attributes(xml(RESOURCES.resolve("schemes/"+family+".xml")));
       Color background=attrs.get("TEXT").getBackgroundColor();
@@ -250,7 +262,10 @@ class ThemeCheck {
     }
     int noItalics=0, semanticRanges=0;
     try(var schemePaths=Files.list(RESOURCES.resolve("schemes"))) {
-      for(Path path:schemePaths.filter(p->p.getFileName().toString().endsWith(".xml")).toList()) {
+      var files = schemePaths.filter(p->p.getFileName().toString().endsWith(".xml")).toList();
+      Set<String> actualPaths = new HashSet<>(files.stream().map(p -> RESOURCES.relativize(p).toString().replace('\\', '/')).toList());
+      check(actualPaths.equals(bundledSchemes.keySet()), "Unregistered or missing editor schemes");
+      for(Path path:files) {
         checkSemanticRange(path);
         semanticRanges++;
         if (!path.getFileName().toString().endsWith("-no-italics.xml")) continue;
@@ -271,5 +286,6 @@ class ThemeCheck {
     check(PROVIDERS.size()==20&&contrastThemes==5&&accentThemes==10&&islandThemes==20&&noItalics==10&&semanticRanges==20,"Complete preset matrix");
     System.out.printf("Validated %d inheritance chains, %d Contrast themes, %d accent themes, and %d No Italics schemes.%n",PROVIDERS.size(),contrastThemes,accentThemes,noItalics);
     System.out.printf("Validated %d opt-in semantic ranges, including all 21 interpolated colors per scheme.%n",semanticRanges);
+    System.out.printf("Validated %d explicitly bundled editor schemes for theme reloads.%n",bundledSchemes.size());
   }
 }

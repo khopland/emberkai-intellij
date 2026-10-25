@@ -8,3 +8,5 @@ Initial Emberkai release for IntelliJ Platform 2025.3 and newer.
 - Islands layout, Contrast variants, and Teal and Rose accents.
 - Matching No Italics editor schemes.
 - Coordinated diff and console colors, plus optional palette-matched semantic highlighting.
+- Explicitly registered editor schemes to prevent missing-scheme errors after
+  project or plugin reloads, including Spectrum Rose.

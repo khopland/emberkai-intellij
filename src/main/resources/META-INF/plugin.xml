@@ -31,6 +31,7 @@
     <li>Five Islands palettes with Contrast variants and Teal and Rose accents.</li>
     <li>Matching No Italics editor schemes.</li>
     <li>Coordinated diff, console, and optional semantic highlighting colors.</li>
+    <li>Explicit editor scheme registrations to prevent missing-scheme errors after project or plugin reloads.</li>
   </ul>
   ]]>
   </change-notes>
@@ -58,6 +59,19 @@
     <themeProvider id="fee005fc-b8b1-48ba-a032-97ba7ef22653" path="/islands/ristretto-contrast.theme.json"/>
     <themeProvider id="f4ebd1f0-989d-4f4d-9e2b-0800912a88e9" path="/islands/ristretto-teal.theme.json"/>
     <themeProvider id="ef59857a-6d4c-4ba5-9770-4511a58ea0f2" path="/islands/ristretto-rose.theme.json"/>
+
+    <!-- Register regular schemes independently of theme discovery so IDE/plugin
+         reloads can resolve the scheme names stored by the active theme. -->
+    <bundledColorScheme id="Emberkai" path="schemes/default"/>
+    <bundledColorScheme id="Emberkai (Filter Machine)" path="schemes/machine"/>
+    <bundledColorScheme id="Emberkai (Filter Octagon)" path="schemes/octagon"/>
+    <bundledColorScheme id="Emberkai (Filter Ristretto)" path="schemes/ristretto"/>
+    <bundledColorScheme id="Emberkai (Filter Spectrum)" path="schemes/spectrum"/>
+    <bundledColorScheme id="Emberkai Contrast" path="schemes/default-contrast"/>
+    <bundledColorScheme id="Emberkai (Machine Contrast)" path="schemes/machine-contrast"/>
+    <bundledColorScheme id="Emberkai (Octagon Contrast)" path="schemes/octagon-contrast"/>
+    <bundledColorScheme id="Emberkai (Ristretto Contrast)" path="schemes/ristretto-contrast"/>
+    <bundledColorScheme id="Emberkai (Spectrum Contrast)" path="schemes/spectrum-contrast"/>
 
     <bundledColorScheme id="Emberkai (Filter Machine) - No Italics" path="schemes/machine-no-italics"/>
     <bundledColorScheme id="Emberkai (Filter Octagon) - No Italics" path="schemes/octagon-no-italics"/>
