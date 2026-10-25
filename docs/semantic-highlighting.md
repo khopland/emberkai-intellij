@@ -24,3 +24,7 @@ variable name does not have a fixed color across every scope or project.
 
 Open [SemanticDemo.java](samples/SemanticDemo.java) in the
 [sample project](samples/pom.xml) to compare the enabled and disabled views.
+
+Spectrum Islands Contrast with No Italics and semantic highlighting enabled:
+
+![Semantic highlighting in IntelliJ IDEA](screenshots/spectrum-semantic-highlighting.png)
