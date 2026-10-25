@@ -60,6 +60,21 @@ The gallery also compares [Teal and Rose accents](docs/screenshots/README.md#tea
 Optional [semantic highlighting](docs/semantic-highlighting.md) gives individual
 parameters and local variables colors from a range matched to your palette.
 
+## Optional file icons
+
+Install [Symbols Icons](https://github.com/joansgarcia/jetbrains-symbols) separately
+to use its file and folder icons with Emberkai. The common Symbols colors follow
+the selected Emberkai palette automatically. Contrast variants brighten neutral
+icons; Teal and Rose keep their palette's icon colors. Icons keep their colors
+when selected in the Project panel.
+
+Emberkai uses JetBrains' global SVG color replacements. Other icons using the
+same source colors can also change. The replacements are active whenever an
+Emberkai theme is selected, even without Symbols installed. See
+[icon color support](docs/icon-colors.md) for the mappings and limitations.
+
+## Development
+
 To preview in a development IDE, run `./gradlew runIde`.
 Checks: `./gradlew check verifyPluginStructure verifyPlugin`. See [validation](docs/validation.md)
 for the visual smoke test.
