@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Match common Symbols file and folder icon colors to the selected Emberkai palette.
+
 ## 1.0.0
 
 Initial Emberkai release for IntelliJ Platform 2025.3 and newer.

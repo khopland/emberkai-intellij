@@ -11,6 +11,9 @@ Contrast text thresholds, and Islands geometry and selected controls.
 The parser runs with New UI enabled so IntelliJ's per-theme selection defaults
 cannot hide inheritance issues. Selected tool window buttons must use the
 preset's accent background and contrasting icon foreground.
+Icon checks run the target IDE's SVG color patcher against every preset's
+inherited Symbols mappings, including fills, strokes, neutral Contrast colors,
+and colors outside the map.
 It also checks the five native semantic color stops in every scheme, all 21
 interpolated shades against the editor and caret-row backgrounds (4.5:1, or
 5.5:1 for Contrast), and the native opt-in toggle. A running IDE may further
@@ -30,6 +33,10 @@ and inspect ANSI output in the Run console. The sample requires Java 21+.
   spacing. Open another window to inspect the inactive frame.
 - Focus the Project tool window in each preset and check that its sidebar
   button uses the preset accent, including after switching between themes.
+- Install Symbols Icons and check Java, JavaScript, TypeScript, JSON, and folder
+  icons while switching palettes, Contrast, Teal, and Rose. Check that neutral
+  icons brighten with Contrast. Disable Symbols and confirm the normal IDE
+  icons return; SVGs sharing mapped source colors can still be recolored.
 - Open a diff with additions, deletions, and modifications; inspect conflict
   colors in Editor → Color Scheme → Diff & Merge.
 - Run `bash docs/samples/ansi-colors.sh` in the IDE terminal. Inspect normal and
