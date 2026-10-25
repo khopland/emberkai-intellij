@@ -8,6 +8,9 @@ Use `-PplatformVersion=2025.3.6.1` to check the oldest supported IDE, or
 checks all theme registrations and inheritance chains, matching No Italics
 schemes, preserved syntax colors, 16 distinct ANSI colors, diff readability,
 Contrast text thresholds, and Islands geometry and selected controls.
+Every editor scheme must also have an explicit `bundledColorScheme` registration
+whose ID matches the XML scheme name. This keeps schemes available independently
+of theme discovery when projects or plugins reload.
 The parser runs with New UI enabled so IntelliJ's per-theme selection defaults
 cannot hide inheritance issues. Selected tool window buttons must use the
 preset's accent background and contrasting icon foreground.
@@ -29,6 +32,9 @@ Open `docs/samples/pom.xml` as a Maven project to run `EmberkaiDemo.main()`
 and inspect ANSI output in the Run console. The sample requires Java 21+.
 
 - Switch through the five Islands palettes and their Contrast variants.
+- With Spectrum Rose selected, open another project and install or enable a
+  plugin without restarting. Check that editor and Project view colors remain
+  correct and the IDE log has no "refers to unknown color scheme" errors.
 - In Islands, check Spectrum, Contrast, Teal, and Rose with regular and compact
   spacing. Open another window to inspect the inactive frame.
 - Focus the Project tool window in each preset and check that its sidebar
