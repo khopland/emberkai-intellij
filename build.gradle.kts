@@ -16,9 +16,13 @@ val validateThemes = tasks.register<ThemeCheckTask>("validateThemes") {
     jvmArgs("-Djava.awt.headless=true", "-Dide.experimental.ui=true")
     mainClass = layout.projectDirectory.file("scripts/ThemeCheck.java").asFile.absolutePath
     args(layout.projectDirectory.dir("src/main/resources").asFile.absolutePath)
-    // Include module jars too: recent IDEs keep UITheme and the scheme reader there.
+    // Keep IDE libraries ahead of optional modules, which may bundle conflicting
+    // copies of libraries (e.g. JSVG inside intellij.charts on 2025.3).
+    // Recent IDEs also keep UITheme and the scheme reader in module jars.
     classpath = files(provider {
-        fileTree(platformPath.resolve("lib").toFile()) { include("*.jar", "modules/*.jar") }
+        val lib = platformPath.resolve("lib").toFile()
+        fileTree(lib) { include("*.jar") }.files.sortedBy { it.name } +
+            fileTree(lib.resolve("modules")) { include("*.jar") }.files.sortedBy { it.name }
     })
 }
 

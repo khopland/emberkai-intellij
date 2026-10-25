@@ -5,6 +5,8 @@ Use `-PplatformVersion=2025.3.6.1` to check the oldest supported IDE, or
 `-PplatformLocalPath=/path/to/IDE` to use a local installation.
 
 `validateThemes` uses the target IDE's theme parser and editor scheme reader. It
+loads the IDE's libraries before optional module jars, which can contain
+conflicting library copies such as JSVG in IntelliJ 2025.3's charts module. It
 checks all theme registrations and inheritance chains, matching No Italics
 schemes, preserved syntax colors, 16 distinct ANSI colors, diff readability,
 Contrast text thresholds, and Islands geometry and selected controls.
