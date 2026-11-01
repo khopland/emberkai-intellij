@@ -9,7 +9,7 @@ Comes with a **Contrast** option with brighter comments and secondary text,
 Accent presets keep the same syntax colors. Buttons, run and stop controls,
 badges, diff, console, and file icon colors all come from one palette.
 
-Requires **IntelliJ Platform 2025.3 or newer**.
+Requires **IntelliJ Platform 2026.1 or newer**.
 
 ## Preview
 

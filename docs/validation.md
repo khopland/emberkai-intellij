@@ -1,12 +1,12 @@
 # Theme validation
 
 Run `./gradlew check verifyPluginStructure verifyPlugin buildPlugin` before submitting changes.
-Use `-PplatformVersion=2025.3.6.1` to check the oldest supported IDE, or
+Use `-PplatformVersion=2026.1.4` to check the oldest supported IDE, or
 `-PplatformLocalPath=/path/to/IDE` to use a local installation.
 
 `validateThemes` uses the target IDE's theme parser and editor scheme reader. It
 loads the IDE's libraries before optional module jars, which can contain
-conflicting library copies such as JSVG in IntelliJ 2025.3's charts module. It
+conflicting library copies such as JSVG in the charts module. It
 checks all theme registrations and inheritance chains, matching No Italics
 schemes, preserved syntax colors, 16 distinct ANSI colors, diff readability,
 Contrast text thresholds, and Islands geometry and selected controls.
@@ -35,7 +35,7 @@ adjust semantic shades around its language-specific diagnostic colors.
 `verifyPlugin` also runs JetBrains Plugin Verifier against the selected IDE,
 with reports under `build/reports/pluginVerifier/`.
 GitHub Actions runs these checks on IntelliJ
-2025.3, 2026.1, and 2026.2. The newest target also uploads an installable ZIP.
+2026.1 and 2026.2. The newest target also uploads an installable ZIP.
 
 These checks are headless. Use `./gradlew runIde` for a visual smoke test:
 
@@ -85,7 +85,7 @@ Checked in an isolated IntelliJ IDEA 2026.2.3 instance on macOS:
 - Installed the prepared 1.0.0 ZIP through Install Plugin from Disk in a fresh
   IDE profile, restarted, and confirmed Emberkai Theme 1.0.0 was enabled.
 
-The 2025.3 and 2026.1 compatibility checks use native readers and Plugin Verifier;
+The 2026.1 compatibility checks use native readers and Plugin Verifier;
 live UI checks were performed on 2026.2.3.
 
 The original layouts and Classic palette were removed after this visual check.

@@ -13,7 +13,7 @@
   <p>Includes optional No Italics editor schemes, coordinated diff and console
   colors, and palette-matched semantic highlighting for parameters and local
   variables. Semantic highlighting is off by default.</p>
-  <p>Requires IntelliJ Platform 2025.3 or newer. Select a theme under
+  <p>Requires IntelliJ Platform 2026.1 or newer. Select a theme under
   Settings &gt; Appearance &amp; Behavior &gt; Appearance.</p>
   <p><a href="https://github.com/khopland/emberkai-intellij/issues">Report an issue</a> |
   <a href="https://github.com/khopland/emberkai-intellij">Source code</a> |

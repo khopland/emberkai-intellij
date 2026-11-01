@@ -4,6 +4,7 @@
 
 ## 2.0.0
 
+- Requires IntelliJ Platform 2026.1 or newer. Support for 2025.3 is dropped.
 **Breaking:** Emberkai now has one palette, based on Monokai Pro Spectrum. The
 Default, Machine, Octagon, and Ristretto palettes are removed. Themes are now
 **Emberkai Islands**, **Contrast**, **Teal**, and **Rose**, with matching

@@ -13,7 +13,7 @@ Use JDK 25 (available through SDKMAN), then run:
 
 This runs the theme checks, plugin structure validation, and JetBrains Plugin
 Verifier against the configured IDE. CI repeats verification on IntelliJ
-2025.3.6.1, 2026.1.4, and 2026.2.3. Reports are in
+2026.1.4 and 2026.2.3. Reports are in
 `build/reports/pluginVerifier/`.
 
 The installable ZIP and `SHA256SUMS` are staged in `build/release/`.
