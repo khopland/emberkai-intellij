@@ -8,9 +8,11 @@ the colors; Symbols supplies the icon shapes and file/folder associations.
 Symbols is optional and is not bundled with Emberkai.
 
 Each base theme defines an `icons.ColorPalette` map. The map replaces Symbols'
-red and pink with the palette's rose, orange with orange, yellow with yellow,
+red and pink with Emberkai's rose, orange with orange, yellow with yellow,
 green with green, blue with the console blue, sky and teal with cyan, and purple
 with violet. Neutral file and folder icons use `icon-default-stroke`.
+Near-duplicate shades used by the Docker, webpack, Cypress, and Orval icons
+map to the same palette colors.
 The matching `iconColorsOnSelection` map keeps those colors when a file or
 folder is selected. JetBrains renders selected icons with a separate patcher,
 so both maps are needed. Selection map keys use lowercase SVG color values.

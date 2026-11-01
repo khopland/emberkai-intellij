@@ -2,47 +2,35 @@
 
 <img src="src/main/resources/META-INF/pluginIcon.svg" alt="Emberkai ember logo" width="64" height="64">
 
-A dark theme collection for IntelliJ-based IDEs, using the Islands layout.
+A warm, high-color dark theme for IntelliJ-based IDEs, using the Islands layout.
 
-Includes five palettes: Default, Machine, Octagon, Ristretto, and Spectrum,
-plus optional **No Italics** editor schemes.
-
-Every palette includes a **Contrast** option with brighter comments and secondary
-text, plus **Teal** and **Rose** Islands accents. Accent presets keep the palette's
-syntax colors. All palettes include coordinated diff and console colors.
+Comes with a **Contrast** option with brighter comments and secondary text,
+**Teal** and **Rose** Islands accents, and optional **No Italics** editor schemes.
+Accent presets keep the same syntax colors. Buttons, run and stop controls,
+badges, diff, console, and file icon colors all come from one palette.
 
 Requires **IntelliJ Platform 2025.3 or newer**.
 
 ## Preview
 
 Direct IntelliJ IDEA captures, with no mouse pointer. See the
-[full screenshot gallery](docs/screenshots/README.md) for palettes, accents, and features.
+[full screenshot gallery](docs/screenshots/README.md) for accents and features.
 
-### Color palettes
-
-All five palettes in the Islands layout. Click a preview to see it at full size.
-
-| Spectrum | Default |
-| --- | --- |
-| [![Spectrum Islands palette](docs/screenshots/spectrum-islands.png)](docs/screenshots/spectrum-islands.png) | [![Default Islands palette](docs/screenshots/default-islands.png)](docs/screenshots/default-islands.png) |
-| **Machine** | **Octagon** |
-| [![Machine Islands palette](docs/screenshots/machine-islands.png)](docs/screenshots/machine-islands.png) | [![Octagon Islands palette](docs/screenshots/octagon-islands.png)](docs/screenshots/octagon-islands.png) |
-| **Ristretto** | |
-| [![Ristretto Islands palette](docs/screenshots/ristretto-islands.png)](docs/screenshots/ristretto-islands.png) | |
+[![Emberkai Islands](docs/screenshots/emberkai-islands.png)](docs/screenshots/emberkai-islands.png)
 
 ### Features
 
-Spectrum Islands Contrast, compact mode, with the matching No Italics scheme:
+Emberkai Islands Contrast, compact mode, with the matching No Italics scheme:
 
-![Spectrum Islands Contrast editor preview](docs/screenshots/spectrum-contrast-compact.png)
+![Emberkai Islands Contrast editor preview](docs/screenshots/emberkai-contrast-compact.png)
 
-Spectrum Islands Teal in the diff viewer:
+Emberkai Islands Teal in the diff viewer:
 
-![Spectrum Islands Teal diff preview](docs/screenshots/spectrum-teal-diff.png)
+![Emberkai Islands Teal diff preview](docs/screenshots/emberkai-teal-diff.png)
 
 | ANSI console colors | Optional semantic highlighting |
 | --- | --- |
-| [![Spectrum Teal normal and bright ANSI console colors](docs/screenshots/spectrum-teal-console.png)](docs/screenshots/spectrum-teal-console.png) | [![Spectrum Contrast semantic highlighting for parameters and local variables](docs/screenshots/spectrum-semantic-highlighting.png)](docs/screenshots/spectrum-semantic-highlighting.png) |
+| [![Emberkai Teal normal and bright ANSI console colors](docs/screenshots/emberkai-teal-console.png)](docs/screenshots/emberkai-teal-console.png) | [![Emberkai Contrast semantic highlighting for parameters and local variables](docs/screenshots/emberkai-semantic-highlighting.png)](docs/screenshots/emberkai-semantic-highlighting.png) |
 
 The gallery also compares [Teal and Rose accents](docs/screenshots/README.md#teal-and-rose-accents).
 

@@ -6,10 +6,10 @@
 
   <description>
   <![CDATA[
-  <p>Emberkai is a dark theme collection for IntelliJ-based IDEs.</p>
-  <p>Choose from five palettes: Default, Machine, Octagon, Ristretto, and
-  Spectrum. Each uses the Islands layout, with a Contrast option for
-  brighter secondary text and Teal and Rose accents.</p>
+  <p>Emberkai is a warm, high-color dark theme for IntelliJ-based IDEs.</p>
+  <p>Built on the Islands layout, with a Contrast option for brighter
+  comments and secondary text, and Teal and Rose accents. Buttons, run and
+  stop controls, badges, and file icons all follow the same palette.</p>
   <p>Includes optional No Italics editor schemes, coordinated diff and console
   colors, and palette-matched semantic highlighting for parameters and local
   variables. Semantic highlighting is off by default.</p>
@@ -26,62 +26,32 @@
 
   <change-notes>
   <![CDATA[
-  <p>1.0.0 — Initial Emberkai release.</p>
+  <p>2.0.0 — Emberkai now has a single palette.</p>
   <ul>
-    <li>Five Islands palettes with Contrast variants and Teal and Rose accents.</li>
-    <li>Matching No Italics editor schemes.</li>
-    <li>Coordinated diff, console, and optional semantic highlighting colors.</li>
-    <li>Explicit editor scheme registrations to prevent missing-scheme errors after project or plugin reloads.</li>
+    <li><b>Breaking:</b> the Default, Machine, Octagon, and Ristretto palettes are removed.
+    Themes are now Emberkai Islands, Contrast, Teal, and Rose. Reselect the editor
+    scheme under Settings &gt; Editor &gt; Color Scheme if it resets.</li>
+    <li>Run and stop buttons, plugin buttons, toggles, banners, badges, and progress
+    bars use the palette instead of Islands' stock green and red.</li>
+    <li>Editor colors previously copied from other themes now come from the palette,
+    including parameters, constants, rainbow brackets, TODOs, breakpoints, and coverage.</li>
+    <li>Unused code uses the comment color, and the Rose accent no longer matches errors.</li>
+    <li>Test and non-project file colors, plus more Symbols icons, follow the palette.</li>
   </ul>
   ]]>
   </change-notes>
 
   <extensions defaultExtensionNs="com.intellij">
-    <themeProvider id="cb4ef67d-a446-4ffc-a0d8-75b28f21e5b3" path="/islands/default.theme.json"/>
-    <themeProvider id="001053df-86c9-4105-943d-fc0fc7441e95" path="/islands/machine.theme.json"/>
-    <themeProvider id="118660e7-13b1-4d5f-8989-3ed31a3c2df6" path="/islands/octagon.theme.json"/>
-    <themeProvider id="c371d97a-eb44-40e1-ab8a-0a0cd87656e1" path="/islands/ristretto.theme.json"/>
-    <themeProvider id="6f67444a-949d-4956-9d05-bb6ceae75572" path="/islands/spectrum.theme.json"/>
-
-    <themeProvider id="3201fbb7-59f3-4f47-9803-c70924cd923f" path="/islands/spectrum-contrast.theme.json"/>
-    <themeProvider id="6d2e5f19-84f2-4590-a3b2-04c56e299c43" path="/islands/spectrum-teal.theme.json"/>
-    <themeProvider id="68794a74-fbdf-4cc3-b010-23a06b405f54" path="/islands/spectrum-rose.theme.json"/>
-
-    <themeProvider id="4d6855b2-0380-4162-9abf-ea8983206de2" path="/islands/default-contrast.theme.json"/>
-    <themeProvider id="8871c6f0-c727-48f7-bcec-bfa1b31c8d37" path="/islands/default-teal.theme.json"/>
-    <themeProvider id="dd00462f-9202-4b1c-9c10-baf2e344d05d" path="/islands/default-rose.theme.json"/>
-    <themeProvider id="72f0f5aa-3744-43ec-a385-0672337152c6" path="/islands/machine-contrast.theme.json"/>
-    <themeProvider id="80560795-3d8b-40bc-bd3c-bae0df2f4f51" path="/islands/machine-teal.theme.json"/>
-    <themeProvider id="196e4b63-7479-43aa-9d2f-93bcc3cbad84" path="/islands/machine-rose.theme.json"/>
-    <themeProvider id="758a5879-0c96-4649-be7f-9cb33d6db530" path="/islands/octagon-contrast.theme.json"/>
-    <themeProvider id="8740966c-2582-4872-a794-783cf050a14a" path="/islands/octagon-teal.theme.json"/>
-    <themeProvider id="6d77fe77-b2aa-4a1f-bf00-378509e847e5" path="/islands/octagon-rose.theme.json"/>
-    <themeProvider id="fee005fc-b8b1-48ba-a032-97ba7ef22653" path="/islands/ristretto-contrast.theme.json"/>
-    <themeProvider id="f4ebd1f0-989d-4f4d-9e2b-0800912a88e9" path="/islands/ristretto-teal.theme.json"/>
-    <themeProvider id="ef59857a-6d4c-4ba5-9770-4511a58ea0f2" path="/islands/ristretto-rose.theme.json"/>
+    <themeProvider id="6f67444a-949d-4956-9d05-bb6ceae75572" path="/islands/emberkai.theme.json"/>
+    <themeProvider id="3201fbb7-59f3-4f47-9803-c70924cd923f" path="/islands/emberkai-contrast.theme.json"/>
+    <themeProvider id="6d2e5f19-84f2-4590-a3b2-04c56e299c43" path="/islands/emberkai-teal.theme.json"/>
+    <themeProvider id="68794a74-fbdf-4cc3-b010-23a06b405f54" path="/islands/emberkai-rose.theme.json"/>
 
     <!-- Register regular schemes independently of theme discovery so IDE/plugin
          reloads can resolve the scheme names stored by the active theme. -->
-    <bundledColorScheme id="Emberkai" path="schemes/default"/>
-    <bundledColorScheme id="Emberkai (Filter Machine)" path="schemes/machine"/>
-    <bundledColorScheme id="Emberkai (Filter Octagon)" path="schemes/octagon"/>
-    <bundledColorScheme id="Emberkai (Filter Ristretto)" path="schemes/ristretto"/>
-    <bundledColorScheme id="Emberkai (Filter Spectrum)" path="schemes/spectrum"/>
-    <bundledColorScheme id="Emberkai Contrast" path="schemes/default-contrast"/>
-    <bundledColorScheme id="Emberkai (Machine Contrast)" path="schemes/machine-contrast"/>
-    <bundledColorScheme id="Emberkai (Octagon Contrast)" path="schemes/octagon-contrast"/>
-    <bundledColorScheme id="Emberkai (Ristretto Contrast)" path="schemes/ristretto-contrast"/>
-    <bundledColorScheme id="Emberkai (Spectrum Contrast)" path="schemes/spectrum-contrast"/>
-
-    <bundledColorScheme id="Emberkai (Filter Machine) - No Italics" path="schemes/machine-no-italics"/>
-    <bundledColorScheme id="Emberkai (Filter Octagon) - No Italics" path="schemes/octagon-no-italics"/>
-    <bundledColorScheme id="Emberkai (Filter Ristretto) - No Italics" path="schemes/ristretto-no-italics"/>
-    <bundledColorScheme id="Emberkai (Filter Spectrum) - No Italics" path="schemes/spectrum-no-italics"/>
-    <bundledColorScheme id="Emberkai - No Italics" path="schemes/default-no-italics"/>
-    <bundledColorScheme id="Emberkai (Spectrum Contrast) - No Italics" path="schemes/spectrum-contrast-no-italics"/>
-    <bundledColorScheme id="Emberkai Contrast - No Italics" path="schemes/default-contrast-no-italics"/>
-    <bundledColorScheme id="Emberkai (Machine Contrast) - No Italics" path="schemes/machine-contrast-no-italics"/>
-    <bundledColorScheme id="Emberkai (Octagon Contrast) - No Italics" path="schemes/octagon-contrast-no-italics"/>
-    <bundledColorScheme id="Emberkai (Ristretto Contrast) - No Italics" path="schemes/ristretto-contrast-no-italics"/>
+    <bundledColorScheme id="Emberkai" path="schemes/emberkai"/>
+    <bundledColorScheme id="Emberkai Contrast" path="schemes/emberkai-contrast"/>
+    <bundledColorScheme id="Emberkai - No Italics" path="schemes/emberkai-no-italics"/>
+    <bundledColorScheme id="Emberkai Contrast - No Italics" path="schemes/emberkai-contrast-no-italics"/>
   </extensions>
 </idea-plugin>

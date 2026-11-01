@@ -1,6 +1,6 @@
 # Releasing Emberkai
 
-The first release is **1.0.0**, tagged **v1.0.0**. Keep `pluginVersion` in
+The current release is **2.0.0**, tagged **v2.0.0**. Keep `pluginVersion` in
 `gradle.properties`, `CHANGELOG.md`, and the plugin's change notes in sync.
 
 ## Build and check
@@ -40,8 +40,8 @@ After the release PR is merged and all three CI checks pass:
 ```sh
 git switch main
 git pull --ff-only
-git tag v1.0.0
-git push origin v1.0.0
+git tag v2.0.0
+git push origin v2.0.0
 ```
 
 The tag must match `pluginVersion`. The release workflow runs all three CI targets,
@@ -64,7 +64,7 @@ Use the plugin description and change notes from `plugin.xml`, and set:
 - Issue tracker: `https://github.com/khopland/emberkai-intellij/issues`
 - Documentation: `https://github.com/khopland/emberkai-intellij#readme`
 - License: Apache 2.0, with the [inherited MIT notices](../NOTICE).
-- Screenshots: the [native IDE captures](screenshots/README.md), with Spectrum first.
+- Screenshots: the [native IDE captures](screenshots/README.md), with Emberkai Islands first.
 
 Review the [Marketplace requirements](https://plugins.jetbrains.com/docs/marketplace/jetbrains-marketplace-approval-guidelines.html)
 when submitting. After approval, add the Marketplace installation link to the README.
