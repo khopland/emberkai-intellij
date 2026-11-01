@@ -50,3 +50,98 @@ jobs:
           path: build/distributions/*.zip
           if-no-files-found: error
           retention-days: 14
+
+  draft:
+    name: Draft release
+    # Only on main, after every platform passed. Publishing the draft creates the tag and
+    # starts the release workflow.
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - name: Read version
+        id: version
+        shell: bash
+        run: |
+          version="$(sed -n 's/^pluginVersion=//p' gradle.properties)"
+          if [[ -z "$version" ]]; then
+            echo "::error::gradle.properties has no pluginVersion."
+            exit 1
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          if grep -q "^## $version$" CHANGELOG.md; then
+            echo "releasable=true" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Download tested plugin
+        if: steps.version.outputs.releasable == 'true'
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8
+        with:
+          name: emberkai-plugin
+          path: build/release
+      - name: Extract release notes
+        if: steps.version.outputs.releasable == 'true'
+        env:
+          RELEASE_VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          python3 - <<'PY'
+          import os
+          from pathlib import Path
+
+          version = os.environ['RELEASE_VERSION']
+          changelog = Path('CHANGELOG.md').read_text()
+          heading = f'## {version}\n'
+          if heading not in changelog:
+              raise SystemExit(f'Missing changelog entry for {version}')
+          notes = changelog.split(heading, 1)[1].split('\n## ', 1)[0].strip()
+          if not notes:
+              raise SystemExit(f'Empty changelog entry for {version}')
+          Path('build/release-notes.md').write_text(notes + '\n')
+          PY
+      - name: Checksum the tested plugin
+        if: steps.version.outputs.releasable == 'true'
+        run: (cd build/release && sha256sum ./*.zip > SHA256SUMS)
+      - name: Create or update draft release
+        if: steps.version.outputs.releasable == 'true'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          tag="v$RELEASE_VERSION"
+          prerelease=()
+          case "$RELEASE_VERSION" in *-*) prerelease=(--prerelease) ;; esac
+
+          if existing="$(gh release view "$tag" --json isDraft 2>/dev/null)"; then
+            if [[ "$(jq -r '.isDraft' <<< "$existing")" != "true" ]]; then
+              echo "Release $tag is already published; nothing to do."
+              exit 0
+            fi
+          fi
+
+          # Never move a tag that already points to another commit.
+          remote_tag="$(git ls-remote origin "refs/tags/$tag" "refs/tags/$tag^{}")"
+          if [[ -n "$remote_tag" ]]; then
+            tag_sha=$(awk '/\^\{\}$/ { peeled=$1 } { direct=$1 } END { print peeled ? peeled : direct }' <<< "$remote_tag")
+            if [[ "$tag_sha" != "$GITHUB_SHA" ]]; then
+              echo "Tag $tag already points to another commit; leaving its release unchanged."
+              exit 0
+            fi
+          fi
+
+          if [[ -n "${existing:-}" ]]; then
+            gh release edit "$tag" --target "$GITHUB_SHA" \
+              --notes-file build/release-notes.md "${prerelease[@]}"
+          else
+            gh release create "$tag" --draft --target "$GITHUB_SHA" \
+              --title "Emberkai $RELEASE_VERSION" \
+              --notes-file build/release-notes.md "${prerelease[@]}"
+          fi
+
+          gh release upload "$tag" build/release/* --clobber
+          echo "Prepared $tag from tested commit $GITHUB_SHA. Publish the draft to release it."

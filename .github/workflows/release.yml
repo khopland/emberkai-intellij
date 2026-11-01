@@ -1,39 +1,91 @@
-name: Prepare release
+name: Release
 
 on:
-  push:
-    tags: ['v*']
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing published GitHub release tag (for recovery)
+        required: true
+        type: string
+      publish_marketplace:
+        description: Upload to Marketplace (disable if this version was already uploaded)
+        default: true
+        type: boolean
 
 permissions:
   contents: read
 
 concurrency:
-  group: release-${{ github.ref }}
+  group: marketplace-release-${{ github.event.release.tag_name || inputs.tag }}
   cancel-in-progress: false
 
 jobs:
   verify:
     uses: ./.github/workflows/validate.yml
+
   release:
+    name: Validate and publish plugin
     needs: verify
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 60
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-        with:
-          persist-credentials: false
-      - name: Check release version
-        id: version
-        shell: bash
+      - name: Resolve published GitHub release
+        id: release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ github.event.release.tag_name || inputs.tag }}
         run: |
-          release_version="$(sed -n 's/^pluginVersion=//p' gradle.properties)"
-          if [[ -z "$release_version" || "$GITHUB_REF_NAME" != "v$release_version" ]]; then
-            echo "::error::Tag must match pluginVersion in gradle.properties."
+          release=$(gh release view "$RELEASE_TAG" --json tagName,isDraft)
+          if [[ $(jq -r '.isDraft' <<< "$release") != false ]]; then
+            echo 'Publish the GitHub release before running Marketplace delivery.' >&2
             exit 1
           fi
-          echo "version=$release_version" >> "$GITHUB_OUTPUT"
+          echo "tag=$(jq -r '.tagName' <<< "$release")" >> "$GITHUB_OUTPUT"
+
+      - name: Validate publishing credentials
+        env:
+          PUBLISH_MARKETPLACE: ${{ github.event_name == 'release' || inputs.publish_marketplace }}
+          PUBLISH_TOKEN: ${{ secrets.PUBLISH_TOKEN }}
+          CERTIFICATE_CHAIN: ${{ secrets.CERTIFICATE_CHAIN }}
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          PRIVATE_KEY_PASSWORD: ${{ secrets.PRIVATE_KEY_PASSWORD }}
+        run: |
+          if [[ "$PUBLISH_MARKETPLACE" == true && -z "$PUBLISH_TOKEN" ]]; then
+            echo 'Add the PUBLISH_TOKEN GitHub Actions secret from your JetBrains Marketplace account.' >&2
+            exit 1
+          fi
+          if [[ -n "$PRIVATE_KEY" || -n "$CERTIFICATE_CHAIN" || -n "$PRIVATE_KEY_PASSWORD" ]]; then
+            if [[ -z "$PRIVATE_KEY" || -z "$CERTIFICATE_CHAIN" ]]; then
+              echo 'Signing requires both PRIVATE_KEY and CERTIFICATE_CHAIN; PRIVATE_KEY_PASSWORD is optional.' >&2
+              exit 1
+            fi
+          fi
+
+      - name: Fetch tagged sources
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: refs/tags/${{ steps.release.outputs.tag }}
+          persist-credentials: false
+
+      - name: Validate tag, version and changelog
+        id: metadata
+        env:
+          RELEASE_TAG: ${{ steps.release.outputs.tag }}
+        run: |
+          version="$(sed -n 's/^pluginVersion=//p' gradle.properties)"
+          if [[ "${RELEASE_TAG#v}" != "$version" ]]; then
+            echo "Tag $RELEASE_TAG does not match pluginVersion $version in gradle.properties." >&2
+            exit 1
+          fi
+          grep -q "^## $version$" CHANGELOG.md || { echo "CHANGELOG.md has no entry for $version." >&2; exit 1; }
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          if [[ "$version" == *-* ]]; then echo "channel=eap" >> "$GITHUB_OUTPUT"; else echo "channel=default" >> "$GITHUB_OUTPUT"; fi
+
       - uses: actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad # v6
         with:
           distribution: temurin
@@ -41,12 +93,14 @@ jobs:
       - uses: gradle/actions/setup-gradle@07d1f8453baaff67fb503883367f8b13e6158a54 # v6
         with:
           cache-provider: basic
-      - name: Verify and package release
+
+      - name: Verify, sign and package the tagged plugin
         run: ./gradlew prepareRelease --no-daemon --console=plain
         env:
           CERTIFICATE_CHAIN: ${{ secrets.CERTIFICATE_CHAIN }}
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
           PRIVATE_KEY_PASSWORD: ${{ secrets.PRIVATE_KEY_PASSWORD }}
+
       - name: Save verification reports
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
@@ -54,29 +108,20 @@ jobs:
           name: release-verification
           path: build/reports/pluginVerifier/
           if-no-files-found: ignore
-      - name: Extract release notes
-        env:
-          RELEASE_VERSION: ${{ steps.version.outputs.version }}
-        run: |
-          python3 - <<'PY'
-          import os
-          from pathlib import Path
 
-          version = os.environ['RELEASE_VERSION']
-          changelog = Path('CHANGELOG.md').read_text()
-          heading = f'## {version}\n'
-          if heading not in changelog:
-              raise SystemExit(f'Missing changelog entry for {version}')
-          notes = changelog.split(heading, 1)[1].split('\n## ', 1)[0].strip()
-          if not notes:
-              raise SystemExit(f'Empty changelog entry for {version}')
-          Path('build/release-notes.md').write_text(notes + '\n')
-          PY
-      - name: Create draft GitHub release
+      # Upload assets first so a GitHub upload failure cannot follow a successful Marketplace upload.
+      - name: Upload GitHub release assets
         env:
           GH_TOKEN: ${{ github.token }}
-          RELEASE_VERSION: ${{ steps.version.outputs.version }}
-        run: |
-          gh release create "$GITHUB_REF_NAME" build/release/* \
-            --verify-tag --draft --title "Emberkai $RELEASE_VERSION" \
-            --notes-file build/release-notes.md
+          RELEASE_TAG: ${{ steps.release.outputs.tag }}
+        run: gh release upload "$RELEASE_TAG" build/release/* --clobber
+
+      - name: Publish to JetBrains Marketplace
+        if: github.event_name == 'release' || inputs.publish_marketplace
+        env:
+          PUBLISH_TOKEN: ${{ secrets.PUBLISH_TOKEN }}
+          CERTIFICATE_CHAIN: ${{ secrets.CERTIFICATE_CHAIN }}
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          PRIVATE_KEY_PASSWORD: ${{ secrets.PRIVATE_KEY_PASSWORD }}
+          CHANNEL: ${{ steps.metadata.outputs.channel }}
+        run: ./gradlew publishPlugin -PmarketplaceChannel="$CHANNEL" --no-daemon --console=plain
