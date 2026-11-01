@@ -44,20 +44,18 @@ push release tags by hand; the draft owns the tag.
 
 ## Release workflow
 
-Publishing a GitHub release, or running the **Release** workflow manually with
-its tag, does the following:
+Publishing a GitHub release starts the release workflow:
 
-1. Re-runs the two-IDE validation matrix on the tagged commit.
-2. Runs `prepareRelease`: theme checks, structure validation, Plugin Verifier,
-   signing when the signing secrets are set, and staging the ZIP and checksum.
+1. Checks that the tag matches `pluginVersion`.
+2. Runs the theme checks, structure validation, and Plugin Verifier, and builds
+   the plugin ZIP from the tagged commit.
 3. Uploads the ZIP and `SHA256SUMS` to the GitHub release.
-4. Publishes the staged ZIP to JetBrains Marketplace. Versions with a suffix,
-   such as `2.1.0-beta.1`, go to the `eap` channel; plain versions go to
-   `default`.
+4. Rebuilds the tagged plugin, signs it when the signing secrets are set, and
+   publishes it to JetBrains Marketplace. Versions with a suffix, such as
+   `2.1.0-beta.1`, go to the `beta` channel; plain versions go to `default`.
 
-If the Marketplace upload fails after the assets are attached, re-run the
-workflow manually with the published tag and set `publish_marketplace` to false
-when the version is already on the Marketplace.
+If the Marketplace step fails, re-run the failed **Release** workflow from the
+Actions tab after fixing the cause.
 
 ## Secrets
 
