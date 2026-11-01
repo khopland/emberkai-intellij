@@ -112,6 +112,31 @@ class ThemeCheck {
     return result;
   }
 
+  static final Set<String> JETBRAINS_COLORS = Set.of(
+    "3574f0", "3573f0", "3871e1", "2f5eb9", "548af7", "3671e5", "366acf", "35538f", "375fad", "1d2336");
+  // Licensing, profiler, and retired plugin UI that Emberkai leaves to the IDE.
+  static final String VENDOR_KEYS =
+    "(Profiler|LineProfiler|CompilationCharts|CodeWithMe|Recap|TrialWidget|PackageSearch|FlameGraph|"
+    + "Managed|UnattendedHostStatus|LicenseDialog|NuGet)\\b.*";
+  static final Set<String> FOREIGN_COLORS = Set.of(
+    "f59762", "f78c6c", "f65f87", "87cefa", "ffd700", "da70d6", "e91e63", "c1c0c0", "939393",
+    "b7b6b6", "848383", "59575a", "4b1515", "264b33", "12404b", "3b514d", "4d6168", "9373a5",
+    "c7c8f5", "219598", "39adb5", "c4b3a3", "536c46", "fcfafa", "646877", "a2a2a2", "727272",
+    "808080", "dbdbdb", "404040", "fffbf7", "19181a", "7867e7", "5789dd");
+
+  static Map<String,Color> schemeColors(org.jdom.Element root) {
+    var result = new HashMap<String,Color>();
+    colors(root).forEach((key, value) -> { if (value != null) result.put(key, value); });
+    attributes(root).forEach((key, value) -> {
+      if (value == null) return;
+      if (value.getForegroundColor() != null) result.put(key + ".foreground", value.getForegroundColor());
+      if (value.getBackgroundColor() != null) result.put(key + ".background", value.getBackgroundColor());
+      if (value.getEffectColor() != null) result.put(key + ".effect", value.getEffectColor());
+      if (value.getErrorStripeColor() != null) result.put(key + ".stripe", value.getErrorStripeColor());
+    });
+    return result;
+  }
+
   // Use the real semantic keys and gradient generator without starting an IDE.
   // A lightweight scheme avoids application services used to adjust colors
   // around language-specific diagnostics in a running editor.
@@ -277,9 +302,8 @@ class ThemeCheck {
       check(PROVIDERS.put(id, new String[]{id, path, bean.parentTheme == null ? "" : bean.parentTheme}) == null, "Duplicate provider id: " + id);
     }
     Set<String> expectedPaths = new HashSet<>();
-    for (String family : List.of("default", "machine", "octagon", "ristretto", "spectrum"))
-      for (String variant : List.of("", "-contrast", "-teal", "-rose"))
-        expectedPaths.add("islands/" + family + variant + ".theme.json");
+    for (String variant : List.of("", "-contrast", "-teal", "-rose"))
+      expectedPaths.add("islands/emberkai" + variant + ".theme.json");
     check(paths.equals(expectedPaths), "Complete Islands preset matrix");
     try (var files = Files.walk(RESOURCES)) {
       Set<String> actual = new HashSet<>(files.filter(p -> p.toString().endsWith(".theme.json")).map(p -> RESOURCES.relativize(p).toString().replace('\\', '/')).toList());
@@ -341,10 +365,36 @@ class ThemeCheck {
         check(color(defaults,"ToolWindow.Button.selectedForeground").equals(palette.get("surface")),"Selected tool window icon uses contrasting foreground: "+theme.getName());
         check(defaults.getInt("Island.arc")==20&&defaults.getInt("Island.arc.compact")==16,"Native geometry");
         check(color(defaults,"Island.borderColor").equals(color(defaults,"ToolWindow.background")),"Panel edge");
-        check(contrast(color(defaults,"ToolWindow.background"),color(defaults,"MainWindow.background"))>=1.2,"Panel separation");
+        // Stock Islands Dark separates islands from the frame at about 1.18:1.
+        check(contrast(color(defaults,"ToolWindow.background"),color(defaults,"MainWindow.background"))>=1.15,"Panel separation");
         check(contrast(color(defaults,"EditorTabs.underlinedTabBackground"),color(defaults,"EditorTabs.underlinedTabForeground"))>=4.5,"Tabs");
         check(contrast(color(defaults,"Button.default.startBackground"),color(defaults,"Button.default.foreground"))>=4.5,"Buttons");
         check(contrast(color(defaults,"ToolWindow.Button.selectedBackground"),color(defaults,"ToolWindow.Button.selectedForeground"))>=4.5,"Selected tool windows: "+theme.getName());
+        // Filled status controls (run/stop, plugin restart) use palette hues, not Islands green/red.
+        check(color(defaults,"RunWidget.runningBackground").equals(palette.get("text-success"))
+              && color(defaults,"RunWidget.stopBackground").equals(palette.get("text-error"))
+              && color(defaults,"Plugins.Button.installFillBackground").equals(palette.get("text-success")),
+              "Status controls follow palette: "+theme.getName());
+        for (String[] pair : new String[][]{{"Plugins.Button.installFillBackground","Plugins.Button.installFillForeground"},
+                                            {"RunWidget.runningBackground","RunWidget.runningIconColor"},
+                                            {"RunWidget.stopBackground","RunWidget.runningIconColor"}})
+          check(contrast(color(defaults,pair[0]),color(defaults,pair[1]))>=4.5,"Status control readability: "+theme.getName()+" / "+pair[0]);
+        var islandsPalette = BEANS.get(THEMES.get("Islands Dark")).colorMap.map;
+        // The near-white 130-160 steps carry almost no hue and may coincide.
+        for (var entry : islandsPalette.entrySet())
+          if (entry.getKey().matches("(gray|blue|green|red|yellow|orange|purple|teal)-([1-9]0|1[0-2]0)"))
+            check(!entry.getValue().equals(palette.get(entry.getKey())),"Islands color ramp follows palette: "+theme.getName()+" / "+entry.getKey());
+        check(contrast(palette.get("text-muted"),palette.get("surface"))>=4.5,"Muted text: "+theme.getName());
+        // JetBrains' brand blue and its navy tints must not leak through the palette.
+        var leaks = new TreeSet<String>();
+        for (Object key : Collections.list(defaults.keys())) {
+          if (!(key instanceof String name) || name.matches(VENDOR_KEYS)) continue;
+          if (defaults.get(key) instanceof Color value && JETBRAINS_COLORS.contains(String.format("%06x", value.getRGB() & 0xffffff)))
+            leaks.add(name + "=" + String.format("#%06x", value.getRGB() & 0xffffff));
+        }
+        check(leaks.isEmpty(), "JetBrains colors instead of palette: " + theme.getName() + " / " + leaks);
+        if (file.contains("-rose"))
+          check(!palette.get("accent").equals(palette.get("text-error")),"Rose accent must differ from errors: "+theme.getName());
         islandThemes++;
       }
       if(isContrast) {
@@ -373,6 +423,16 @@ class ThemeCheck {
       for(Path path:files) {
         checkSemanticRange(path);
         semanticRanges++;
+        // Colors and keys inherited from the themes Emberkai was adapted from
+        // (Darcula, Material Theme, Rainbow Brackets, Markdown Navigator).
+        var root = xml(path);
+        for (var entry : schemeColors(root).entrySet())
+          check(!FOREIGN_COLORS.contains(String.format("%06x", entry.getValue().getRGB() & 0xffffff)),
+                "Scheme color must come from the palette: " + path + " / " + entry.getKey());
+        for (var section : List.of("colors", "attributes"))
+          for (var option : root.getChild(section).getChildren("option"))
+            check(!option.getAttributeValue("name").matches("MT_.*|MARKDOWN_NAVIGATOR\\..*"),
+                  "Unused plugin key: " + path + " / " + option.getAttributeValue("name"));
         if (!path.getFileName().toString().endsWith("-no-italics.xml")) continue;
         var regular = xml(path.resolveSibling(path.getFileName().toString().replace("-no-italics", "")));
         var plain = xml(path);
@@ -388,7 +448,7 @@ class ThemeCheck {
         noItalics++;
       }
     }
-    check(PROVIDERS.size()==20&&contrastThemes==5&&accentThemes==10&&islandThemes==20&&noItalics==10&&semanticRanges==20,"Complete preset matrix");
+    check(PROVIDERS.size()==4&&contrastThemes==1&&accentThemes==2&&islandThemes==4&&noItalics==2&&semanticRanges==4,"Complete preset matrix");
     System.out.printf("Validated %d inheritance chains, %d Contrast themes, %d accent themes, and %d No Italics schemes.%n",PROVIDERS.size(),contrastThemes,accentThemes,noItalics);
     System.out.printf("Validated %d opt-in semantic ranges, including all 21 interpolated colors per scheme.%n",semanticRanges);
     System.out.printf("Validated normal and selected Symbols SVG fill and stroke colors in all %d presets.%n",PROVIDERS.size());

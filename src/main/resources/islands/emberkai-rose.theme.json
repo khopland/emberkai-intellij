@@ -1,0 +1,32 @@
+{
+  "name": "Emberkai Islands Rose",
+  "dark": true,
+  "author": "khopland",
+  "parentTheme": "6f67444a-949d-4956-9d05-bb6ceae75572",
+  "editorScheme": "/schemes/emberkai.xml",
+  "colors": {
+    "accent": "#fa8fb2",
+    "accent-brand-bg": "#fa8fb2",
+    "accent-brand-border": "#fa8fb2",
+    "text-link": "#fa8fb2",
+    "popup-completion-match-text": "#fa8fb2",
+    "accent-muted": "#49363c",
+    "accent-brand-bg-secondary": "#49363c",
+    "toolbar-selected-bg": "#49363c",
+    "selection-bg-active": "#49363c",
+    "selection-bg-active-muted": "#49363c",
+    "tab-selected-bg-active": "#49363c",
+    "SelectionActive": "#49363c",
+    "accent-brand-border-secondary": "#8e586a",
+    "toolbar-selected-bg-hovered": "#8e586a",
+    "tab-selected-border-active": "#8e586a"
+  },
+  "ui": {
+    "ToolWindow.Button.selectedBackground": "accent",
+    "EditorTabs.underlinedTabForeground": "foreground",
+    "ToolWindow.Button.selectedForeground": "surface",
+    "DragAndDrop.rowBackground": "#fa8fb226",
+    "ToolWindow.Button.DragAndDrop.buttonDropBackground": "#fa8fb259",
+    "ToolWindow.DragAndDrop.areaBackground": "#fa8fb226"
+  }
+}

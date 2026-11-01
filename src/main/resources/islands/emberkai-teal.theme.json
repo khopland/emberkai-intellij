@@ -1,9 +1,9 @@
 {
-  "name": "Emberkai Islands (Spectrum Teal)",
+  "name": "Emberkai Islands Teal",
   "dark": true,
   "author": "khopland",
   "parentTheme": "6f67444a-949d-4956-9d05-bb6ceae75572",
-  "editorScheme": "/schemes/spectrum.xml",
+  "editorScheme": "/schemes/emberkai.xml",
   "colors": {
     "accent": "#5ad4e6",
     "accent-brand-bg": "#5ad4e6",
@@ -24,6 +24,9 @@
   "ui": {
     "ToolWindow.Button.selectedBackground": "accent",
     "EditorTabs.underlinedTabForeground": "foreground",
-    "ToolWindow.Button.selectedForeground": "surface"
+    "ToolWindow.Button.selectedForeground": "surface",
+    "DragAndDrop.rowBackground": "#5ad4e626",
+    "ToolWindow.Button.DragAndDrop.buttonDropBackground": "#5ad4e659",
+    "ToolWindow.DragAndDrop.areaBackground": "#5ad4e626"
   }
 }

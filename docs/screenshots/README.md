@@ -4,60 +4,54 @@ Direct captures from IntelliJ IDEA 2026.2.3 on macOS, taken on 25 October 2026
 using the [sample project](../samples/pom.xml). Images are 2800 × 2000 pixels
 and contain no mouse pointer. Click any preview to open the full-size image.
 
-## Five color palettes
+## Emberkai Islands
 
-The same Java fixture and compact Islands layout in each palette.
+The Java fixture in the compact Islands layout.
 
-| Spectrum | Default |
-| --- | --- |
-| [![Spectrum Islands](spectrum-islands.png)](spectrum-islands.png) | [![Default Islands](default-islands.png)](default-islands.png) |
-| **Machine** | **Octagon** |
-| [![Machine Islands](machine-islands.png)](machine-islands.png) | [![Octagon Islands](octagon-islands.png)](octagon-islands.png) |
-| **Ristretto** | |
-| [![Ristretto Islands](ristretto-islands.png)](ristretto-islands.png) | |
+[![Emberkai Islands](emberkai-islands.png)](emberkai-islands.png)
 
 ## Teal and Rose accents
 
-Accent presets change the selected controls and tabs while keeping Spectrum's
+Accent presets change the selected controls and tabs while keeping the same
 syntax colors.
 
 | Teal | Rose |
 | --- | --- |
-| [![Spectrum Islands Teal accent](spectrum-teal.png)](spectrum-teal.png) | [![Spectrum Islands Rose accent](spectrum-rose.png)](spectrum-rose.png) |
+| [![Emberkai Islands Teal accent](emberkai-teal.png)](emberkai-teal.png) | [![Emberkai Islands Rose accent](emberkai-rose.png)](emberkai-rose.png) |
 
 ## Contrast and No Italics
 
-Spectrum Islands Contrast with brighter comments and secondary text, compact
-spacing, and the matching **Emberkai (Spectrum Contrast) - No Italics** scheme.
+Emberkai Islands Contrast with brighter comments and secondary text, compact
+spacing, and the matching **Emberkai Contrast - No Italics** scheme.
 
-![Spectrum Contrast in compact mode](spectrum-contrast-compact.png)
+![Emberkai Contrast in compact mode](emberkai-contrast-compact.png)
 
 ## Diff viewer
 
-Spectrum Islands Teal, showing modified, inserted, and deleted lines between
+Emberkai Islands Teal, showing modified, inserted, and deleted lines between
 the sample and a local copy.
 
-![Spectrum Teal diff viewer](spectrum-teal-diff.png)
+![Emberkai Teal diff viewer](emberkai-teal-diff.png)
 
 ## ANSI console colors
 
-Spectrum Islands Teal in the Run console, showing all eight normal and eight
+Emberkai Islands Teal in the Run console, showing all eight normal and eight
 bright ANSI colors. The sample finishes with exit code 0.
 
-![Spectrum Teal ANSI console palette](spectrum-teal-console.png)
+![Emberkai Teal ANSI console palette](emberkai-teal-console.png)
 
 ## Semantic highlighting
 
-Spectrum Islands Contrast with No Italics and optional semantic highlighting
+Emberkai Islands Contrast with No Italics and optional semantic highlighting
 enabled. Parameters and local variables receive distinct colors, repeated at
 their references. See the [setup guide](../semantic-highlighting.md).
 
-![Spectrum Contrast semantic highlighting](spectrum-semantic-highlighting.png)
+![Emberkai Contrast semantic highlighting](emberkai-semantic-highlighting.png)
 
 ## Taking new screenshots
 
 Use an isolated development IDE profile and the sample project. Keep the same
-file, editor size, and spacing when comparing palettes. Move the mouse pointer
+file, editor size, and spacing when comparing presets. Move the mouse pointer
 out of the captured content before saving, dismiss tooltips and popups, and wait
 for code analysis or sample execution to finish. Check the saved PNG itself for
 the pointer or its highlight before adding it here.

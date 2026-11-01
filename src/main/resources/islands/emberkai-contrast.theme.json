@@ -1,9 +1,9 @@
 {
-  "name": "Emberkai Islands (Spectrum Contrast)",
+  "name": "Emberkai Islands Contrast",
   "dark": true,
   "author": "khopland",
   "parentTheme": "6f67444a-949d-4956-9d05-bb6ceae75572",
-  "editorScheme": "/schemes/spectrum-contrast.xml",
+  "editorScheme": "/schemes/emberkai-contrast.xml",
   "colors": {
     "text-muted": "#aaa3b3",
     "text-secondary": "#aaa3b3",

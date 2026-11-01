@@ -13,7 +13,7 @@ It is off by default. Turning it off restores the scheme's normal parameter and
 variable colors. See [JetBrains' documentation](https://www.jetbrains.com/help/idea/configuring-colors-and-fonts.html#semantic-highlighting)
 for language inheritance and customization.
 
-The five color stops follow each palette's teal, violet, rose, orange, and green
+The five color stops follow the palette's teal, violet, rose, orange, and green
 tones. Contrast schemes use brighter ranges; matching No Italics schemes share
 the same colors. Islands themes, including Teal and Rose accents, use the range
 from their selected editor scheme.
@@ -25,6 +25,6 @@ variable name does not have a fixed color across every scope or project.
 Open [SemanticDemo.java](samples/SemanticDemo.java) in the
 [sample project](samples/pom.xml) to compare the enabled and disabled views.
 
-Spectrum Islands Contrast with No Italics and semantic highlighting enabled:
+Emberkai Islands Contrast with No Italics and semantic highlighting enabled:
 
-![Semantic highlighting in IntelliJ IDEA](screenshots/spectrum-semantic-highlighting.png)
+![Semantic highlighting in IntelliJ IDEA](screenshots/emberkai-semantic-highlighting.png)

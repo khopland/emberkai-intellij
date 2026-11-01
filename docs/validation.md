@@ -1,15 +1,21 @@
 # Theme validation
 
 Run `./gradlew check verifyPluginStructure verifyPlugin buildPlugin` before submitting changes.
-Use `-PplatformVersion=2025.3.6.1` to check the oldest supported IDE, or
+Use `-PplatformVersion=2026.1.4` to check the oldest supported IDE, or
 `-PplatformLocalPath=/path/to/IDE` to use a local installation.
 
 `validateThemes` uses the target IDE's theme parser and editor scheme reader. It
 loads the IDE's libraries before optional module jars, which can contain
-conflicting library copies such as JSVG in IntelliJ 2025.3's charts module. It
+conflicting library copies such as JSVG in the charts module. It
 checks all theme registrations and inheritance chains, matching No Italics
 schemes, preserved syntax colors, 16 distinct ANSI colors, diff readability,
 Contrast text thresholds, and Islands geometry and selected controls.
+Run/stop and plugin install buttons must use the palette's green and red with
+4.5:1 foregrounds, every Islands color ramp must be replaced by the palette,
+secondary text must reach 4.5:1, and Rose accents must differ from the error
+color. Editor schemes must not contain known colors or plugin keys inherited
+from the themes Emberkai was adapted from. No resolved UI color may be JetBrains'
+brand blue or its navy tints, apart from licensing, profiler, and retired plugin UI.
 Every editor scheme must also have an explicit `bundledColorScheme` registration
 whose ID matches the XML scheme name. This keeps schemes available independently
 of theme discovery when projects or plugins reload.
@@ -29,23 +35,23 @@ adjust semantic shades around its language-specific diagnostic colors.
 `verifyPlugin` also runs JetBrains Plugin Verifier against the selected IDE,
 with reports under `build/reports/pluginVerifier/`.
 GitHub Actions runs these checks on IntelliJ
-2025.3, 2026.1, and 2026.2. The newest target also uploads an installable ZIP.
+2026.1 and 2026.2. The newest target also uploads an installable ZIP.
 
 These checks are headless. Use `./gradlew runIde` for a visual smoke test:
 
 Open `docs/samples/pom.xml` as a Maven project to run `EmberkaiDemo.main()`
 and inspect ANSI output in the Run console. The sample requires Java 21+.
 
-- Switch through the five Islands palettes and their Contrast variants.
-- With Spectrum Rose selected, open another project and install or enable a
+- Switch between Emberkai Islands, Contrast, Teal, and Rose.
+- With Emberkai Islands Rose selected, open another project and install or enable a
   plugin without restarting. Check that editor and Project view colors remain
   correct and the IDE log has no "refers to unknown color scheme" errors.
-- In Islands, check Spectrum, Contrast, Teal, and Rose with regular and compact
+- In Islands, check the base theme, Contrast, Teal, and Rose with regular and compact
   spacing. Open another window to inspect the inactive frame.
 - Focus the Project tool window in each preset and check that its sidebar
   button uses the preset accent, including after switching between themes.
 - Install Symbols Icons and check Java, JavaScript, TypeScript, JSON, and folder
-  icons while switching palettes, Contrast, Teal, and Rose. Check that neutral
+  icons while switching between Contrast, Teal, and Rose. Check that neutral
   icons brighten with Contrast. Select and deselect files and folders; their
   icon colors must stay the same, including orange XML icons. Disable Symbols
   and confirm the normal IDE icons return; SVGs sharing mapped source colors
@@ -79,7 +85,7 @@ Checked in an isolated IntelliJ IDEA 2026.2.3 instance on macOS:
 - Installed the prepared 1.0.0 ZIP through Install Plugin from Disk in a fresh
   IDE profile, restarted, and confirmed Emberkai Theme 1.0.0 was enabled.
 
-The 2025.3 and 2026.1 compatibility checks use native readers and Plugin Verifier;
+The 2026.1 compatibility checks use native readers and Plugin Verifier;
 live UI checks were performed on 2026.2.3.
 
 The original layouts and Classic palette were removed after this visual check.
