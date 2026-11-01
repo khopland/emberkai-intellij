@@ -1,4 +1,5 @@
 import java.security.MessageDigest
+import org.jetbrains.intellij.platform.gradle.tasks.PublishPluginTask
 import org.jetbrains.intellij.platform.gradle.tasks.VerifyPluginTask
 import org.jetbrains.intellij.platform.gradle.tasks.aware.IntelliJPlatformVersionAware
 
@@ -92,6 +93,14 @@ intellijPlatform {
         privateKey = providers.environmentVariable("PRIVATE_KEY")
         password = providers.environmentVariable("PRIVATE_KEY_PASSWORD")
     }
+
+    publishing {
+        token = providers.environmentVariable("PUBLISH_TOKEN")
+        // A version with a suffix, such as 2.1.0-beta.1, publishes to the "eap" channel.
+        channels = providers.gradleProperty("marketplaceChannel")
+            .map { listOf(it) }
+            .orElse(listOf("default"))
+    }
 }
 
 val hasCertificate = providers.environmentVariable("CERTIFICATE_CHAIN").orNull?.isNotBlank() == true
@@ -125,4 +134,10 @@ tasks.register<Sync>("prepareRelease") {
         val checksum = digest.joinToString("") { "%02x".format(it.toInt() and 0xff) }
         destinationDir.resolve("SHA256SUMS").writeText("$checksum  ${archive.name}\n")
     }
+}
+
+tasks.named<PublishPluginTask>("publishPlugin") {
+    // Publish exactly the archive prepareRelease verified and staged. The default falls back to
+    // the unsigned ZIP when signPlugin is up-to-date in a later build.
+    archiveFiles.setFrom(releaseArchive.map { layout.buildDirectory.file("release/" + it.asFile.name) })
 }
