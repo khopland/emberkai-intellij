@@ -74,6 +74,9 @@ class ThemeCheck {
     double first = luminance(a), second = luminance(b);
     return (Math.max(first, second) + 0.05) / (Math.min(first, second) + 0.05);
   }
+  static double distance(Color a, Color b) {
+    return Math.hypot(Math.hypot(a.getRed() - b.getRed(), a.getGreen() - b.getGreen()), a.getBlue() - b.getBlue());
+  }
   static Color color(UIDefaults defaults, String key) {
     Color result = defaults.getColor(key);
     check(result != null, "Missing color: " + key + " = " + defaults.get(key));
@@ -374,7 +377,7 @@ class ThemeCheck {
       check(PROVIDERS.put(id, new String[]{id, path, bean.parentTheme == null ? "" : bean.parentTheme}) == null, "Duplicate provider id: " + id);
     }
     Set<String> expectedPaths = new HashSet<>();
-    for (String variant : List.of("", "-contrast", "-teal", "-rose"))
+    for (String variant : List.of("", "-contrast", "-teal", "-rose", "-ember"))
       expectedPaths.add("islands/emberkai" + variant + ".theme.json");
     check(paths.equals(expectedPaths), "Complete Islands preset matrix");
     try (var files = Files.walk(RESOURCES)) {
@@ -398,7 +401,7 @@ class ThemeCheck {
       String file=Path.of(PROVIDERS.get(id)[1]).getFileName().toString();
       String family=file.replace(".theme.json","").split("-")[0];
       boolean isContrast=file.contains("-contrast");
-      boolean isAccent=file.contains("-teal")||file.contains("-rose");
+      boolean isAccent=file.contains("-teal")||file.contains("-rose")||file.contains("-ember");
       UIDefaults defaults=new UIDefaults(); theme.applyTheme(defaults);
       String schemePath = theme.getEditorSchemeId().substring(1);
       var scheme=xml(RESOURCES.resolve(schemePath));
@@ -465,8 +468,10 @@ class ThemeCheck {
             leaks.add(name + "=" + String.format("#%06x", value.getRGB() & 0xffffff));
         }
         check(leaks.isEmpty(), "JetBrains colors instead of palette: " + theme.getName() + " / " + leaks);
-        if (file.contains("-rose"))
-          check(!palette.get("accent").equals(palette.get("text-error")),"Rose accent must differ from errors: "+theme.getName());
+        // Links and focus rings use the accent; they must not read as errors or warnings.
+        if (isAccent)
+          for (String status : List.of("text-error", "text-warning"))
+            check(distance(palette.get("accent"), palette.get(status)) >= 40, "Accent must differ from "+status+": "+theme.getName());
         islandThemes++;
       }
       if(isContrast) {
@@ -528,7 +533,7 @@ class ThemeCheck {
         noItalics++;
       }
     }
-    check(PROVIDERS.size()==4&&contrastThemes==1&&accentThemes==2&&islandThemes==4&&noItalics==2&&semanticRanges==4,"Complete preset matrix");
+    check(PROVIDERS.size()==5&&contrastThemes==1&&accentThemes==3&&islandThemes==5&&noItalics==2&&semanticRanges==4,"Complete preset matrix");
     System.out.printf("Validated %d inheritance chains, %d Contrast themes, %d accent themes, and %d No Italics schemes.%n",PROVIDERS.size(),contrastThemes,accentThemes,noItalics);
     System.out.printf("Validated %d opt-in semantic ranges, including all 21 interpolated colors per scheme.%n",semanticRanges);
     System.out.printf("Validated normal and selected Symbols SVG fill and stroke colors in all %d presets.%n",PROVIDERS.size());

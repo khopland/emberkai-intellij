@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+- New **Emberkai Islands Ember** accent: a light ember orange, kept distinct from
+  the warning color so links and focus rings don't read as warnings.
 - Editor colors that still came from Darcula now use the palette. These include
   inlay hints and inlay buttons, unmatched braces, grammar and style underlines,
   regular expressions, XML and HTML entities, Sass, Less, Velocity and XPath, inline
