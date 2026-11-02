@@ -16,6 +16,8 @@ val validateThemes = tasks.register<ThemeCheckTask>("validateThemes") {
     jvmArgs("-Djava.awt.headless=true", "-Dide.experimental.ui=true")
     mainClass = layout.projectDirectory.file("scripts/ThemeCheck.java").asFile.absolutePath
     args(layout.projectDirectory.dir("src/main/resources").asFile.absolutePath)
+    // The IDE root, to find the colors bundled plugins add to Darcula.
+    argumentProviders.add(CommandLineArgumentProvider { listOf(platformPath.toString()) })
     // Keep IDE libraries ahead of optional modules, which may bundle conflicting
     // copies of libraries (e.g. JSVG inside intellij.charts).
     // Recent IDEs also keep UITheme and the scheme reader in module jars.
