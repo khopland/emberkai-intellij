@@ -1,8 +1,13 @@
 # Changelog
 
-## Unreleased
+## [Unreleased]
 
-## 2.0.0
+## [2.0.1]
+
+- First Marketplace release of 2.0. The 2.0.0 release workflow failed before
+  publishing, so 2.0.1 ships the changes from 2.0.0 unchanged.
+
+## [2.0.0]
 
 - Requires IntelliJ Platform 2026.1 or newer. Support for 2025.3 is dropped.
 **Breaking:** Emberkai now has one palette, based on Monokai Pro Spectrum. The
@@ -32,7 +37,7 @@ the editor scheme (Settings → Editor → Color Scheme) if it resets.
 - Docker, webpack, Cypress, and Orval Symbols icons follow the palette.
 - Removed unused Markdown Navigator and Material Theme scheme entries.
 
-## 1.0.0
+## [1.0.0]
 
 Initial Emberkai release for IntelliJ Platform 2025.3 and newer.
 
