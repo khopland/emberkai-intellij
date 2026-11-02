@@ -1,14 +1,14 @@
 # Releasing Emberkai
 
-The current release is **2.0.0**, tagged **v2.0.0**. Releases run through GitHub
-Actions. Keep `pluginVersion` in `gradle.properties`, the `## <version>` entry in
+The current release is **2.0.1**, tagged **v2.0.1**. Releases run through GitHub
+Actions. Keep `pluginVersion` in `gradle.properties`, the `## [<version>]` entry in
 `CHANGELOG.md`, and the change notes in `src/main/resources/META-INF/plugin.xml`
 in sync.
 
 ## Prepare
 
 1. Bump `pluginVersion` in `gradle.properties`.
-2. Add a `## <version>` section to `CHANGELOG.md` and update the plugin change
+2. Add a `## [<version>]` section to `CHANGELOG.md` and update the plugin change
    notes.
 3. Open a pull request. CI validates the themes, plugin structure, and Plugin
    Verifier against IntelliJ 2026.1.4 and 2026.2.3.
@@ -33,9 +33,9 @@ switching, No Italics, and semantic highlighting on and off.
 
 ## Draft release
 
-When a push to `main` passes both validation jobs, CI creates or updates a
+When a push to `main` passes both **Build** jobs, CI creates or updates a
 **draft GitHub release** for `pluginVersion` if `CHANGELOG.md` has a matching
-`## <version>` entry. The draft contains the tested ZIP, `SHA256SUMS`, and the
+`## [<version>]` entry. The draft contains the tested ZIP, `SHA256SUMS`, and the
 release notes from the changelog. Later pushes to `main` refresh the draft.
 
 Download the draft ZIP and smoke-test it. When it is ready, publish the draft.
@@ -44,18 +44,33 @@ push release tags by hand; the draft owns the tag.
 
 ## Release workflow
 
-Publishing a GitHub release starts the release workflow:
+Publishing a GitHub release starts the release workflow. It runs as one job in
+the `marketplace` environment:
 
-1. Checks that the tag matches `pluginVersion`.
-2. Runs the theme checks, structure validation, and Plugin Verifier, and builds
-   the plugin ZIP from the tagged commit.
-3. Uploads the ZIP and `SHA256SUMS` to the GitHub release.
-4. Rebuilds the tagged plugin, signs it when the signing secrets are set, and
-   publishes it to JetBrains Marketplace. Versions with a suffix, such as
-   `2.1.0-beta.1`, go to the `beta` channel; plain versions go to `default`.
+1. Checks that the release is published and that the publishing and signing
+   secrets are complete.
+2. Checks out the tag and checks that it matches `pluginVersion` and has a
+   changelog entry.
+3. Runs `prepareRelease` on the tagged sources: theme checks, structure
+   validation, Plugin Verifier, and signing when the signing secrets are set.
+4. Uploads the ZIP and `SHA256SUMS` to the GitHub release.
+5. Publishes that same ZIP to JetBrains Marketplace without rebuilding it.
+   Versions with a suffix, such as `2.1.0-beta.1`, go to the `beta` channel;
+   plain versions go to `default`.
 
-If the Marketplace step fails, re-run the failed **Release** workflow from the
-Actions tab after fixing the cause.
+The GitHub assets are uploaded before the Marketplace upload, so a failed GitHub
+upload never follows a successful Marketplace release.
+
+### Recovery
+
+If the job fails, re-run it from the Actions tab after fixing the cause.
+
+A release event always runs the workflow file from the tagged commit, so a tag
+whose workflow cannot start (shown as a startup failure) cannot be re-run. Run
+**Release** manually from the Actions tab on `main` instead, and enter the
+published tag (for example `v2.0.1`). This uses the workflow from `main` and
+builds the tagged sources. Clear **Upload to Marketplace** if that version is
+already on the Marketplace and you only need the GitHub assets.
 
 ## Secrets
 

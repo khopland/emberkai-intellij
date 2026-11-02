@@ -26,6 +26,7 @@
 
   <change-notes>
   <![CDATA[
+  <p>2.0.1 — First Marketplace release of 2.0, with the 2.0.0 changes below.</p>
   <p>2.0.0 — Emberkai now has a single palette.</p>
   <ul>
     <li><b>Breaking:</b> the Default, Machine, Octagon, and Ristretto palettes are removed.
