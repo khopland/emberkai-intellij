@@ -14,7 +14,11 @@ Run/stop and plugin install buttons must use the palette's green and red with
 4.5:1 foregrounds, every Islands color ramp must be replaced by the palette,
 secondary text must reach 4.5:1, and Rose accents must differ from the error
 color. Editor schemes must not contain known colors or plugin keys inherited
-from the themes Emberkai was adapted from. No resolved UI color may be JetBrains'
+from the themes Emberkai was adapted from. Emberkai's schemes extend Darcula, so
+every key that Darcula, or a bundled plugin's Darcula addition, colors explicitly
+must be redefined from the palette. The check reads these keys from the target
+IDE, so a new IDE version that adds Darcula colors fails until they are mapped.
+No resolved UI color may be JetBrains'
 brand blue or its navy tints, apart from licensing, profiler, and retired plugin UI.
 Every editor scheme must also have an explicit `bundledColorScheme` registration
 whose ID matches the XML scheme name. This keeps schemes available independently
@@ -63,6 +67,14 @@ and inspect ANSI output in the Run console. The sample requires Java 21+.
   can be customized separately from the console scheme.
 - Select a matching No Italics scheme under Editor → Color Scheme, then check
   comments, strings, keywords, selection, and the gutter in the sample Java file.
+- In the sample Java file, check inlay hints (parameter names, chained-call
+  types, code vision), an unmatched brace, a regular expression, and a grammar
+  error in a comment.
+- Open `emberkai.sql` with a PostgreSQL dialect and check keywords, aliases, and
+  the outer-query column inside the correlated subquery.
+- In RustRover, open `emberkai.rs` and check lifetimes, type parameters, macros,
+  mutable bindings, the `unsafe` block, and the `cfg`-disabled function. Rust
+  isn't bundled with IntelliJ IDEA, so the headless checks don't cover these keys.
 - Open `SemanticDemo.java`, enable semantic highlighting in Language Defaults,
   and check that declarations and references share colors. Disable it again to
   check the original parameter/variable colors. Repeat with Contrast and No Italics.

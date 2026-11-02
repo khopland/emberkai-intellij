@@ -2,6 +2,19 @@
 
 ## [Unreleased]
 
+- Editor colors that still came from Darcula now use the palette. These include
+  inlay hints and inlay buttons, unmatched braces, grammar and style underlines,
+  regular expressions, XML and HTML entities, Sass, Less, Velocity and XPath, inline
+  completion and AI prompts, debugger smart step into and evaluated expressions,
+  bookmark mnemonics, the terminal's block colors, and UML and Mermaid diagrams.
+- Bundled plugin colors follow the palette too: SQL, Kotlin, Angular signals,
+  Compose, Docker Compose and Kubernetes status, code review, Code With Me
+  participants, and find usages.
+- RustRover lifetimes, type parameters, macros, mutable bindings, and unsafe,
+  disabled, and generated code use palette colors.
+- Theme validation fails if a scheme inherits any color that Darcula or a bundled
+  plugin defines for Darcula.
+
 ## [2.0.1]
 
 - First Marketplace release of 2.0. The 2.0.0 release workflow failed before

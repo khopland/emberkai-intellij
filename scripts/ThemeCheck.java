@@ -124,6 +124,78 @@ class ThemeCheck {
     "c7c8f5", "219598", "39adb5", "c4b3a3", "536c46", "fcfafa", "646877", "a2a2a2", "727272",
     "808080", "dbdbdb", "404040", "fffbf7", "19181a", "7867e7", "5789dd");
 
+  static final java.util.regex.Pattern HEX_COLOR = java.util.regex.Pattern.compile("#?[0-9a-fA-F]{6}([0-9a-fA-F]{2})?");
+  static final java.util.regex.Pattern DARCULA_ADDITION = java.util.regex.Pattern.compile("<additionalTextAttributes\\b[^>]*>");
+  static final java.util.regex.Pattern ADDITION_FILE = java.util.regex.Pattern.compile("\\bfile=\"/?([^\"]+)\"");
+
+  static void collectColored(org.jdom.Element root, String origin, Map<String,String> result) {
+    var options = new ArrayList<org.jdom.Element>(root.getChildren("option"));
+    for (var section : List.of("colors", "attributes"))
+      if (root.getChild(section) != null) options.addAll(root.getChild(section).getChildren("option"));
+    for (var option : options) {
+      if (option.getAttributeValue("baseAttributes") != null) continue;
+      var values = option.getChild("value") == null ? List.of(option) : option.getChild("value").getChildren("option");
+      for (var value : values) {
+        String field = value == option ? "value" : value.getAttributeValue("name");
+        String color = value.getAttributeValue("value");
+        if (color != null && HEX_COLOR.matcher(color).matches()
+            && (value == option || field.endsWith("COLOR") || field.equals("FOREGROUND") || field.equals("BACKGROUND")))
+          result.putIfAbsent(option.getAttributeValue("name"), origin);
+      }
+    }
+  }
+
+  // Keys the Darcula base scheme and bundled plugins' Darcula additions color explicitly. Emberkai
+  // extends Darcula, so any of these it does not redefine shows Darcula's colors.
+  static Map<String,String> darculaColoredKeys(Path ide) throws Exception {
+    var result = new TreeMap<String,String>();
+    try (InputStream stream = LOADER.getResourceAsStream("DefaultColorSchemesManager.xml")) {
+      check(stream != null, "Missing DefaultColorSchemesManager.xml");
+      for (var scheme : com.intellij.openapi.util.JDOMUtil.load(stream.readAllBytes()).getChildren("scheme"))
+        if ("Darcula".equals(scheme.getAttributeValue("name"))) collectColored(scheme, "Darcula", result);
+    }
+    // Plugins may register an addition in one jar and ship the file in another jar of the same plugin.
+    var groups = new TreeMap<Path,List<java.util.zip.ZipFile>>();
+    try (var files = Files.walk(ide)) {
+      for (Path jar : files.filter(p -> p.toString().endsWith(".jar")).sorted().toList()) {
+        Path relative = ide.relativize(jar);
+        if (!relative.startsWith("lib") && !relative.startsWith("plugins")) continue;
+        Path group = relative.startsWith("plugins") ? relative.subpath(0, 2) : relative.subpath(0, 1);
+        try { groups.computeIfAbsent(group, g -> new ArrayList<>()).add(new java.util.zip.ZipFile(jar.toFile())); }
+        catch (java.io.IOException notAnArchive) { }
+      }
+    }
+    try {
+      for (var jars : groups.values()) {
+        for (var jar : jars) {
+          for (var entry : Collections.list(jar.entries())) {
+            String name = entry.getName();
+            if (!name.endsWith(".xml") || (name.contains("/") && !name.startsWith("META-INF/"))) continue;
+            String descriptor = new String(jar.getInputStream(entry).readAllBytes(), java.nio.charset.StandardCharsets.UTF_8);
+            if (!descriptor.contains("additionalTextAttributes")) continue;
+            var tags = DARCULA_ADDITION.matcher(descriptor);
+            while (tags.find()) {
+              if (!tags.group().contains("scheme=\"Darcula\"")) continue;
+              var fileMatch = ADDITION_FILE.matcher(tags.group());
+              check(fileMatch.find(), "Darcula addition without file: " + tags.group());
+              String file = fileMatch.group(1).endsWith(".xml") ? fileMatch.group(1) : fileMatch.group(1) + ".xml";
+              // Prefer the registering jar, then its plugin; split frontend modules use platform files.
+              var owner = java.util.stream.Stream.of(java.util.stream.Stream.of(jar), jars.stream(),
+                  groups.values().stream().flatMap(List::stream)).flatMap(s -> s)
+                .filter(candidate -> candidate.getEntry(file) != null).findFirst();
+              check(owner.isPresent(), "Missing Darcula addition: " + jar.getName() + " / " + file);
+              collectColored(com.intellij.openapi.util.JDOMUtil.load(owner.get().getInputStream(owner.get().getEntry(file)).readAllBytes()), file, result);
+            }
+          }
+        }
+      }
+    } finally {
+      for (var jars : groups.values()) for (var jar : jars) jar.close();
+    }
+    check(result.size() > 300, "Darcula scheme keys not found: " + result.size());
+    return result;
+  }
+
   static Map<String,Color> schemeColors(org.jdom.Element root) {
     var result = new HashMap<String,Color>();
     colors(root).forEach((key, value) -> { if (value != null) result.put(key, value); });
@@ -416,6 +488,7 @@ class ThemeCheck {
       }
     }
     int noItalics=0, semanticRanges=0;
+    var darculaKeys = darculaColoredKeys(Path.of(args[1]));
     try(var schemePaths=Files.list(RESOURCES.resolve("schemes"))) {
       var files = schemePaths.filter(p->p.getFileName().toString().endsWith(".xml")).toList();
       Set<String> actualPaths = new HashSet<>(files.stream().map(p -> RESOURCES.relativize(p).toString().replace('\\', '/')).toList());
@@ -433,6 +506,13 @@ class ThemeCheck {
           for (var option : root.getChild(section).getChildren("option"))
             check(!option.getAttributeValue("name").matches("MT_.*|MARKDOWN_NAVIGATOR\\..*"),
                   "Unused plugin key: " + path + " / " + option.getAttributeValue("name"));
+        var defined = new HashSet<String>();
+        for (var section : List.of("colors", "attributes"))
+          for (var option : root.getChild(section).getChildren("option")) defined.add(option.getAttributeValue("name"));
+        var inherited = new TreeMap<>(darculaKeys);
+        inherited.keySet().removeAll(defined);
+        inherited.remove("CONSOLE_OUTPUT"); // Deliberately inherited; see the console background check.
+        check(inherited.isEmpty(), "Darcula colors inherited instead of the palette: " + path + " / " + inherited);
         if (!path.getFileName().toString().endsWith("-no-italics.xml")) continue;
         var regular = xml(path.resolveSibling(path.getFileName().toString().replace("-no-italics", "")));
         var plain = xml(path);
@@ -453,5 +533,6 @@ class ThemeCheck {
     System.out.printf("Validated %d opt-in semantic ranges, including all 21 interpolated colors per scheme.%n",semanticRanges);
     System.out.printf("Validated normal and selected Symbols SVG fill and stroke colors in all %d presets.%n",PROVIDERS.size());
     System.out.printf("Validated %d explicitly bundled editor schemes for theme reloads.%n",bundledSchemes.size());
+    System.out.printf("Validated that no scheme inherits any of %d Darcula and bundled plugin colors.%n",darculaKeys.size());
   }
 }
