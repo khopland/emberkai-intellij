@@ -20,7 +20,7 @@ The source colors come from the Symbols
 [upstream icon set at its pinned revision](https://github.com/miguelsolorio/vscode-symbols/tree/296ef1b62287fb2315cb5651e552e09e8c8e1de8/src/icons).
 
 Contrast variants inherit the same hue mappings and use their brighter neutral
-icon color. Teal and Rose variants inherit the base palette's icon colors, so
+icon color. Teal, Rose, and Ember variants inherit the base palette's icon colors, so
 changing the UI accent does not change the meaning of file icon colors.
 Selecting and deselecting a row keeps its Emberkai icon color.
 

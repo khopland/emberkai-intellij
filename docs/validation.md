@@ -12,8 +12,8 @@ schemes, preserved syntax colors, 16 distinct ANSI colors, diff readability,
 Contrast text thresholds, and Islands geometry and selected controls.
 Run/stop and plugin install buttons must use the palette's green and red with
 4.5:1 foregrounds, every Islands color ramp must be replaced by the palette,
-secondary text must reach 4.5:1, and Rose accents must differ from the error
-color. Editor schemes must not contain known colors or plugin keys inherited
+secondary text must reach 4.5:1, and accents must differ visibly from the error
+and warning colors. Editor schemes must not contain known colors or plugin keys inherited
 from the themes Emberkai was adapted from. Emberkai's schemes extend Darcula, so
 every key that Darcula, or a bundled plugin's Darcula addition, colors explicitly
 must be redefined from the palette. The check reads these keys from the target
@@ -46,16 +46,16 @@ These checks are headless. Use `./gradlew runIde` for a visual smoke test:
 Open `docs/samples/pom.xml` as a Maven project to run `EmberkaiDemo.main()`
 and inspect ANSI output in the Run console. The sample requires Java 21+.
 
-- Switch between Emberkai Islands, Contrast, Teal, and Rose.
+- Switch between Emberkai Islands, Contrast, Teal, Rose, and Ember.
 - With Emberkai Islands Rose selected, open another project and install or enable a
   plugin without restarting. Check that editor and Project view colors remain
   correct and the IDE log has no "refers to unknown color scheme" errors.
-- In Islands, check the base theme, Contrast, Teal, and Rose with regular and compact
+- In Islands, check the base theme, Contrast, Teal, Rose, and Ember with regular and compact
   spacing. Open another window to inspect the inactive frame.
 - Focus the Project tool window in each preset and check that its sidebar
   button uses the preset accent, including after switching between themes.
 - Install Symbols Icons and check Java, JavaScript, TypeScript, JSON, and folder
-  icons while switching between Contrast, Teal, and Rose. Check that neutral
+  icons while switching between Contrast, Teal, Rose, and Ember. Check that neutral
   icons brighten with Contrast. Select and deselect files and folders; their
   icon colors must stay the same, including orange XML icons. Disable Symbols
   and confirm the normal IDE icons return; SVGs sharing mapped source colors

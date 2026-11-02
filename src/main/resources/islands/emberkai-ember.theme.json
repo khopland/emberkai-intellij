@@ -1,0 +1,32 @@
+{
+  "name": "Emberkai Islands Ember",
+  "dark": true,
+  "author": "khopland",
+  "parentTheme": "6f67444a-949d-4956-9d05-bb6ceae75572",
+  "editorScheme": "/schemes/emberkai.xml",
+  "colors": {
+    "accent": "#ffb07a",
+    "accent-brand-bg": "#ffb07a",
+    "accent-brand-border": "#ffb07a",
+    "text-link": "#ffb07a",
+    "popup-completion-match-text": "#ffb07a",
+    "accent-muted": "#4a3c32",
+    "accent-brand-bg-secondary": "#4a3c32",
+    "toolbar-selected-bg": "#4a3c32",
+    "selection-bg-active": "#4a3c32",
+    "selection-bg-active-muted": "#4a3c32",
+    "tab-selected-bg-active": "#4a3c32",
+    "SelectionActive": "#4a3c32",
+    "accent-brand-border-secondary": "#90694e",
+    "toolbar-selected-bg-hovered": "#90694e",
+    "tab-selected-border-active": "#90694e"
+  },
+  "ui": {
+    "ToolWindow.Button.selectedBackground": "accent",
+    "EditorTabs.underlinedTabForeground": "foreground",
+    "ToolWindow.Button.selectedForeground": "surface",
+    "DragAndDrop.rowBackground": "#ffb07a26",
+    "ToolWindow.Button.DragAndDrop.buttonDropBackground": "#ffb07a59",
+    "ToolWindow.DragAndDrop.areaBackground": "#ffb07a26"
+  }
+}

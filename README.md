@@ -5,7 +5,7 @@
 A warm, high-color dark theme for IntelliJ-based IDEs, using the Islands layout.
 
 Comes with a **Contrast** option with brighter comments and secondary text,
-**Teal** and **Rose** Islands accents, and optional **No Italics** editor schemes.
+**Teal**, **Rose**, and **Ember** Islands accents, and optional **No Italics** editor schemes.
 Accent presets keep the same syntax colors. Buttons, run and stop controls,
 badges, diff, console, and file icon colors all come from one palette.
 
@@ -53,7 +53,7 @@ parameters and local variables colors from a range matched to your palette.
 Install [Symbols Icons](https://github.com/joansgarcia/jetbrains-symbols) separately
 to use its file and folder icons with Emberkai. The common Symbols colors follow
 the selected Emberkai palette automatically. Contrast variants brighten neutral
-icons; Teal and Rose keep their palette's icon colors. Icons keep their colors
+icons; Teal, Rose, and Ember keep their palette's icon colors. Icons keep their colors
 when selected in the Project panel.
 
 Emberkai uses JetBrains' global SVG color replacements. Other icons using the

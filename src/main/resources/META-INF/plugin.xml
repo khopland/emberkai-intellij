@@ -8,7 +8,7 @@
   <![CDATA[
   <p>Emberkai is a warm, high-color dark theme for IntelliJ-based IDEs.</p>
   <p>Built on the Islands layout, with a Contrast option for brighter
-  comments and secondary text, and Teal and Rose accents. Buttons, run and
+  comments and secondary text, and Teal, Rose, and Ember accents. Buttons, run and
   stop controls, badges, and file icons all follow the same palette.</p>
   <p>Includes optional No Italics editor schemes, coordinated diff and console
   colors, and palette-matched semantic highlighting for parameters and local
@@ -47,6 +47,7 @@
     <themeProvider id="3201fbb7-59f3-4f47-9803-c70924cd923f" path="/islands/emberkai-contrast.theme.json"/>
     <themeProvider id="6d2e5f19-84f2-4590-a3b2-04c56e299c43" path="/islands/emberkai-teal.theme.json"/>
     <themeProvider id="68794a74-fbdf-4cc3-b010-23a06b405f54" path="/islands/emberkai-rose.theme.json"/>
+    <themeProvider id="e549d25d-0a29-4583-aad9-1cfc5e874616" path="/islands/emberkai-ember.theme.json"/>
 
     <!-- Register regular schemes independently of theme discovery so IDE/plugin
          reloads can resolve the scheme names stored by the active theme. -->
