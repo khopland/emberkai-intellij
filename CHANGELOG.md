@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [2.0.2]
+
 - New **Emberkai Islands Ember** accent: a light ember orange, kept distinct from
   the warning color so links and focus rings don't read as warnings.
 - Editor colors that still came from Darcula now use the palette. These include
