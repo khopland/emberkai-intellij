@@ -26,6 +26,18 @@
 
   <change-notes>
   <![CDATA[
+  <p>2.0.2 — New Ember accent, and the last Darcula colors replaced with the palette.</p>
+  <ul>
+    <li>New <b>Emberkai Islands Ember</b> accent: a light ember orange, kept distinct from
+    the warning color.</li>
+    <li>Editor colors that still came from Darcula now use the palette, including inlay
+    hints, unmatched braces, grammar underlines, regular expressions, debugger, terminal
+    blocks, and diagrams.</li>
+    <li>Bundled plugin colors follow the palette: SQL, Kotlin, Angular, Compose, Docker
+    Compose, Kubernetes, code review, Code With Me, and find usages.</li>
+    <li>RustRover lifetimes, type parameters, macros, mutable bindings, and unsafe,
+    disabled, and generated code use palette colors.</li>
+  </ul>
   <p>2.0.1 — First Marketplace release of 2.0, with the 2.0.0 changes below.</p>
   <p>2.0.0 — Emberkai now has a single palette.</p>
   <ul>

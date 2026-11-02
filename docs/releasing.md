@@ -1,6 +1,6 @@
 # Releasing Emberkai
 
-The current release is **2.0.1**, tagged **v2.0.1**. Releases run through GitHub
+The current release is **2.0.2**, tagged **v2.0.2**. Releases run through GitHub
 Actions. Keep `pluginVersion` in `gradle.properties`, the `## [<version>]` entry in
 `CHANGELOG.md`, and the change notes in `src/main/resources/META-INF/plugin.xml`
 in sync.
