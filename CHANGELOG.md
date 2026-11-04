@@ -2,6 +2,16 @@
 
 ## [Unreleased]
 
+- Unused, deprecated, disabled, and unresolved code has its own muted lavender
+  color, so it no longer looks like a comment. Unused code's wavy underline uses
+  the same color and is now visible.
+- Comments are brighter in Emberkai Islands (3.5:1 instead of 2.9:1).
+- The editor selection is darker and tinted, so comments and punctuation stay
+  readable when selected.
+- Grammar-Kit keywords, JFlex macro references, class references, inactive
+  breadcrumbs, and `.ignore` comments were nearly invisible and now use palette
+  colors.
+
 ## [2.0.2]
 
 - New **Emberkai Islands Ember** accent: a light ember orange, kept distinct from
