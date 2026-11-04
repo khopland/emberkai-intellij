@@ -117,6 +117,8 @@ class ThemeCheck {
 
   static final Set<String> JETBRAINS_COLORS = Set.of(
     "3574f0", "3573f0", "3871e1", "2f5eb9", "548af7", "3671e5", "366acf", "35538f", "375fad", "1d2336");
+  static final Set<String> DARCULA_UI_COLORS = Set.of(
+    "313b45", "343638", "3c3f41", "2f475e", "bbbbbb", "7a7a7a", "9a9da1", "585858");
   // Licensing, profiler, and retired plugin UI that Emberkai leaves to the IDE.
   static final String VENDOR_KEYS =
     "(Profiler|LineProfiler|CompilationCharts|CodeWithMe|Recap|TrialWidget|PackageSearch|FlameGraph|"
@@ -285,6 +287,10 @@ class ThemeCheck {
     check(selectedProvider != null, "Missing selected icon color patcher: " + theme.getName());
     checkIconColor(selectedProvider, "/symbols/icons/files/xml.svg", "#EA580C", colors.get("text-warning"));
     var mappings = (Map<?,?>)bean.icons.get("ColorPalette");
+    // Checked checkboxes and radio buttons otherwise keep JetBrains' brand blue.
+    for (String key : List.of("Checkbox.Background.Selected.Dark", "Checkbox.Border.Selected.Dark", "Checkbox.Focus.Wide.Dark"))
+      check("accent".equals(mappings.get(key)), "Checkbox follows the accent: " + theme.getName() + " / " + key);
+    check("text-over-accent".equals(mappings.get("Checkbox.Foreground.Selected.Dark")), "Checkbox mark contrasts with the accent: " + theme.getName());
     for (var entry : mappings.entrySet()) {
       // Parent themes also contribute palette entries for built-in controls.
       if (!entry.getKey().toString().startsWith("#")) continue;
@@ -296,6 +302,8 @@ class ThemeCheck {
     var base = read(Files.readAllBytes(RESOURCES.resolve("islands/" + family + ".theme.json")));
     var symbolsMappings = (Map<?,?>)base.icons.get("ColorPalette");
     for (var entry : symbolsMappings.entrySet()) {
+      // Named keys such as Checkbox.Background.Selected.Dark patch SVG elements by ID.
+      if (!entry.getKey().toString().startsWith("#")) continue;
       Color expected = colors.get(entry.getValue());
       checkIconColor(selectedProvider, "/symbols/icons/files/java.svg", entry.getKey().toString(), expected);
       checkIconColor(selectedProvider, "/symbols/icons/folders/folder.svg", entry.getKey().toString(), expected);
@@ -461,13 +469,27 @@ class ThemeCheck {
             check(!entry.getValue().equals(palette.get(entry.getKey())),"Islands color ramp follows palette: "+theme.getName()+" / "+entry.getKey());
         check(contrast(palette.get("text-muted"),palette.get("surface"))>=4.5,"Muted text: "+theme.getName());
         // JetBrains' brand blue and its navy tints must not leak through the palette.
+        // Darcula's grays and its navy tab tints must not show through either. Lowercase
+        // keys are Swing's system colors, which IntelliJ components don't paint with.
         var leaks = new TreeSet<String>();
         for (Object key : Collections.list(defaults.keys())) {
           if (!(key instanceof String name) || name.matches(VENDOR_KEYS)) continue;
-          if (defaults.get(key) instanceof Color value && JETBRAINS_COLORS.contains(String.format("%06x", value.getRGB() & 0xffffff)))
-            leaks.add(name + "=" + String.format("#%06x", value.getRGB() & 0xffffff));
+          if (!(defaults.get(key) instanceof Color value)) continue;
+          String hex = String.format("%06x", value.getRGB() & 0xffffff);
+          if (JETBRAINS_COLORS.contains(hex) || (DARCULA_UI_COLORS.contains(hex) && Character.isUpperCase(name.charAt(0))))
+            leaks.add(name + "=#" + hex);
         }
         check(leaks.isEmpty(), "JetBrains colors instead of palette: " + theme.getName() + " / " + leaks);
+        // Ordinary buttons are filled so they read as buttons, not empty frames.
+        check(color(defaults,"Button.startBackground").getAlpha()==255
+              && !color(defaults,"Button.startBackground").equals(color(defaults,"Panel.background")),"Filled buttons: "+theme.getName());
+        check(contrast(color(defaults,"Button.startBorderColor"),color(defaults,"Panel.background"))>=2.5,"Button borders: "+theme.getName());
+        check(contrast(color(defaults,"SegmentedButton.selectedButtonColor"),color(defaults,"Panel.background"))>=1.3,"Selected segment visible: "+theme.getName());
+        check(contrast(color(defaults,"SearchEverywhere.Tab.selectedForeground"),color(defaults,"SearchEverywhere.Tab.selectedBackground"))>=4.5,"Search Everywhere tab: "+theme.getName());
+        check(contrast(color(defaults,"Counter.foreground"),color(defaults,"Counter.background"))>=4.5,"Counter badges: "+theme.getName());
+        // Popups, menus, and balloons need an edge against the editor and each other.
+        for (String[] pair : new String[][]{{"Popup.borderColor","Popup.background"},{"Menu.borderColor","PopupMenu.background"},{"Notification.borderColor","Notification.background"}})
+          check(contrast(color(defaults,pair[0]),color(defaults,pair[1]))>=1.5,"Popup edges: "+theme.getName()+" / "+pair[0]);
         // Links and focus rings use the accent; they must not read as errors or warnings.
         if (isAccent)
           for (String status : List.of("text-error", "text-warning"))

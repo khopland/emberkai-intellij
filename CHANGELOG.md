@@ -18,6 +18,24 @@
   easier to see. Indent guides and tearlines no longer disappear on the caret row.
 - Theme validation fails if editor text is below 3:1 against the background, or
   if unused or deprecated code uses the comment color.
+- Ordinary buttons have a raised fill and a brighter border instead of a
+  transparent outline. Contrast keeps its brighter border.
+- Selected segmented buttons (scope and mode switches) and selected tool window
+  header tabs use the accent's muted selection color. Header tabs were a leftover
+  navy.
+- The selected Search Everywhere tab label is readable; it was dark text on the
+  dark selection.
+- Disabled text is brighter (2.9:1 instead of 2:1).
+- Message dialog text, settings group titles, selected menu shortcuts, combo box
+  arrows, and the LightEdit status bar no longer use Darcula's grays and blues.
+- Counter badges, such as the number of plugin updates, use the accent color.
+- Popups, menus, and notification balloons have a visible border. Balloons
+  previously had a border the same color as their background.
+- Checked checkboxes and radio buttons use the accent with a dark mark instead
+  of JetBrains blue.
+- Git log rows on the current branch use a neutral gray instead of a blue tint.
+- Theme validation fails if buttons are unfilled, the selected segment or Search
+  Everywhere tab is unreadable, or a UI color is one of Darcula's leftover grays.
 
 ## [2.0.2]
 

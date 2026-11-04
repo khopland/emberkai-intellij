@@ -15,7 +15,7 @@
     "text-default": "#f7f1ff",
     "text-muted": "#8b888f",
     "text-secondary": "#8b888f",
-    "text-disabled": "#525053",
+    "text-disabled": "#69676c",
     "text-over-accent": "#222222",
     "text-over-accent-inverted": "#f7f1ff",
     "text-link": "#fce566",
@@ -48,6 +48,9 @@
     "control-border-disabled": "#2b2b2b",
     "control-border-raised": "#8b888f",
     "control-bg-small": "#525053",
+    "button-bg": "#3e3d3f",
+    "button-border": "#69676c",
+    "popup-border": "#69676c",
     "toolbar-selected-bg": "#49452e",
     "toolbar-selected-bg-hovered": "#8f8444",
     "selection-bg-active": "#49452e",
@@ -93,7 +96,7 @@
     "ComboboxBackground": "#2b2b2b",
     "PopupBackground": "#2e2d2f",
     "PopupBackgroundLight": "#2e2d2f",
-    "PopupBorder": "#525053",
+    "PopupBorder": "#69676c",
     "TooltipBackground": "#3e3d3f",
     "TooltipBorder": "#525053",
     "HoverBackgroundMid": "#2b2b2b",
@@ -341,7 +344,8 @@
     },
     "StatusBar": {
       "background": "main-window-bg",
-      "borderColor": "transparent"
+      "borderColor": "transparent",
+      "LightEditBackground": "accent-muted"
     },
     "ToolWindow": {
       "background": "tool-window-bg",
@@ -358,6 +362,12 @@
       "Button": {
         "selectedForeground": "surface",
         "selectedBackground": "accent"
+      },
+      "HeaderTab": {
+        "selectedBackground": "accent-muted",
+        "selectedInactiveBackground": "shell",
+        "underlinedTabBackground": "accent-muted",
+        "underlinedTabInactiveBackground": "shell"
       }
     },
     "Editor.background": "editor-bg",
@@ -418,6 +428,10 @@
     },
     "Button": {
       "foreground": "foreground",
+      "startBackground": "button-bg",
+      "endBackground": "button-bg",
+      "startBorderColor": "button-border",
+      "endBorderColor": "button-border",
       "default": {
         "foreground": "surface",
         "startBackground": "accent",
@@ -427,6 +441,37 @@
         "focusedBorderColor": "surface"
       }
     },
+    "SegmentedButton": {
+      "selectedButtonColor": "accent-muted",
+      "focusedSelectedButtonColor": "accent-muted",
+      "selectedStartBorderColor": "accent-brand-border-secondary",
+      "selectedEndBorderColor": "accent-brand-border-secondary"
+    },
+    "SearchEverywhere.Tab.selectedForeground": "foreground",
+    "Counter": {
+      "background": "accent",
+      "foreground": "text-over-accent"
+    },
+    "Popup": {
+      "borderColor": "popup-border",
+      "inactiveBorderColor": "popup-border"
+    },
+    "Menu.borderColor": "popup-border",
+    "Notification": {
+      "borderColor": "popup-border",
+      "Button.borderColor": "button-border"
+    },
+    "MenuItem.acceleratorSelectionForeground": "foreground",
+    "PopupMenu.translucentBackground": "layer-1-bg",
+    "ComboBox.ArrowButton": {
+      "iconColor": "icon-default-stroke",
+      "disabledIconColor": "text-disabled"
+    },
+    "TabbedPane.disabledUnderlineColor": "text-disabled",
+    "Label.selectedForeground": "foreground",
+    "OptionPane.messageForeground": "foreground",
+    "TitledBorder.titleColor": "foreground",
+    "SplitPane.highlight": "layer-1-bg",
     "Component": {
       "focusColor": "accent",
       "borderColor": "border"
@@ -522,11 +567,11 @@
     },
     "VersionControl": {
       "Log.Commit": {
-        "currentBranchBackground": "#2d3239",
+        "currentBranchBackground": "editor-bg-inline",
         "unmatchedForeground": "text-muted",
         "Reference.foreground": "text-muted"
       },
-      "FileHistory.Commit.selectedBranchBackground": "#2d3239",
+      "FileHistory.Commit.selectedBranchBackground": "editor-bg-inline",
       "MarkerPopup.borderColor": "layer-1-border",
       "GitLog": {
         "headIconColor": "icon-yellow",
@@ -599,6 +644,17 @@
   },
   "icons": {
     "ColorPalette": {
+      "Checkbox.Background.Default.Dark": "control-bg-raised",
+      "Checkbox.Border.Default.Dark": "button-border",
+      "Checkbox.Background.Selected.Dark": "accent",
+      "Checkbox.Border.Selected.Dark": "accent",
+      "Checkbox.Foreground.Selected.Dark": "text-over-accent",
+      "Checkbox.Focus.Wide.Dark": "accent",
+      "Checkbox.Focus.Thin.Default.Dark": "accent",
+      "Checkbox.Focus.Thin.Selected.Dark": "accent",
+      "Checkbox.Background.Disabled.Dark": "shell",
+      "Checkbox.Border.Disabled.Dark": "border",
+      "Checkbox.Foreground.Disabled.Dark": "text-disabled",
       "#F87171": "text-error",
       "#F87272": "text-error",
       "#F472B6": "text-error",
