@@ -29,8 +29,9 @@
 - Message dialog text, settings group titles, selected menu shortcuts, combo box
   arrows, and the LightEdit status bar no longer use Darcula's grays and blues.
 - Counter badges, such as the number of plugin updates, use the accent color.
-- Popups, menus, and notification balloons have a visible border. Balloons
-  previously had a border the same color as their background.
+- Popups, menus, and notification balloons have a visible border. Popup and
+  menu borders are a subtle dark gray; balloons previously had a border the
+  same color as their background.
 - Checked checkboxes and radio buttons use the accent with a dark mark instead
   of JetBrains blue.
 - Git log rows on the current branch use a neutral gray instead of a blue tint.
