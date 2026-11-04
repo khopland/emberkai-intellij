@@ -567,11 +567,11 @@
     },
     "VersionControl": {
       "Log.Commit": {
-        "currentBranchBackground": "#2d3239",
+        "currentBranchBackground": "editor-bg-inline",
         "unmatchedForeground": "text-muted",
         "Reference.foreground": "text-muted"
       },
-      "FileHistory.Commit.selectedBranchBackground": "#2d3239",
+      "FileHistory.Commit.selectedBranchBackground": "editor-bg-inline",
       "MarkerPopup.borderColor": "layer-1-border",
       "GitLog": {
         "headIconColor": "icon-yellow",
@@ -644,6 +644,17 @@
   },
   "icons": {
     "ColorPalette": {
+      "Checkbox.Background.Default.Dark": "control-bg-raised",
+      "Checkbox.Border.Default.Dark": "button-border",
+      "Checkbox.Background.Selected.Dark": "accent",
+      "Checkbox.Border.Selected.Dark": "accent",
+      "Checkbox.Foreground.Selected.Dark": "text-over-accent",
+      "Checkbox.Focus.Wide.Dark": "accent",
+      "Checkbox.Focus.Thin.Default.Dark": "accent",
+      "Checkbox.Focus.Thin.Selected.Dark": "accent",
+      "Checkbox.Background.Disabled.Dark": "shell",
+      "Checkbox.Border.Disabled.Dark": "border",
+      "Checkbox.Foreground.Disabled.Dark": "text-disabled",
       "#F87171": "text-error",
       "#F87272": "text-error",
       "#F472B6": "text-error",

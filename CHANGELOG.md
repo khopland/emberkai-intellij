@@ -31,6 +31,9 @@
 - Counter badges, such as the number of plugin updates, use the accent color.
 - Popups, menus, and notification balloons have a visible border. Balloons
   previously had a border the same color as their background.
+- Checked checkboxes and radio buttons use the accent with a dark mark instead
+  of JetBrains blue.
+- Git log rows on the current branch use a neutral gray instead of a blue tint.
 - Theme validation fails if buttons are unfilled, the selected segment or Search
   Everywhere tab is unreadable, or a UI color is one of Darcula's leftover grays.
 

@@ -287,6 +287,10 @@ class ThemeCheck {
     check(selectedProvider != null, "Missing selected icon color patcher: " + theme.getName());
     checkIconColor(selectedProvider, "/symbols/icons/files/xml.svg", "#EA580C", colors.get("text-warning"));
     var mappings = (Map<?,?>)bean.icons.get("ColorPalette");
+    // Checked checkboxes and radio buttons otherwise keep JetBrains' brand blue.
+    for (String key : List.of("Checkbox.Background.Selected.Dark", "Checkbox.Border.Selected.Dark", "Checkbox.Focus.Wide.Dark"))
+      check("accent".equals(mappings.get(key)), "Checkbox follows the accent: " + theme.getName() + " / " + key);
+    check("text-over-accent".equals(mappings.get("Checkbox.Foreground.Selected.Dark")), "Checkbox mark contrasts with the accent: " + theme.getName());
     for (var entry : mappings.entrySet()) {
       // Parent themes also contribute palette entries for built-in controls.
       if (!entry.getKey().toString().startsWith("#")) continue;
@@ -298,6 +302,8 @@ class ThemeCheck {
     var base = read(Files.readAllBytes(RESOURCES.resolve("islands/" + family + ".theme.json")));
     var symbolsMappings = (Map<?,?>)base.icons.get("ColorPalette");
     for (var entry : symbolsMappings.entrySet()) {
+      // Named keys such as Checkbox.Background.Selected.Dark patch SVG elements by ID.
+      if (!entry.getKey().toString().startsWith("#")) continue;
       Color expected = colors.get(entry.getValue());
       checkIconColor(selectedProvider, "/symbols/icons/files/java.svg", entry.getKey().toString(), expected);
       checkIconColor(selectedProvider, "/symbols/icons/folders/folder.svg", entry.getKey().toString(), expected);
