@@ -448,6 +448,13 @@
       "selectedEndBorderColor": "accent-brand-border-secondary"
     },
     "SearchEverywhere.Tab.selectedForeground": "foreground",
+    "IconBadge": {
+      "infoBackground": "accent",
+      "newUiBackground": "accent",
+      "successBackground": "accent-success-bg",
+      "warningBackground": "accent-warning-bg",
+      "errorBackground": "accent-error-bg"
+    },
     "Counter": {
       "background": "accent",
       "foreground": "text-over-accent"
@@ -483,6 +490,7 @@
       "visitedForeground": "accent",
       "secondaryForeground": "accent"
     },
+    "Hyperlink.linkColor": "text-link",
     "List": {
       "background": "tool-window-bg",
       "foreground": "foreground",
@@ -580,6 +588,16 @@
         "otherIconColor": "text-muted",
         "tagIconColor": "text-muted"
       },
+      "HgLog": {
+        "headIconColor": "icon-yellow",
+        "tipIconColor": "text-warning",
+        "branchIconColor": "text-success",
+        "closedBranchIconColor": "text-error",
+        "bookmarkIconColor": "icon-purple",
+        "localTagIconColor": "icon-cyan",
+        "mqTagIconColor": "icon-blue",
+        "tagIconColor": "text-muted"
+      },
       "Merge.Status.NoConflicts.foreground": "text-success"
     },
     "Debugger.Variables": {
@@ -624,7 +642,12 @@
     "WelcomeScreen.Projects.actions.background": "tool-window-bg-alt",
     "HelpBrowser.titleHighlightForeground": "accent",
     "DataSummary.Chart.barColor": "accent",
-    "Lesson.shortcutBackground": "border",
+    "Lesson": {
+      "shortcutBackground": "border",
+      "stepNumberForeground": "foreground",
+      "Badge.newLessonBackground": "accent-success-bg",
+      "Badge.newLessonForeground": "text-over-accent"
+    },
     "RunWidget.foreground": "foreground",
     "MainWindow.Tab": {
       "background": "#191919",
@@ -632,10 +655,17 @@
       "hoverForeground": "foreground",
       "borderColor": "surface"
     },
-    "DragAndDrop.rowBackground": "#fce56626",
+    "DragAndDrop": {
+      "rowBackground": "#fce56626",
+      "areaBorderColor": "accent",
+      "areaForeground": "foreground"
+    },
     "ToolWindow.Button.DragAndDrop.buttonDropBackground": "#fce56659",
     "ToolWindow.DragAndDrop.areaBackground": "#fce56626",
-    "CombinedDiff.BlockBorder.selectedActiveColor": "accent-brand-border-secondary",
+    "CombinedDiff.BlockBorder": {
+      "selectedActiveColor": "accent-brand-border-secondary",
+      "selectedInactiveColor": "border"
+    },
     "ScreenView": {
       "hoveredBorderColor": "accent",
       "selectedBorderColor": "accent"
@@ -644,17 +674,15 @@
   },
   "icons": {
     "ColorPalette": {
-      "Checkbox.Background.Default.Dark": "control-bg-raised",
-      "Checkbox.Border.Default.Dark": "button-border",
-      "Checkbox.Background.Selected.Dark": "accent",
-      "Checkbox.Border.Selected.Dark": "accent",
-      "Checkbox.Foreground.Selected.Dark": "text-over-accent",
-      "Checkbox.Focus.Wide.Dark": "accent",
-      "Checkbox.Focus.Thin.Default.Dark": "accent",
-      "Checkbox.Focus.Thin.Selected.Dark": "accent",
-      "Checkbox.Background.Disabled.Dark": "shell",
-      "Checkbox.Border.Disabled.Dark": "border",
-      "Checkbox.Foreground.Disabled.Dark": "text-disabled",
+      "Checkbox.Background.Default": "control-bg-raised",
+      "Checkbox.Border.Default": "button-border",
+      "Checkbox.Background.Selected": "accent",
+      "Checkbox.Border.Selected": "accent",
+      "Checkbox.Foreground.Selected": "text-over-accent",
+      "Checkbox.Focus.Wide": "accent",
+      "Checkbox.Background.Disabled": "shell",
+      "Checkbox.Border.Disabled": "border",
+      "Checkbox.Foreground.Disabled": "text-disabled",
       "#F87171": "text-error",
       "#F87272": "text-error",
       "#F472B6": "text-error",
