@@ -507,6 +507,20 @@ class ThemeCheck {
         for (var entry : schemeColors(root).entrySet())
           check(!FOREIGN_COLORS.contains(String.format("%06x", entry.getValue().getRGB() & 0xffffff)),
                 "Scheme color must come from the palette: " + path + " / " + entry.getKey());
+        // Text drawn straight on the editor must stay readable; only placeholders that
+        // IntelliJ shows on hover are meant to be invisible.
+        var schemeAttrs = attributes(root);
+        Color editor = schemeAttrs.get("TEXT").getBackgroundColor();
+        for (var entry : schemeAttrs.entrySet()) {
+          var value = entry.getValue();
+          if (value.getForegroundColor() == null || value.getBackgroundColor() != null
+              || entry.getKey().matches("INVISIBLE_INLAY_BUTTON|COMPOSE_INVISIBLE_PORT_BUTTON")) continue;
+          check(contrast(value.getForegroundColor(), editor) >= 3, "Editor text contrast below 3:1: " + path + " / " + entry.getKey());
+        }
+        // Dimmed code must not read as a comment.
+        Color comment = schemeAttrs.get("DEFAULT_LINE_COMMENT").getForegroundColor();
+        for (String key : List.of("NOT_USED_ELEMENT_ATTRIBUTES", "DEPRECATED_ATTRIBUTES"))
+          check(distance(schemeAttrs.get(key).getForegroundColor(), comment) >= 30, "Dimmed code must differ from comments: " + path + " / " + key);
         for (var section : List.of("colors", "attributes"))
           for (var option : root.getChild(section).getChildren("option"))
             check(!option.getAttributeValue("name").matches("MT_.*|MARKDOWN_NAVIGATOR\\..*"),

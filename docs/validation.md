@@ -12,7 +12,8 @@ schemes, preserved syntax colors, 16 distinct ANSI colors, diff readability,
 Contrast text thresholds, and Islands geometry and selected controls.
 Run/stop and plugin install buttons must use the palette's green and red with
 4.5:1 foregrounds, every Islands color ramp must be replaced by the palette,
-secondary text must reach 4.5:1, and accents must differ visibly from the error
+secondary text must reach 4.5:1, editor text without its own background must
+reach 3:1, unused and deprecated code must differ from comments, and accents must differ visibly from the error
 and warning colors. Editor schemes must not contain known colors or plugin keys inherited
 from the themes Emberkai was adapted from. Emberkai's schemes extend Darcula, so
 every key that Darcula, or a bundled plugin's Darcula addition, colors explicitly

@@ -2,6 +2,23 @@
 
 ## [Unreleased]
 
+- Unused, deprecated, disabled, and unresolved code has its own muted lavender
+  color, so it no longer looks like a comment. Unused code's wavy underline uses
+  the same color and is now visible.
+- Comments are brighter in Emberkai Islands (3.5:1 instead of 2.9:1).
+- The editor selection is darker and tinted, so comments and punctuation stay
+  readable when selected.
+- Grammar-Kit keywords, JFlex macro references, class references, inactive
+  breadcrumbs, and `.ignore` comments were nearly invisible and now use palette
+  colors.
+- Muted text that was still 2.9:1 is brighter: code vision hints, doc comment
+  markup, Markdown markers, inactive links, inline completion, and Doxygen
+  commands. Contrast brightens these too.
+- Line numbers, whitespace, soft wrap signs, indent guides, and tearlines are
+  easier to see. Indent guides and tearlines no longer disappear on the caret row.
+- Theme validation fails if editor text is below 3:1 against the background, or
+  if unused or deprecated code uses the comment color.
+
 ## [2.0.2]
 
 - New **Emberkai Islands Ember** accent: a light ember orange, kept distinct from
