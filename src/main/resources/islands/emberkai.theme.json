@@ -15,7 +15,7 @@
     "text-default": "#f7f1ff",
     "text-muted": "#8b888f",
     "text-secondary": "#8b888f",
-    "text-disabled": "#525053",
+    "text-disabled": "#69676c",
     "text-over-accent": "#222222",
     "text-over-accent-inverted": "#f7f1ff",
     "text-link": "#fce566",
@@ -48,6 +48,8 @@
     "control-border-disabled": "#2b2b2b",
     "control-border-raised": "#8b888f",
     "control-bg-small": "#525053",
+    "button-bg": "#3e3d3f",
+    "button-border": "#69676c",
     "toolbar-selected-bg": "#49452e",
     "toolbar-selected-bg-hovered": "#8f8444",
     "selection-bg-active": "#49452e",
@@ -341,7 +343,8 @@
     },
     "StatusBar": {
       "background": "main-window-bg",
-      "borderColor": "transparent"
+      "borderColor": "transparent",
+      "LightEditBackground": "accent-muted"
     },
     "ToolWindow": {
       "background": "tool-window-bg",
@@ -358,6 +361,12 @@
       "Button": {
         "selectedForeground": "surface",
         "selectedBackground": "accent"
+      },
+      "HeaderTab": {
+        "selectedBackground": "accent-muted",
+        "selectedInactiveBackground": "shell",
+        "underlinedTabBackground": "accent-muted",
+        "underlinedTabInactiveBackground": "shell"
       }
     },
     "Editor.background": "editor-bg",
@@ -418,6 +427,10 @@
     },
     "Button": {
       "foreground": "foreground",
+      "startBackground": "button-bg",
+      "endBackground": "button-bg",
+      "startBorderColor": "button-border",
+      "endBorderColor": "button-border",
       "default": {
         "foreground": "surface",
         "startBackground": "accent",
@@ -427,6 +440,24 @@
         "focusedBorderColor": "surface"
       }
     },
+    "SegmentedButton": {
+      "selectedButtonColor": "accent-muted",
+      "focusedSelectedButtonColor": "accent-muted",
+      "selectedStartBorderColor": "accent-brand-border-secondary",
+      "selectedEndBorderColor": "accent-brand-border-secondary"
+    },
+    "SearchEverywhere.Tab.selectedForeground": "foreground",
+    "MenuItem.acceleratorSelectionForeground": "foreground",
+    "PopupMenu.translucentBackground": "layer-1-bg",
+    "ComboBox.ArrowButton": {
+      "iconColor": "icon-default-stroke",
+      "disabledIconColor": "text-disabled"
+    },
+    "TabbedPane.disabledUnderlineColor": "text-disabled",
+    "Label.selectedForeground": "foreground",
+    "OptionPane.messageForeground": "foreground",
+    "TitledBorder.titleColor": "foreground",
+    "SplitPane.highlight": "layer-1-bg",
     "Component": {
       "focusColor": "accent",
       "borderColor": "border"
