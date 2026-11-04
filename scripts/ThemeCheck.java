@@ -520,7 +520,7 @@ class ThemeCheck {
         // Dimmed code must not read as a comment.
         Color comment = schemeAttrs.get("DEFAULT_LINE_COMMENT").getForegroundColor();
         for (String key : List.of("NOT_USED_ELEMENT_ATTRIBUTES", "DEPRECATED_ATTRIBUTES"))
-          check(distance(schemeAttrs.get(key).getForegroundColor(), comment) >= 20, "Dimmed code must differ from comments: " + path + " / " + key);
+          check(distance(schemeAttrs.get(key).getForegroundColor(), comment) >= 30, "Dimmed code must differ from comments: " + path + " / " + key);
         for (var section : List.of("colors", "attributes"))
           for (var option : root.getChild(section).getChildren("option"))
             check(!option.getAttributeValue("name").matches("MT_.*|MARKDOWN_NAVIGATOR\\..*"),

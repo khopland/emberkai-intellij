@@ -540,7 +540,7 @@
     </option>
     <option name="CONDITIONALLY_NOT_COMPILED">
       <value>
-        <option name="FOREGROUND" value="#928aab" />
+        <option name="FOREGROUND" value="#8e83b6" />
       </value>
     </option>
     <option name="CONSOLE_BLUE_BRIGHT_OUTPUT">
@@ -1098,15 +1098,15 @@
     </option>
     <option name="DELETED_TEXT_ATTRIBUTES">
       <value>
-        <option name="FOREGROUND" value="#928aab" />
-        <option name="EFFECT_COLOR" value="#928aab" />
+        <option name="FOREGROUND" value="#8e83b6" />
+        <option name="EFFECT_COLOR" value="#8e83b6" />
         <option name="EFFECT_TYPE" value="3" />
       </value>
     </option>
     <option name="DEPRECATED_ATTRIBUTES">
       <value>
-        <option name="FOREGROUND" value="#928aab" />
-        <option name="EFFECT_COLOR" value="#928aab" />
+        <option name="FOREGROUND" value="#8e83b6" />
+        <option name="EFFECT_COLOR" value="#8e83b6" />
         <option name="EFFECT_TYPE" value="3" />
       </value>
     </option>
@@ -2278,7 +2278,7 @@
     </option>
     <option name="MARKED_FOR_REMOVAL_ATTRIBUTES">
       <value>
-        <option name="FOREGROUND" value="#928aab" />
+        <option name="FOREGROUND" value="#8e83b6" />
         <option name="EFFECT_COLOR" value="#fc618d" />
         <option name="EFFECT_TYPE" value="3" />
       </value>
@@ -2379,8 +2379,8 @@
     </option>
     <option name="NOT_USED_ELEMENT_ATTRIBUTES">
       <value>
-        <option name="FOREGROUND" value="#928aab" />
-        <option name="EFFECT_COLOR" value="#928aab" />
+        <option name="FOREGROUND" value="#8e83b6" />
+        <option name="EFFECT_COLOR" value="#8e83b6" />
         <option name="EFFECT_TYPE" value="2" />
       </value>
     </option>
@@ -3563,8 +3563,8 @@
     </option>
     <option name="Unresolved reference access">
       <value>
-        <option name="FOREGROUND" value="#928aab" />
-        <option name="EFFECT_COLOR" value="#928aab" />
+        <option name="FOREGROUND" value="#8e83b6" />
+        <option name="EFFECT_COLOR" value="#8e83b6" />
         <option name="EFFECT_TYPE" value="5" />
       </value>
     </option>
@@ -3773,12 +3773,12 @@
       <option name="org.rust.MUT_PARAMETER" baseAttributes="DEFAULT_REASSIGNED_PARAMETER"/>
       <option name="org.rust.DIMMED_TEXT">
       <value>
-        <option name="FOREGROUND" value="#928aab" />
+        <option name="FOREGROUND" value="#8e83b6" />
       </value>
     </option>
       <option name="org.rust.CFG_DISABLED_CODE">
       <value>
-        <option name="FOREGROUND" value="#928aab" />
+        <option name="FOREGROUND" value="#8e83b6" />
       </value>
     </option>
       <option name="org.rust.UNSAFE_CODE">
