@@ -480,6 +480,10 @@ class ThemeCheck {
         check(contrast(color(defaults,"Button.startBorderColor"),color(defaults,"Panel.background"))>=2.5,"Button borders: "+theme.getName());
         check(contrast(color(defaults,"SegmentedButton.selectedButtonColor"),color(defaults,"Panel.background"))>=1.3,"Selected segment visible: "+theme.getName());
         check(contrast(color(defaults,"SearchEverywhere.Tab.selectedForeground"),color(defaults,"SearchEverywhere.Tab.selectedBackground"))>=4.5,"Search Everywhere tab: "+theme.getName());
+        check(contrast(color(defaults,"Counter.foreground"),color(defaults,"Counter.background"))>=4.5,"Counter badges: "+theme.getName());
+        // Popups, menus, and balloons need an edge against the editor and each other.
+        for (String[] pair : new String[][]{{"Popup.borderColor","Popup.background"},{"Menu.borderColor","PopupMenu.background"},{"Notification.borderColor","Notification.background"}})
+          check(contrast(color(defaults,pair[0]),color(defaults,pair[1]))>=1.5,"Popup edges: "+theme.getName()+" / "+pair[0]);
         // Links and focus rings use the accent; they must not read as errors or warnings.
         if (isAccent)
           for (String status : List.of("text-error", "text-warning"))

@@ -12,6 +12,7 @@
     "layer-1-border": "#8c8594",
     "control-border": "#8c8594",
     "button-border": "#8c8594",
+    "popup-border": "#8c8594",
     "control-border-raised": "#aaa3b3",
     "control-bg-small": "#8c8594",
     "tab-selected-border-active": "#fce566",

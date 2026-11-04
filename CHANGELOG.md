@@ -28,6 +28,9 @@
 - Disabled text is brighter (2.9:1 instead of 2:1).
 - Message dialog text, settings group titles, selected menu shortcuts, combo box
   arrows, and the LightEdit status bar no longer use Darcula's grays and blues.
+- Counter badges, such as the number of plugin updates, use the accent color.
+- Popups, menus, and notification balloons have a visible border. Balloons
+  previously had a border the same color as their background.
 - Theme validation fails if buttons are unfilled, the selected segment or Search
   Everywhere tab is unreadable, or a UI color is one of Darcula's leftover grays.
 

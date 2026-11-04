@@ -23,7 +23,9 @@ No resolved UI color may be JetBrains'
 brand blue or its navy tints, or one of Darcula's leftover grays and tab tints,
 apart from licensing, profiler, and retired plugin UI. Ordinary buttons must be
 filled with a 2.5:1 border, the selected segmented button must stand out from the
-panel, and the selected Search Everywhere tab label must reach 4.5:1.
+panel, and the selected Search Everywhere tab label and counter badges must
+reach 4.5:1. Popup, menu, and notification borders must reach 1.5:1 against
+their backgrounds.
 Every editor scheme must also have an explicit `bundledColorScheme` registration
 whose ID matches the XML scheme name. This keeps schemes available independently
 of theme discovery when projects or plugins reload.
