@@ -50,7 +50,7 @@
     "control-bg-small": "#525053",
     "button-bg": "#3e3d3f",
     "button-border": "#69676c",
-    "popup-border": "#69676c",
+    "popup-border": "#4a484b",
     "toolbar-selected-bg": "#49452e",
     "toolbar-selected-bg-hovered": "#8f8444",
     "selection-bg-active": "#49452e",
@@ -96,7 +96,7 @@
     "ComboboxBackground": "#2b2b2b",
     "PopupBackground": "#2e2d2f",
     "PopupBackgroundLight": "#2e2d2f",
-    "PopupBorder": "#69676c",
+    "PopupBorder": "#4a484b",
     "TooltipBackground": "#3e3d3f",
     "TooltipBorder": "#525053",
     "HoverBackgroundMid": "#2b2b2b",
@@ -458,7 +458,7 @@
     },
     "Menu.borderColor": "popup-border",
     "Notification": {
-      "borderColor": "popup-border",
+      "borderColor": "button-border",
       "Button.borderColor": "button-border"
     },
     "MenuItem.acceleratorSelectionForeground": "foreground",
