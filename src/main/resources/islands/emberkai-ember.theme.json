@@ -27,6 +27,7 @@
     "ToolWindow.Button.selectedForeground": "surface",
     "DragAndDrop.rowBackground": "#ffb07a26",
     "ToolWindow.Button.DragAndDrop.buttonDropBackground": "#ffb07a59",
-    "ToolWindow.DragAndDrop.areaBackground": "#ffb07a26"
+    "ToolWindow.DragAndDrop.areaBackground": "#ffb07a26",
+    "ToolWindow.DragAndDrop.hintBackground": "#ffb07a1a"
   }
 }

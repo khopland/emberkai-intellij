@@ -1,6 +1,6 @@
 # Releasing Emberkai
 
-The current release is **2.0.3**, tagged **v2.0.3**. Releases run through GitHub
+The current release is **2.0.4**, tagged **v2.0.4**. Releases run through GitHub
 Actions. Keep `pluginVersion` in `gradle.properties`, the `## [<version>]` entry in
 `CHANGELOG.md`, and the change notes in `src/main/resources/META-INF/plugin.xml`
 in sync.
@@ -11,7 +11,7 @@ in sync.
 2. Add a `## [<version>]` section to `CHANGELOG.md` and update the plugin change
    notes.
 3. Open a pull request. CI validates the themes, plugin structure, and Plugin
-   Verifier against IntelliJ 2026.1.4 and 2026.2.3.
+   Verifier against IntelliJ 2026.1.4, 2026.2.3, and 2026.3.
 4. Merge the pull request to `main`.
 
 ## Build and check locally

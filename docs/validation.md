@@ -49,7 +49,7 @@ adjust semantic shades around its language-specific diagnostic colors.
 `verifyPlugin` also runs JetBrains Plugin Verifier against the selected IDE,
 with reports under `build/reports/pluginVerifier/`.
 GitHub Actions runs these checks on IntelliJ
-2026.1 and 2026.2. The newest target also uploads an installable ZIP.
+2026.1, 2026.2, and 2026.3. The newest target also uploads an installable ZIP.
 
 These checks are headless. Use `./gradlew runIde` for a visual smoke test:
 

@@ -26,6 +26,11 @@
 
   <change-notes>
   <![CDATA[
+  <p>2.0.4 — Support for IntelliJ Platform 2026.3.</p>
+  <ul>
+    <li>The tool window drop hint added in 2026.3 uses the accent instead of JetBrains
+    blue.</li>
+  </ul>
   <p>2.0.3 — Readability and contrast fixes across the editor and UI.</p>
   <ul>
     <li>Unused, deprecated, disabled, and unresolved code has its own muted color instead
