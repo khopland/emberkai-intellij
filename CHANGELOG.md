@@ -45,6 +45,15 @@
 - Theme validation fails if buttons are unfilled, the selected segment or Search
   Everywhere tab is unreadable, a UI color is one of Darcula's leftover grays, or
   badge dots don't follow the accent.
+- The preselected item in the code completion popup is easier to spot. Its
+  highlight was barely lighter than the popup.
+- Git-ignored files and excluded folders, such as `target`, are readable in the
+  Project view (3.5:1 against the panel instead of 2:1). Contrast brightens them
+  further.
+- Parameter name hints use a soft gray chip instead of bright white text on a
+  near-black chip, so they no longer compete with the code around them.
+- Theme validation checks the completion highlight, ignored file colors, and
+  that parameter hints are readable but quieter than code.
 
 ## [2.0.2]
 
