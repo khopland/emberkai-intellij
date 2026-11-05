@@ -106,10 +106,26 @@ intellijPlatform {
 
 val hasCertificate = providers.environmentVariable("CERTIFICATE_CHAIN").orNull?.isNotBlank() == true
 val hasPrivateKey = providers.environmentVariable("PRIVATE_KEY").orNull?.isNotBlank() == true
+val releaseDir = layout.buildDirectory.dir("release")
+
+// The release workflow tests the plugin in one job, then signs and publishes that same ZIP in a job with the
+// secrets. There, -PtestedArchive=<zip> takes the place of buildPlugin's output, so nothing is rebuilt.
+val testedArchive = providers.gradleProperty("testedArchive").orNull?.let { layout.projectDirectory.file(it) }
+if (testedArchive != null) {
+    tasks.signPlugin {
+        archiveFile = testedArchive
+    }
+    // Publishes the ZIP that prepareRelease staged, without building or signing again.
+    tasks.publishPlugin {
+        setDependsOn(emptyList<Any>())
+        archiveFiles.setFrom(fileTree(releaseDir) { include("*.zip") })
+    }
+}
+val unsignedArchive = testedArchive?.let { provider { it } } ?: tasks.buildPlugin.flatMap { it.archiveFile }
 val releaseArchive = if (hasCertificate && hasPrivateKey) {
     tasks.signPlugin.flatMap { it.signedArchiveFile }
 } else {
-    tasks.buildPlugin.flatMap { it.archiveFile }
+    unsignedArchive
 }
 
 tasks.verifyPluginSignature {
@@ -118,12 +134,11 @@ tasks.verifyPluginSignature {
 
 tasks.register<Sync>("prepareRelease") {
     group = "distribution"
-    description = "Verifies the plugin and stages the release ZIP with a SHA-256 checksum."
-    dependsOn(tasks.check, tasks.verifyPluginStructure, tasks.verifyPlugin)
+    description = "Signs the plugin when configured and stages the release ZIP with a SHA-256 checksum."
     inputs.property("signingConfigurationComplete", hasCertificate == hasPrivateKey)
     if (hasCertificate && hasPrivateKey) dependsOn(tasks.verifyPluginSignature)
     from(releaseArchive)
-    into(layout.buildDirectory.dir("release"))
+    into(releaseDir)
     doFirst {
         require(hasCertificate == hasPrivateKey) {
             "Provide both CERTIFICATE_CHAIN and PRIVATE_KEY, or leave both unset."
