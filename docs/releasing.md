@@ -11,7 +11,7 @@ in sync.
 2. Add a `## [<version>]` section to `CHANGELOG.md` and update the plugin change
    notes.
 3. Open a pull request. CI validates the themes, plugin structure, and Plugin
-   Verifier against IntelliJ 2026.1.4 and 2026.2.3.
+   Verifier against IntelliJ 2026.1.4, 2026.2.3, and 2026.3.
 4. Merge the pull request to `main`.
 
 ## Build and check locally

@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+- Supports IntelliJ Platform 2026.3. The tool window drop hint added in 2026.3
+  uses the accent instead of JetBrains blue.
+
 ## [2.0.3]
 
 - Unused, deprecated, disabled, and unresolved code has its own muted lavender

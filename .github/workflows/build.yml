@@ -21,7 +21,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        platform: [ '2026.1.4', '2026.2.3' ]
+        platform: [ '2026.1.4', '2026.2.3', '2026.3' ]
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
@@ -45,7 +45,7 @@ jobs:
           if-no-files-found: ignore
           retention-days: 14
       - name: Upload plugin
-        if: matrix.platform == '2026.2.3'
+        if: matrix.platform == '2026.3'
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: plugin-distribution

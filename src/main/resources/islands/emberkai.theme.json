@@ -663,6 +663,7 @@
     },
     "ToolWindow.Button.DragAndDrop.buttonDropBackground": "#fce56659",
     "ToolWindow.DragAndDrop.areaBackground": "#fce56626",
+    "ToolWindow.DragAndDrop.hintBackground": "#fce5661a",
     "CombinedDiff.BlockBorder": {
       "selectedActiveColor": "accent-brand-border-secondary",
       "selectedInactiveColor": "border"
