@@ -20,12 +20,13 @@ every key that Darcula, or a bundled plugin's Darcula addition, colors explicitl
 must be redefined from the palette. The check reads these keys from the target
 IDE, so a new IDE version that adds Darcula colors fails until they are mapped.
 No resolved UI color may be JetBrains'
-brand blue or its navy tints, or one of Darcula's leftover grays and tab tints,
-apart from licensing, profiler, and retired plugin UI. Ordinary buttons must be
+brand blue or its navy tints, or one of Darcula's leftover grays, tab tints, link
+blue, and badge colors, apart from licensing, profiler, and retired plugin UI. Ordinary buttons must be
 filled with a 2.5:1 border, the selected segmented button must stand out from the
 panel, and the selected Search Everywhere tab label and counter badges must
 reach 4.5:1. Popup, menu, and notification borders must reach 1.5:1 against
-their backgrounds.
+their backgrounds. Info and "new" badge dots must use the preset accent, and
+checkbox palette keys must use the unsuffixed names that New UI themes expect.
 Every editor scheme must also have an explicit `bundledColorScheme` registration
 whose ID matches the XML scheme name. This keeps schemes available independently
 of theme discovery when projects or plugins reload.

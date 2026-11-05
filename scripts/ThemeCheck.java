@@ -118,7 +118,8 @@ class ThemeCheck {
   static final Set<String> JETBRAINS_COLORS = Set.of(
     "3574f0", "3573f0", "3871e1", "2f5eb9", "548af7", "3671e5", "366acf", "35538f", "375fad", "1d2336");
   static final Set<String> DARCULA_UI_COLORS = Set.of(
-    "313b45", "343638", "3c3f41", "2f475e", "bbbbbb", "7a7a7a", "9a9da1", "585858");
+    "313b45", "343638", "3c3f41", "2f475e", "bbbbbb", "7a7a7a", "9a9da1", "585858",
+    "589df6", "4f73a8", "499c54", "c31e8c", "0055ff", "00f3f3");
   // Licensing, profiler, and retired plugin UI that Emberkai leaves to the IDE.
   static final String VENDOR_KEYS =
     "(Profiler|LineProfiler|CompilationCharts|CodeWithMe|Recap|TrialWidget|PackageSearch|FlameGraph|"
@@ -288,9 +289,12 @@ class ThemeCheck {
     checkIconColor(selectedProvider, "/symbols/icons/files/xml.svg", "#EA580C", colors.get("text-warning"));
     var mappings = (Map<?,?>)bean.icons.get("ColorPalette");
     // Checked checkboxes and radio buttons otherwise keep JetBrains' brand blue.
-    for (String key : List.of("Checkbox.Background.Selected.Dark", "Checkbox.Border.Selected.Dark", "Checkbox.Focus.Wide.Dark"))
+    for (String key : List.of("Checkbox.Background.Selected", "Checkbox.Border.Selected", "Checkbox.Focus.Wide"))
       check("accent".equals(mappings.get(key)), "Checkbox follows the accent: " + theme.getName() + " / " + key);
-    check("text-over-accent".equals(mappings.get("Checkbox.Foreground.Selected.Dark")), "Checkbox mark contrasts with the accent: " + theme.getName());
+    check("text-over-accent".equals(mappings.get("Checkbox.Foreground.Selected")), "Checkbox mark contrasts with the accent: " + theme.getName());
+    // New UI themes take the unsuffixed names; the IDE logs a warning for each .Dark key.
+    check(mappings.keySet().stream().noneMatch(key -> key.toString().startsWith("Checkbox.") && key.toString().endsWith(".Dark")),
+          "Checkbox palette keys without the deprecated .Dark suffix: " + theme.getName());
     for (var entry : mappings.entrySet()) {
       // Parent themes also contribute palette entries for built-in controls.
       if (!entry.getKey().toString().startsWith("#")) continue;
@@ -302,7 +306,7 @@ class ThemeCheck {
     var base = read(Files.readAllBytes(RESOURCES.resolve("islands/" + family + ".theme.json")));
     var symbolsMappings = (Map<?,?>)base.icons.get("ColorPalette");
     for (var entry : symbolsMappings.entrySet()) {
-      // Named keys such as Checkbox.Background.Selected.Dark patch SVG elements by ID.
+      // Named keys such as Checkbox.Background.Selected patch SVG elements by ID.
       if (!entry.getKey().toString().startsWith("#")) continue;
       Color expected = colors.get(entry.getValue());
       checkIconColor(selectedProvider, "/symbols/icons/files/java.svg", entry.getKey().toString(), expected);
@@ -487,6 +491,9 @@ class ThemeCheck {
         check(contrast(color(defaults,"SegmentedButton.selectedButtonColor"),color(defaults,"Panel.background"))>=1.3,"Selected segment visible: "+theme.getName());
         check(contrast(color(defaults,"SearchEverywhere.Tab.selectedForeground"),color(defaults,"SearchEverywhere.Tab.selectedBackground"))>=4.5,"Search Everywhere tab: "+theme.getName());
         check(contrast(color(defaults,"Counter.foreground"),color(defaults,"Counter.background"))>=4.5,"Counter badges: "+theme.getName());
+        // Icon badges, like the update dot on the settings gear, fall back to JetBrains blue when unset.
+        for (String key : List.of("IconBadge.infoBackground","IconBadge.newUiBackground"))
+          check(color(defaults,key).equals(palette.get("accent")),"Icon badges follow the accent: "+theme.getName()+" / "+key);
         // Popups, menus, and balloons need an edge against the editor and each other.
         for (String[] pair : new String[][]{{"Popup.borderColor","Popup.background"},{"Menu.borderColor","PopupMenu.background"},{"Notification.borderColor","Notification.background"}})
           check(contrast(color(defaults,pair[0]),color(defaults,pair[1]))>=1.5,"Popup edges: "+theme.getName()+" / "+pair[0]);

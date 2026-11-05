@@ -35,8 +35,16 @@
 - Checked checkboxes and radio buttons use the accent with a dark mark instead
   of JetBrains blue.
 - Git log rows on the current branch use a neutral gray instead of a blue tint.
+- Badge dots, such as the update dot on the settings gear and the "new" dot next
+  to Settings pages, use the accent instead of JetBrains blue. Error, warning,
+  and success dots use the palette's red, orange, and green.
+- Checkbox colors use the current key names, so the IDE no longer logs
+  deprecation warnings for them on startup.
+- Legacy hyperlinks, tool window drop areas, "new lesson" badges, the inactive
+  diff block border, and Mercurial log icons use palette colors.
 - Theme validation fails if buttons are unfilled, the selected segment or Search
-  Everywhere tab is unreadable, or a UI color is one of Darcula's leftover grays.
+  Everywhere tab is unreadable, a UI color is one of Darcula's leftover grays, or
+  badge dots don't follow the accent.
 
 ## [2.0.2]
 
