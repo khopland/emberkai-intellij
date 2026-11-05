@@ -491,6 +491,8 @@ class ThemeCheck {
         check(contrast(color(defaults,"SegmentedButton.selectedButtonColor"),color(defaults,"Panel.background"))>=1.3,"Selected segment visible: "+theme.getName());
         check(contrast(color(defaults,"SearchEverywhere.Tab.selectedForeground"),color(defaults,"SearchEverywhere.Tab.selectedBackground"))>=4.5,"Search Everywhere tab: "+theme.getName());
         check(contrast(color(defaults,"Counter.foreground"),color(defaults,"Counter.background"))>=4.5,"Counter badges: "+theme.getName());
+        // The preselected completion item, before arrow keys focus the list. Stock Islands Dark reaches about 1.2:1.
+        check(contrast(color(defaults,"CompletionPopup.selectionInactiveBackground"),colors.get("LOOKUP_COLOR"))>=1.2,"Completion selection visible: "+theme.getName());
         // Icon badges, like the update dot on the settings gear, fall back to JetBrains blue when unset.
         for (String key : List.of("IconBadge.infoBackground","IconBadge.newUiBackground"))
           check(color(defaults,key).equals(palette.get("accent")),"Icon badges follow the accent: "+theme.getName()+" / "+key);
@@ -546,6 +548,15 @@ class ThemeCheck {
               || entry.getKey().matches("INVISIBLE_INLAY_BUTTON|COMPOSE_INVISIBLE_PORT_BUTTON")) continue;
           check(contrast(value.getForegroundColor(), editor) >= 3, "Editor text contrast below 3:1: " + path + " / " + entry.getKey());
         }
+        // Ignored files are dimmed in the Project view and Changes lists, but must stay readable.
+        var schemeColors = colors(root);
+        for (String key : List.of("FILESTATUS_IDEA_FILESTATUS_IGNORED", "FILESTATUS_IGNORE.PROJECT_VIEW.IGNORED"))
+          check(contrast(schemeColors.get(key), editor) >= 3, "Ignored file contrast below 3:1: " + path + " / " + key);
+        // Parameter hints sit inside code and must stay quieter than it.
+        var hint = schemeAttrs.get("INLINE_PARAMETER_HINT");
+        check(contrast(hint.getForegroundColor(), hint.getBackgroundColor()) >= 4.5
+              && !hint.getForegroundColor().equals(schemeAttrs.get("TEXT").getForegroundColor()),
+              "Parameter hints readable and quieter than code: " + path);
         // Dimmed code must not read as a comment.
         Color comment = schemeAttrs.get("DEFAULT_LINE_COMMENT").getForegroundColor();
         for (String key : List.of("NOT_USED_ELEMENT_ATTRIBUTES", "DEPRECATED_ATTRIBUTES"))

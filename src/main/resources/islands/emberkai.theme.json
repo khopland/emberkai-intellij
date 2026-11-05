@@ -468,6 +468,7 @@
       "borderColor": "button-border",
       "Button.borderColor": "button-border"
     },
+    "CompletionPopup.selectionInactiveBackground": "layer-2-bg",
     "MenuItem.acceleratorSelectionForeground": "foreground",
     "PopupMenu.translucentBackground": "layer-1-bg",
     "ComboBox.ArrowButton": {

@@ -63,12 +63,12 @@
     <option name="FILESTATUS_DELETED" value="#69676c" />
     <option name="FILESTATUS_HIJACKED" value="#fce566" />
     <option name="FILESTATUS_IDEA_FILESTATUS_DELETED_FROM_FILE_SYSTEM" value="#69676c" />
-    <option name="FILESTATUS_IDEA_FILESTATUS_IGNORED" value="#525053" />
+    <option name="FILESTATUS_IDEA_FILESTATUS_IGNORED" value="#8c8594" />
     <option name="FILESTATUS_IDEA_FILESTATUS_MERGED_WITH_BOTH_CONFLICTS" value="#fd9353" />
     <option name="FILESTATUS_IDEA_FILESTATUS_MERGED_WITH_CONFLICTS" value="#fd9353" />
     <option name="FILESTATUS_IDEA_FILESTATUS_MERGED_WITH_PROPERTY_CONFLICTS" value="#fd9353" />
     <option name="FILESTATUS_IDEA_SVN_FILESTATUS_EXTERNAL" value="#7bd88f" />
-    <option name="FILESTATUS_IGNORE.PROJECT_VIEW.IGNORED" value="#525053" />
+    <option name="FILESTATUS_IGNORE.PROJECT_VIEW.IGNORED" value="#8c8594" />
     <option name="FILESTATUS_MERGED" value="#948ae3" />
     <option name="FILESTATUS_MODIFIED" value="#5ad4e6" />
     <option name="FILESTATUS_NOT_CHANGED_IMMEDIATE" value="#5ad4e6" />
@@ -1591,8 +1591,8 @@
     </option>
     <option name="INLINE_PARAMETER_HINT">
       <value>
-        <option name="FOREGROUND" value="#f7f1ff" />
-        <option name="BACKGROUND" value="#191919" />
+        <option name="FOREGROUND" value="#bab6c0" />
+        <option name="BACKGROUND" value="#363537" />
       </value>
     </option>
     <option name="INLINE_PARAMETER_HINT_CURRENT">
