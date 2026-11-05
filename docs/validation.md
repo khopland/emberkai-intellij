@@ -27,8 +27,9 @@ panel, and the selected Search Everywhere tab label and counter badges must
 reach 4.5:1. Popup, menu, and notification borders must reach 1.5:1 against
 their backgrounds. The preselected completion item must reach 1.2:1 against the
 popup, like stock Islands Dark. Ignored file colors must reach 3:1, and
-parameter hints must reach 4.5:1 on their chip without using the code's text color. Info and "new" badge dots must use the preset accent, and
-checkbox palette keys must use the unsuffixed names that New UI themes expect.
+parameter hints must reach 4.5:1 on their chip without using the code's text
+color. Info and "new" badge dots must use the preset accent, and checkbox
+palette keys must use the unsuffixed names that New UI themes expect.
 Every editor scheme must also have an explicit `bundledColorScheme` registration
 whose ID matches the XML scheme name. This keeps schemes available independently
 of theme discovery when projects or plugins reload.

@@ -48,7 +48,8 @@
 - The preselected item in the code completion popup is easier to spot. Its
   highlight was barely lighter than the popup.
 - Git-ignored files and excluded folders, such as `target`, are readable in the
-  Project view (3.5:1 instead of 2:1). Contrast brightens them further.
+  Project view (3.5:1 against the panel instead of 2:1). Contrast brightens them
+  further.
 - Parameter name hints use a soft gray chip instead of bright white text on a
   near-black chip, so they no longer compete with the code around them.
 - Theme validation checks the completion highlight, ignored file colors, and
