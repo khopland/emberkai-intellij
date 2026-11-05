@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [2.0.4]
+
 - Supports IntelliJ Platform 2026.3. The tool window drop hint added in 2026.3
   uses the accent instead of JetBrains blue.
 
