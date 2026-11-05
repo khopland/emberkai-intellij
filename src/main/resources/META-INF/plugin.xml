@@ -26,6 +26,18 @@
 
   <change-notes>
   <![CDATA[
+  <p>2.0.3 — Readability and contrast fixes across the editor and UI.</p>
+  <ul>
+    <li>Unused, deprecated, disabled, and unresolved code has its own muted color instead
+    of looking like a comment. Comments, line numbers, whitespace, and indent guides are
+    easier to see, and the selection keeps text readable.</li>
+    <li>Muted text, disabled text, and previously near-invisible Grammar-Kit, JFlex, and
+    <code>.ignore</code> elements are brighter.</li>
+    <li>Buttons, segmented controls, tool window tabs, popups, menus, balloons, checkboxes,
+    and badge dots follow the palette and accent instead of Darcula grays and blues.</li>
+    <li>The code completion selection, Git-ignored files, and parameter hints are easier to
+    read.</li>
+  </ul>
   <p>2.0.2 — New Ember accent, and the last Darcula colors replaced with the palette.</p>
   <ul>
     <li>New <b>Emberkai Islands Ember</b> accent: a light ember orange, kept distinct from

@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [2.0.3]
+
 - Unused, deprecated, disabled, and unresolved code has its own muted lavender
   color, so it no longer looks like a comment. Unused code's wavy underline uses
   the same color and is now visible.
