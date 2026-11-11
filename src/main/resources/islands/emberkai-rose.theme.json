@@ -10,6 +10,7 @@
     "accent-brand-border": "#fa8fb2",
     "text-link": "#fa8fb2",
     "popup-completion-match-text": "#fa8fb2",
+    "search-match-bg": "#a46378",
     "accent-muted": "#49363c",
     "accent-brand-bg-secondary": "#49363c",
     "toolbar-selected-bg": "#49363c",

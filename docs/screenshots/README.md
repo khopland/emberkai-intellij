@@ -1,12 +1,13 @@
 # Emberkai in IntelliJ IDEA
 
-Direct captures from IntelliJ IDEA 2026.2.3 on macOS, taken on 25 October 2026
-using the [sample project](../samples/pom.xml). Images are 2800 × 2000 pixels
+Direct captures from IntelliJ IDEA 2026.3 on macOS, taken on 11 November 2026
+using the [sample project](../samples/pom.xml). The semantic highlighting
+capture is from 2026.2.3, taken on 25 October 2026. Images are 2800 × 2000 pixels
 and contain no mouse pointer. Click any preview to open the full-size image.
 
 ## Emberkai Islands
 
-The Java fixture in the compact Islands layout.
+The Java fixture in the Islands layout.
 
 [![Emberkai Islands](emberkai-islands.png)](emberkai-islands.png)
 

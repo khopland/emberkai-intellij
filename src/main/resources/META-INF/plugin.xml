@@ -26,6 +26,19 @@
 
   <change-notes>
   <![CDATA[
+  <p>2.0.5 — Search highlights, scrollbars, and readability fixes.</p>
+  <ul>
+    <li>Find results in the editor are tinted yellow, and highlighted usages are blue for
+    reads and rose for writes. Both are marked in the scrollbar, as are breakpoints.</li>
+    <li>The matched text highlight in Search Everywhere, trees, and lists follows the Teal,
+    Rose, and Ember accents instead of staying yellow.</li>
+    <li>Non-project and test files have a faint tint. The yellow tint looked like the
+    selected row.</li>
+    <li>Indeterminate progress bars animate again, split editors have a visible divider,
+    and editor scrollbars brighten on hover.</li>
+    <li>Runtime errors, duplicated code, Presentation Assistant popups, progress counters,
+    plugin tags, and disabled fields are visible or readable.</li>
+  </ul>
   <p>2.0.4 — Support for IntelliJ Platform 2026.3.</p>
   <ul>
     <li>The tool window drop hint added in 2026.3 uses the accent instead of JetBrains
