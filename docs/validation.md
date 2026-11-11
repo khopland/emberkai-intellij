@@ -28,7 +28,13 @@ reach 4.5:1. Popup, menu, and notification borders must reach 1.5:1 against
 their backgrounds. The preselected completion item must reach 1.2:1 against the
 popup, like stock Islands Dark. Ignored file colors must reach 3:1, and
 parameter hints must reach 4.5:1 on their chip without using the code's text
-color. Info and "new" badge dots must use the preset accent, and checkbox
+color. The current parameter in parameter info, Presentation Assistant popups,
+progress counters, and plugin tags must reach 4.5:1 on their own backgrounds.
+Find results, highlighted usages, and breakpoints need a visible background and
+a scrollbar mark, and write usages must differ from read usages. Indeterminate
+progress needs two distinct colors, split editors need a divider, the default
+yellow and green file colors must stay subtle and differ from the selection,
+and editor scrollbars must change on hover. Info and "new" badge dots must use the preset accent, and checkbox
 palette keys must use the unsuffixed names that New UI themes expect.
 Every editor scheme must also have an explicit `bundledColorScheme` registration
 whose ID matches the XML scheme name. This keeps schemes available independently
@@ -88,6 +94,21 @@ and inspect ANSI output in the Run console. The sample requires Java 21+.
 - Open `SemanticDemo.java`, enable semantic highlighting in Language Defaults,
   and check that declarations and references share colors. Disable it again to
   check the original parameter/variable colors. Repeat with Contrast and No Italics.
+
+## Visual check, 11 November 2026
+
+Checked in the development IDE (IntelliJ IDEA 2026.3) on macOS with the sample project:
+
+- Find results, with their scrollbar marks, in the base theme, Teal, and
+  Contrast. Read and write usages of a loop variable in the base theme.
+- The matched text highlight in Find Action in the base theme, Teal, Rose, and
+  Ember.
+- A split editor, Settings → Plugins, the parameter info popup, and the diff
+  viewer in the base theme.
+- Contrast with its No Italics scheme in compact mode, and the Run console
+  with all 16 ANSI colors in Teal.
+
+Not triggered: indeterminate progress, Presentation Assistant, and feature tips.
 
 ## Visual check, 24 October 2026
 

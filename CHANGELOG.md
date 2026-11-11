@@ -2,6 +2,32 @@
 
 ## [Unreleased]
 
+## [2.0.5]
+
+- Find results in the editor are tinted yellow instead of gray, and usages
+  highlighted in a file are blue for reads and rose for writes. They were all
+  neutral grays that looked like folded text and inlay hints.
+- Find results, highlighted usages, and breakpoints are marked in the scrollbar.
+- Runtime errors have a red underline and duplicated code has a faint yellow
+  background. Neither was drawn at all.
+- Presentation Assistant popups, test progress counters, and plugin and list
+  tags have readable text.
+- Feature tips ("Got It" tooltips) use blue shortcut chips and a light icon
+  outline instead of yellow chips on the blue tip.
+- Disabled fields and toggles keep a visible border.
+- The matched text highlight in Search Everywhere, trees, and lists follows the
+  Teal, Rose, and Ember accents. It was yellow in every preset.
+- Indeterminate progress bars animate again. Both ends of the gradient were the
+  accent, so they looked like a full, frozen bar.
+- Non-project and test files have a faint tint in the Project view and on tabs.
+  The yellow tint was strong enough to look like the selected row.
+- Split editors have a visible divider, and Search Everywhere and the Plugins
+  page have their separator lines back.
+- Editor scrollbars are slightly brighter, brighten on hover, and no longer
+  paint an opaque track over diff and caret-row backgrounds.
+- Theme validation checks these popups and tags, the scrollbar marks, read and
+  write usages, progress bars, the split divider, file colors, and scrollbar hover.
+
 ## [2.0.4]
 
 - Supports IntelliJ Platform 2026.3. The tool window drop hint added in 2026.3

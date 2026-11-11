@@ -32,7 +32,7 @@
     "layer-2-bg": "#3e3d3f",
     "editor-bg": "#222222",
     "editor-bg-inline": "#2b2b2b",
-    "editor-border": "#222222",
+    "editor-border": "#363537",
     "editor-border-alt": "#2b2b2b",
     "tool-window-bg": "#222222",
     "tool-window-bg-alt": "#2b2b2b",
@@ -45,7 +45,7 @@
     "accent-brand-border-secondary": "#8f8444",
     "control-bg-raised": "#2b2b2b",
     "control-border": "#525053",
-    "control-border-disabled": "#2b2b2b",
+    "control-border-disabled": "#3e3d3f",
     "control-border-raised": "#8b888f",
     "control-bg-small": "#525053",
     "button-bg": "#3e3d3f",
@@ -81,6 +81,9 @@
     "toolbar-stop-bg-hovered": "#ff87a3",
     "icon-green-stroke": "#7bd88f",
     "search-match-bg": "#a5974b",
+    "got-it-shortcut-bg": "#2b3649",
+    "got-it-contrast-button-bg": "#2b3649",
+    "got-it-text-step": "#c6c5c7",
     "ForegroundDefault": "#f7f1ff",
     "BackgroundDark": "#222222",
     "BackgroundMid": "#363537",
@@ -398,16 +401,18 @@
     },
     "Panel.background": "surface",
     "EditorPane.background": "surface",
+    "EditorPane.splitBorder": "editor-border",
     "TextArea.background": "surface",
     "ProgressBar": {
       "progressColor": "accent",
       "indeterminateStartColor": "accent",
-      "indeterminateEndColor": "accent",
+      "indeterminateEndColor": "accent-brand-border-secondary",
       "passedColor": "accent-success-bg",
       "passedEndColor": "green-110",
       "failedColor": "accent-error-bg",
       "failedEndColor": "red-110",
-      "progressCounterBackground": "accent-muted"
+      "progressCounterBackground": "accent-muted",
+      "progressCounterForeground": "foreground"
     },
     "alt": {
       "MainWindow.background": "main-window-bg-alt",
@@ -501,8 +506,8 @@
       "selectionInactiveForeground": "foreground"
     },
     "FileColor": {
-      "Yellow": "#45412d",
-      "Green": "#303f33",
+      "Yellow": "#302c1e",
+      "Green": "#243027",
       "Orange": "#45342a",
       "Rose": "#452c33",
       "Violet": "#343341",
@@ -619,19 +624,25 @@
       "Branch.Background": "shell",
       "Branch.Background.Hover": "layer-2-bg",
       "State.Background": "layer-2-bg",
-      "State.Foreground": "text-muted"
+      "State.Foreground": "#bab6c0"
     },
     "List.Tag": {
       "background": "shell",
-      "foreground": "text-muted"
+      "foreground": "#bab6c0"
     },
+    "Plugins.tagForeground": "#bab6c0",
     "Slider": {
       "buttonColor": "#bab6c0",
       "buttonBorderColor": "surface",
       "tickColor": "text-muted",
       "trackColor": "border"
     },
+    "PresentationAssistant.Bright": {
+      "Popup.foreground": "foreground",
+      "keymapLabel": "#c6c5c7"
+    },
     "PresentationAssistant.Pale": {
+      "Popup.foreground": "foreground",
       "Popup.border": "shell",
       "PopupBackground": "shell",
       "keymapLabel": "text-muted"
@@ -642,6 +653,11 @@
     },
     "WelcomeScreen.Projects.actions.background": "tool-window-bg-alt",
     "HelpBrowser.titleHighlightForeground": "accent",
+    "ParameterInfo.currentParameterForeground": "accent",
+    "SearchEverywhere.SearchField.borderColor": "layer-0-border-inline",
+    "Plugins.borderColor": "layer-0-border",
+    "GotItTooltip.iconBorderColor": "foreground",
+    "Tooltip.Learning.iconBorderColor": "foreground",
     "DataSummary.Chart.barColor": "accent",
     "Lesson": {
       "shortcutBackground": "border",

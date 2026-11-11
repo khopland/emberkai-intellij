@@ -491,8 +491,31 @@ class ThemeCheck {
         check(contrast(color(defaults,"SegmentedButton.selectedButtonColor"),color(defaults,"Panel.background"))>=1.3,"Selected segment visible: "+theme.getName());
         check(contrast(color(defaults,"SearchEverywhere.Tab.selectedForeground"),color(defaults,"SearchEverywhere.Tab.selectedBackground"))>=4.5,"Search Everywhere tab: "+theme.getName());
         check(contrast(color(defaults,"Counter.foreground"),color(defaults,"Counter.background"))>=4.5,"Counter badges: "+theme.getName());
+        // Islands Dark draws these with its white text-over-accent, which Emberkai makes dark for its bright accents.
+        for (String[] pair : new String[][]{{"ParameterInfo.currentParameterForeground","ParameterInfo.background"},
+                                            {"ParameterInfo.currentParameterForeground","ParameterInfo.currentOverloadBackground"},
+                                            {"PresentationAssistant.Bright.Popup.foreground","PresentationAssistant.Bright.PopupBackground"},
+                                            {"PresentationAssistant.Pale.Popup.foreground","PresentationAssistant.Pale.PopupBackground"},
+                                            {"GotItTooltip.iconBorderColor","GotItTooltip.background"},
+                                            {"ProgressBar.progressCounterForeground","ProgressBar.progressCounterBackground"},
+                                            {"Plugins.tagForeground","Plugins.paidTagBackground"}})
+          check(contrast(color(defaults,pair[0]),color(defaults,pair[1]))>=4.5,"Text on popups and tags: "+theme.getName()+" / "+pair[0]);
         // The preselected completion item, before arrow keys focus the list. Stock Islands Dark reaches about 1.2:1.
         check(contrast(color(defaults,"CompletionPopup.selectionInactiveBackground"),colors.get("LOOKUP_COLOR"))>=1.2,"Completion selection visible: "+theme.getName());
+        // Indeterminate progress animates between two colors; identical ones look like a frozen full bar.
+        check(distance(color(defaults,"ProgressBar.indeterminateStartColor"),color(defaults,"ProgressBar.indeterminateEndColor"))>=40,"Indeterminate progress animates: "+theme.getName());
+        check(contrast(color(defaults,"EditorPane.splitBorder"),color(defaults,"Editor.background"))>=1.25,"Split editors have a divider: "+theme.getName());
+        // Non-project and test files get these colors by default, on whole rows and tabs.
+        for (String key : List.of("FileColor.Yellow","FileColor.Green"))
+          check(contrast(color(defaults,key),color(defaults,"Tree.background"))<=1.25
+                && distance(color(defaults,key),color(defaults,"Tree.selectionBackground"))>=30,"Default file colors stay subtle and differ from the selection: "+theme.getName()+" / "+key);
+        for (String prefix : List.of("ScrollBar.","ScrollBar.Mac.","ScrollBar.Transparent.","ScrollBar.Mac.Transparent."))
+          check(!colors.get(prefix+"hoverThumbColor").equals(colors.get(prefix+"thumbColor")),"Editor scrollbar reacts to hover: "+theme.getName()+" / "+prefix);
+        // The match highlight in Search Everywhere and trees is the accent at 60% over the surface.
+        Color accent=palette.get("accent"), surface=palette.get("surface");
+        Color match=new Color((accent.getRed()*6+surface.getRed()*4)/10,(accent.getGreen()*6+surface.getGreen()*4)/10,(accent.getBlue()*6+surface.getBlue()*4)/10);
+        for (String key : List.of("SearchMatch.startBackground","SearchMatch.endBackground"))
+          check(distance(color(defaults,key),match)<=6,"Search match follows the accent: "+theme.getName()+" / "+key);
         // Icon badges, like the update dot on the settings gear, fall back to JetBrains blue when unset.
         for (String key : List.of("IconBadge.infoBackground","IconBadge.newUiBackground"))
           check(color(defaults,key).equals(palette.get("accent")),"Icon badges follow the accent: "+theme.getName()+" / "+key);
@@ -557,6 +580,14 @@ class ThemeCheck {
         check(contrast(hint.getForegroundColor(), hint.getBackgroundColor()) >= 4.5
               && !hint.getForegroundColor().equals(schemeAttrs.get("TEXT").getForegroundColor()),
               "Parameter hints readable and quieter than code: " + path);
+        // Find results, usages, and breakpoints must show in the scrollbar, and
+        // write usages must differ from read usages.
+        for (String key : List.of("TEXT_SEARCH_RESULT_ATTRIBUTES", "SEARCH_RESULT_ATTRIBUTES", "WRITE_SEARCH_RESULT_ATTRIBUTES", "BREAKPOINT_ATTRIBUTES"))
+          check(schemeAttrs.get(key).getErrorStripeColor() != null && contrast(schemeAttrs.get(key).getBackgroundColor(), editor) >= 1.25,
+                "Highlight needs a visible background and scrollbar mark: " + path + " / " + key);
+        check(distance(schemeAttrs.get("SEARCH_RESULT_ATTRIBUTES").getBackgroundColor(),
+                       schemeAttrs.get("WRITE_SEARCH_RESULT_ATTRIBUTES").getBackgroundColor()) >= 30, "Write usages must differ from read usages: " + path);
+        check(schemeAttrs.get("RUNTIME_ERROR").getEffectColor() != null, "Runtime errors need a visible underline: " + path);
         // Dimmed code must not read as a comment.
         Color comment = schemeAttrs.get("DEFAULT_LINE_COMMENT").getForegroundColor();
         for (String key : List.of("NOT_USED_ELEMENT_ATTRIBUTES", "DEPRECATED_ATTRIBUTES"))
