@@ -14,7 +14,7 @@ variable colors. See [JetBrains' documentation](https://www.jetbrains.com/help/i
 for language inheritance and customization.
 
 The five color stops follow the palette's teal, violet, rose, orange, and green
-tones. Contrast schemes use brighter ranges; matching No Italics schemes share
+tones. Contrast schemes use brighter ranges and Light schemes darker ones; matching No Italics schemes share
 the same colors. Islands themes, including Teal, Rose, and Ember accents, use the range
 from their selected editor scheme.
 

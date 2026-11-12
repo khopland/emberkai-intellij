@@ -2,6 +2,19 @@
 
 ## [Unreleased]
 
+## [2.1.0]
+
+- New **Emberkai Islands Light** theme, with colors:
+  warm paper backgrounds and the same rose, orange, yellow, green, teal, and
+  violet roles as the dark palette. Buttons and selected controls use a bright
+  orange accent with dark text.
+- New **Emberkai Light** and **Emberkai Light - No Italics** editor schemes, with
+  matching diff, console, and semantic highlighting colors. They extend the
+  IDE's Default scheme, so other plugins fall back to light colors.
+- Theme validation covers the light theme: the Islands Light color ramps and
+  IntelliJ Light's grays and blues must be replaced by the palette, and no
+  Default scheme color may be inherited.
+
 ## [2.0.5]
 
 - Find results in the editor are tinted yellow instead of gray, and usages
