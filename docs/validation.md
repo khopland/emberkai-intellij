@@ -15,13 +15,16 @@ Run/stop and plugin install buttons must use the palette's green and red with
 secondary text must reach 4.5:1, editor text without its own background must
 reach 3:1, unused and deprecated code must differ from comments, and accents must differ visibly from the error
 and warning colors. Editor schemes must not contain known colors or plugin keys inherited
-from the themes Emberkai was adapted from. Emberkai's schemes extend Darcula, so
-every key that Darcula, or a bundled plugin's Darcula addition, colors explicitly
-must be redefined from the palette. The check reads these keys from the target
-IDE, so a new IDE version that adds Darcula colors fails until they are mapped.
+from the themes Emberkai was adapted from. Emberkai's dark schemes extend Darcula
+and its light schemes extend Default, so every key that the base scheme, or a
+bundled plugin's addition to it, colors explicitly must be redefined from the
+palette. The check reads these keys from the target IDE, so a new IDE version
+that adds base scheme colors fails until they are mapped.
 No resolved UI color may be JetBrains'
 brand blue or its navy tints, or one of Darcula's leftover grays, tab tints, link
-blue, and badge colors, apart from licensing, profiler, and retired plugin UI. Ordinary buttons must be
+blue, and badge colors, apart from licensing, profiler, and retired plugin UI.
+Emberkai Islands Light is checked against Islands Light instead: its color ramps
+and IntelliJ Light's literal grays and blues must be replaced. Ordinary buttons must be
 filled with a 2.5:1 border, the selected segmented button must stand out from the
 panel, and the selected Search Everywhere tab label and counter badges must
 reach 4.5:1. Popup, menu, and notification borders must reach 1.5:1 against
@@ -62,11 +65,11 @@ These checks are headless. Use `./gradlew runIde` for a visual smoke test:
 Open `docs/samples/pom.xml` as a Maven project to run `EmberkaiDemo.main()`
 and inspect ANSI output in the Run console. The sample requires Java 21+.
 
-- Switch between Emberkai Islands, Contrast, Teal, Rose, and Ember.
+- Switch between Emberkai Islands, Contrast, Teal, Rose, Ember, and Light.
 - With Emberkai Islands Rose selected, open another project and install or enable a
   plugin without restarting. Check that editor and Project view colors remain
   correct and the IDE log has no "refers to unknown color scheme" errors.
-- In Islands, check the base theme, Contrast, Teal, Rose, and Ember with regular and compact
+- In Islands, check the base theme, Contrast, Teal, Rose, Ember, and Light with regular and compact
   spacing. Open another window to inspect the inactive frame.
 - Focus the Project tool window in each preset and check that its sidebar
   button uses the preset accent, including after switching between themes.
@@ -93,7 +96,23 @@ and inspect ANSI output in the Run console. The sample requires Java 21+.
   isn't bundled with IntelliJ IDEA, so the headless checks don't cover these keys.
 - Open `SemanticDemo.java`, enable semantic highlighting in Language Defaults,
   and check that declarations and references share colors. Disable it again to
-  check the original parameter/variable colors. Repeat with Contrast and No Italics.
+  check the original parameter/variable colors. Repeat with Contrast, Light, and No Italics.
+
+## Visual check, 12 November 2026
+
+Checked Emberkai Islands Light in the development IDE (IntelliJ IDEA 2026.3) on
+macOS with the sample project:
+
+- The Java fixtures with inlay hints, code vision, the caret row, identifiers
+  under the caret, find results with their scrollbar marks, and code completion.
+- Search Everywhere, Settings (tree, checkboxes, combo boxes, buttons), a
+  message dialog, a context menu, and notification balloons.
+- The Project tool window with focused and unfocused selection, the Git log,
+  the diff viewer, and the Run console with all 16 ANSI colors.
+
+The check replaced heavy outlines on identifiers under the caret and on find
+results with soft fills. Not checked: the debugger, the terminal, semantic
+highlighting, compact mode, and Windows or Linux.
 
 ## Visual check, 11 November 2026
 

@@ -120,10 +120,13 @@ class ThemeCheck {
   static final Set<String> DARCULA_UI_COLORS = Set.of(
     "313b45", "343638", "3c3f41", "2f475e", "bbbbbb", "7a7a7a", "9a9da1", "585858",
     "589df6", "4f73a8", "499c54", "c31e8c", "0055ff", "00f3f3");
+  // IntelliJ Light's cool grays and blues, which stock Islands Light still uses as literals.
+  static final Set<String> LIGHT_UI_COLORS = Set.of(
+    "ebecf0", "dfe1e5", "e9eaec", "c9ccd6", "a8adbd", "383a42", "27282e", "a0bdf8", "2e55a3", "3875d6", "3d7dcc", "db3b4b");
   // Licensing, profiler, and retired plugin UI that Emberkai leaves to the IDE.
   static final String VENDOR_KEYS =
     "(Profiler|LineProfiler|CompilationCharts|CodeWithMe|Recap|TrialWidget|PackageSearch|FlameGraph|"
-    + "Managed|UnattendedHostStatus|LicenseDialog|NuGet)\\b.*";
+    + "Managed|ManagedIde\\w*|UnattendedHostStatus|LicenseDialog|NuGet)\\b.*";
   static final Set<String> FOREIGN_COLORS = Set.of(
     "f59762", "f78c6c", "f65f87", "87cefa", "ffd700", "da70d6", "e91e63", "c1c0c0", "939393",
     "b7b6b6", "848383", "59575a", "4b1515", "264b33", "12404b", "3b514d", "4d6168", "9373a5",
@@ -151,14 +154,15 @@ class ThemeCheck {
     }
   }
 
-  // Keys the Darcula base scheme and bundled plugins' Darcula additions color explicitly. Emberkai
-  // extends Darcula, so any of these it does not redefine shows Darcula's colors.
-  static Map<String,String> darculaColoredKeys(Path ide) throws Exception {
+  // Keys a base scheme (Darcula, or Default for light schemes) and bundled plugins' additions to
+  // it color explicitly. Emberkai extends these schemes, so any key it does not redefine shows
+  // the base scheme's colors.
+  static Map<String,String> parentColoredKeys(Path ide, String parent) throws Exception {
     var result = new TreeMap<String,String>();
     try (InputStream stream = LOADER.getResourceAsStream("DefaultColorSchemesManager.xml")) {
       check(stream != null, "Missing DefaultColorSchemesManager.xml");
       for (var scheme : com.intellij.openapi.util.JDOMUtil.load(stream.readAllBytes()).getChildren("scheme"))
-        if ("Darcula".equals(scheme.getAttributeValue("name"))) collectColored(scheme, "Darcula", result);
+        if (parent.equals(scheme.getAttributeValue("name"))) collectColored(scheme, parent, result);
     }
     // Plugins may register an addition in one jar and ship the file in another jar of the same plugin.
     var groups = new TreeMap<Path,List<java.util.zip.ZipFile>>();
@@ -181,15 +185,15 @@ class ThemeCheck {
             if (!descriptor.contains("additionalTextAttributes")) continue;
             var tags = DARCULA_ADDITION.matcher(descriptor);
             while (tags.find()) {
-              if (!tags.group().contains("scheme=\"Darcula\"")) continue;
+              if (!tags.group().contains("scheme=\"" + parent + "\"")) continue;
               var fileMatch = ADDITION_FILE.matcher(tags.group());
-              check(fileMatch.find(), "Darcula addition without file: " + tags.group());
+              check(fileMatch.find(), parent + " addition without file: " + tags.group());
               String file = fileMatch.group(1).endsWith(".xml") ? fileMatch.group(1) : fileMatch.group(1) + ".xml";
               // Prefer the registering jar, then its plugin; split frontend modules use platform files.
               var owner = java.util.stream.Stream.of(java.util.stream.Stream.of(jar), jars.stream(),
                   groups.values().stream().flatMap(List::stream)).flatMap(s -> s)
                 .filter(candidate -> candidate.getEntry(file) != null).findFirst();
-              check(owner.isPresent(), "Missing Darcula addition: " + jar.getName() + " / " + file);
+              check(owner.isPresent(), "Missing " + parent + " addition: " + jar.getName() + " / " + file);
               collectColored(com.intellij.openapi.util.JDOMUtil.load(owner.get().getInputStream(owner.get().getEntry(file)).readAllBytes()), file, result);
             }
           }
@@ -198,7 +202,7 @@ class ThemeCheck {
     } finally {
       for (var jars : groups.values()) for (var jar : jars) jar.close();
     }
-    check(result.size() > 300, "Darcula scheme keys not found: " + result.size());
+    check(result.size() > 300, parent + " scheme keys not found: " + result.size());
     return result;
   }
 
@@ -377,6 +381,12 @@ class ThemeCheck {
     UITheme dark = builtin(darcula,"themes/expUI/expUI_dark.theme.json","ExperimentalDark");
     UITheme islands = builtin(dark,"themes/islands/ManyIslandsDark.theme.json","Islands Dark");
     THEMES.put("Darcula",darcula); THEMES.put("ExperimentalDark",dark); THEMES.put("Islands Dark",islands);
+    UITheme intellij = builtin(null,"themes/intellijlaf.theme.json","IntelliJ");
+    UITheme light = builtin(intellij,"themes/expUI/expUI_light.theme.json","ExperimentalLight");
+    UITheme lightHeader = builtin(light,"themes/expUI/expUI_light_with_light_header.theme.json","ExperimentalLightWithLightHeader");
+    UITheme islandsLight = builtin(lightHeader,"themes/islands/ManyIslandsLight.theme.json","Islands Light");
+    THEMES.put("IntelliJ",intellij); THEMES.put("ExperimentalLight",light);
+    THEMES.put("ExperimentalLightWithLightHeader",lightHeader); THEMES.put("Islands Light",islandsLight);
     var descriptor = xml(RESOURCES.resolve("META-INF/plugin.xml"));
     Set<String> paths = new HashSet<>(), names = new HashSet<>();
     for (var entry : descriptor.getChild("extensions").getChildren("themeProvider")) {
@@ -385,11 +395,11 @@ class ThemeCheck {
       check(paths.add(path), "Duplicate theme path: " + path);
       UIThemeBean bean = read(Files.readAllBytes(RESOURCES.resolve(path)));
       check(names.add(bean.name), "Duplicate theme name: " + bean.name);
-      check(bean.dark, "Expected dark theme: " + path);
+      check(bean.dark != path.contains("-light"), "Dark themes, except Light: " + path);
       check(PROVIDERS.put(id, new String[]{id, path, bean.parentTheme == null ? "" : bean.parentTheme}) == null, "Duplicate provider id: " + id);
     }
     Set<String> expectedPaths = new HashSet<>();
-    for (String variant : List.of("", "-contrast", "-teal", "-rose", "-ember"))
+    for (String variant : List.of("", "-contrast", "-teal", "-rose", "-ember", "-light"))
       expectedPaths.add("islands/emberkai" + variant + ".theme.json");
     check(paths.equals(expectedPaths), "Complete Islands preset matrix");
     try (var files = Files.walk(RESOURCES)) {
@@ -406,12 +416,14 @@ class ThemeCheck {
       check(bundledSchemes.put(path, name) == null, "Duplicate scheme path: " + path);
       check(schemeNames.add(name), "Duplicate scheme name: " + name);
     }
-    int contrastThemes=0, accentThemes=0, islandThemes=0;
+    int contrastThemes=0, accentThemes=0, islandThemes=0, lightThemes=0;
     String[] ansi={"BLACK","RED","GREEN","YELLOW","BLUE","MAGENTA","CYAN","GRAY","DARKGRAY","RED_BRIGHT","GREEN_BRIGHT","YELLOW_BRIGHT","BLUE_BRIGHT","MAGENTA_BRIGHT","CYAN_BRIGHT","WHITE"};
     for(String id:PROVIDERS.keySet()) {
       UITheme theme=provider(id);
       String file=Path.of(PROVIDERS.get(id)[1]).getFileName().toString();
-      String family=file.replace(".theme.json","").split("-")[0];
+      boolean isLight=file.contains("-light");
+      // Light has its own palette and syntax colors; the other presets share the base family's.
+      String family=file.replace(".theme.json","").split("-")[0]+(isLight?"-light":"");
       boolean isContrast=file.contains("-contrast");
       boolean isAccent=file.contains("-teal")||file.contains("-rose")||file.contains("-ember");
       UIDefaults defaults=new UIDefaults(); theme.applyTheme(defaults);
@@ -441,7 +453,7 @@ class ThemeCheck {
         Set<Integer> consoleColors=new HashSet<>();
         for(String color:ansi) consoleColors.add(attrs.get("CONSOLE_"+color+"_OUTPUT").getForegroundColor().getRGB());
         check(consoleColors.size()==16,"Distinct ANSI colors: "+theme.getName());
-        check(!attrs.containsKey("CONSOLE_OUTPUT"), "Console must inherit dark background");
+        check(!attrs.containsKey("CONSOLE_OUTPUT"), "Console must inherit the editor background");
         Color blue = attrs.get("CONSOLE_BLUE_OUTPUT").getForegroundColor();
         check(blue.getBlue() > blue.getRed() && blue.getBlue() > blue.getGreen(), "ANSI blue hue");
         check(colors.get("MODIFIED_LINES_COLOR").equals(attrs.get("DIFF_MODIFIED").getErrorStripeColor()), "Matching diff/gutter color");
@@ -449,7 +461,8 @@ class ThemeCheck {
       if(defaults.getInt("Islands")==1) {
         var palette=BEANS.get(theme).colorMap.map;
         check(color(defaults,"ToolWindow.Button.selectedBackground").equals(palette.get("accent")),"Selected tool window uses preset accent: "+theme.getName());
-        check(color(defaults,"ToolWindow.Button.selectedForeground").equals(palette.get("surface")),"Selected tool window icon uses contrasting foreground: "+theme.getName());
+        // Light fills its bright accent with dark text; the dark themes use the surface color.
+        check(color(defaults,"ToolWindow.Button.selectedForeground").equals(palette.get(isLight ? "text-over-accent" : "surface")),"Selected tool window icon uses contrasting foreground: "+theme.getName());
         check(defaults.getInt("Island.arc")==20&&defaults.getInt("Island.arc.compact")==16,"Native geometry");
         check(color(defaults,"Island.borderColor").equals(color(defaults,"ToolWindow.background")),"Panel edge");
         // Stock Islands Dark separates islands from the frame at about 1.18:1.
@@ -466,7 +479,7 @@ class ThemeCheck {
                                             {"RunWidget.runningBackground","RunWidget.runningIconColor"},
                                             {"RunWidget.stopBackground","RunWidget.runningIconColor"}})
           check(contrast(color(defaults,pair[0]),color(defaults,pair[1]))>=4.5,"Status control readability: "+theme.getName()+" / "+pair[0]);
-        var islandsPalette = BEANS.get(THEMES.get("Islands Dark")).colorMap.map;
+        var islandsPalette = BEANS.get(THEMES.get(isLight ? "Islands Light" : "Islands Dark")).colorMap.map;
         // The near-white 130-160 steps carry almost no hue and may coincide.
         for (var entry : islandsPalette.entrySet())
           if (entry.getKey().matches("(gray|blue|green|red|yellow|orange|purple|teal)-([1-9]0|1[0-2]0)"))
@@ -480,7 +493,7 @@ class ThemeCheck {
           if (!(key instanceof String name) || name.matches(VENDOR_KEYS)) continue;
           if (!(defaults.get(key) instanceof Color value)) continue;
           String hex = String.format("%06x", value.getRGB() & 0xffffff);
-          if (JETBRAINS_COLORS.contains(hex) || (DARCULA_UI_COLORS.contains(hex) && Character.isUpperCase(name.charAt(0))))
+          if (JETBRAINS_COLORS.contains(hex) || ((isLight ? LIGHT_UI_COLORS : DARCULA_UI_COLORS).contains(hex) && Character.isUpperCase(name.charAt(0))))
             leaks.add(name + "=#" + hex);
         }
         check(leaks.isEmpty(), "JetBrains colors instead of palette: " + theme.getName() + " / " + leaks);
@@ -541,13 +554,14 @@ class ThemeCheck {
         System.out.printf("%s: comments %.2f:1, gutter %.2f:1; ANSI/diff/UI readability OK%n",theme.getName(),comments,gutter);
         contrastThemes++;
       }
+      if(isLight) lightThemes++;
       if(isAccent) {
         check(!theme.getEditorSchemeId().contains("contrast"),"Accent keeps original syntax scheme");
         accentThemes++;
       }
     }
     int noItalics=0, semanticRanges=0;
-    var darculaKeys = darculaColoredKeys(Path.of(args[1]));
+    var parentKeys = new TreeMap<String,Map<String,String>>();
     try(var schemePaths=Files.list(RESOURCES.resolve("schemes"))) {
       var files = schemePaths.filter(p->p.getFileName().toString().endsWith(".xml")).toList();
       Set<String> actualPaths = new HashSet<>(files.stream().map(p -> RESOURCES.relativize(p).toString().replace('\\', '/')).toList());
@@ -599,10 +613,13 @@ class ThemeCheck {
         var defined = new HashSet<String>();
         for (var section : List.of("colors", "attributes"))
           for (var option : root.getChild(section).getChildren("option")) defined.add(option.getAttributeValue("name"));
-        var inherited = new TreeMap<>(darculaKeys);
+        String parent = root.getAttributeValue("parent_scheme");
+        check(parent.equals(path.getFileName().toString().contains("-light") ? "Default" : "Darcula"), "Base scheme: " + path);
+        if (!parentKeys.containsKey(parent)) parentKeys.put(parent, parentColoredKeys(Path.of(args[1]), parent));
+        var inherited = new TreeMap<>(parentKeys.get(parent));
         inherited.keySet().removeAll(defined);
         inherited.remove("CONSOLE_OUTPUT"); // Deliberately inherited; see the console background check.
-        check(inherited.isEmpty(), "Darcula colors inherited instead of the palette: " + path + " / " + inherited);
+        check(inherited.isEmpty(), parent + " colors inherited instead of the palette: " + path + " / " + inherited);
         if (!path.getFileName().toString().endsWith("-no-italics.xml")) continue;
         var regular = xml(path.resolveSibling(path.getFileName().toString().replace("-no-italics", "")));
         var plain = xml(path);
@@ -618,11 +635,12 @@ class ThemeCheck {
         noItalics++;
       }
     }
-    check(PROVIDERS.size()==5&&contrastThemes==1&&accentThemes==3&&islandThemes==5&&noItalics==2&&semanticRanges==4,"Complete preset matrix");
-    System.out.printf("Validated %d inheritance chains, %d Contrast themes, %d accent themes, and %d No Italics schemes.%n",PROVIDERS.size(),contrastThemes,accentThemes,noItalics);
+    check(PROVIDERS.size()==6&&contrastThemes==1&&accentThemes==3&&lightThemes==1&&islandThemes==6&&noItalics==3&&semanticRanges==6,"Complete preset matrix");
+    System.out.printf("Validated %d inheritance chains, %d Contrast themes, %d accent themes, %d Light themes, and %d No Italics schemes.%n",PROVIDERS.size(),contrastThemes,accentThemes,lightThemes,noItalics);
     System.out.printf("Validated %d opt-in semantic ranges, including all 21 interpolated colors per scheme.%n",semanticRanges);
     System.out.printf("Validated normal and selected Symbols SVG fill and stroke colors in all %d presets.%n",PROVIDERS.size());
     System.out.printf("Validated %d explicitly bundled editor schemes for theme reloads.%n",bundledSchemes.size());
-    System.out.printf("Validated that no scheme inherits any of %d Darcula and bundled plugin colors.%n",darculaKeys.size());
+    for (var entry : parentKeys.entrySet())
+      System.out.printf("Validated that no scheme inherits any of %d %s and bundled plugin colors.%n",entry.getValue().size(),entry.getKey());
   }
 }

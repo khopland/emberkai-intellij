@@ -5,9 +5,13 @@
 A warm, high-color dark theme for IntelliJ-based IDEs, using the Islands layout.
 
 Comes with a **Contrast** option with brighter comments and secondary text,
-**Teal**, **Rose**, and **Ember** Islands accents, and optional **No Italics** editor schemes.
+**Teal**, **Rose**, and **Ember** Islands accents, a **Light** theme, and optional
+**No Italics** editor schemes.
 Accent presets keep the same syntax colors. Buttons, run and stop controls,
 badges, diff, console, and file icon colors all come from one palette.
+
+**Emberkai Islands Light** uses warm paper backgrounds, a bright orange accent, and its
+own **Emberkai Light** editor scheme.
 
 Requires **IntelliJ Platform 2026.1 or newer**.
 

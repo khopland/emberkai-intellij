@@ -22,6 +22,7 @@ The source colors come from the Symbols
 Contrast variants inherit the same hue mappings and use their brighter neutral
 icon color. Teal, Rose, and Ember variants inherit the base palette's icon colors, so
 changing the UI accent does not change the meaning of file icon colors.
+Light defines the same mappings with its own darker palette colors.
 Selecting and deselecting a row keeps its Emberkai icon color.
 
 JetBrains applies these replacements to SVG fills and strokes throughout the

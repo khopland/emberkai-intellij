@@ -6,9 +6,11 @@
 
   <description>
   <![CDATA[
-  <p>Emberkai is a warm, high-color dark theme for IntelliJ-based IDEs.</p>
+  <p>Emberkai is a warm, high-color dark theme for IntelliJ-based IDEs, with a light
+  variant.</p>
   <p>Built on the Islands layout, with a Contrast option for brighter
-  comments and secondary text, and Teal, Rose, and Ember accents. Buttons, run and
+  comments and secondary text, Teal, Rose, and Ember accents, and a Light theme
+  on warm paper backgrounds. Buttons, run and
   stop controls, badges, and file icons all follow the same palette.</p>
   <p>Includes optional No Italics editor schemes, coordinated diff and console
   colors, and palette-matched semantic highlighting for parameters and local
@@ -26,6 +28,13 @@
 
   <change-notes>
   <![CDATA[
+  <p>2.1.0 — New light theme.</p>
+  <ul>
+    <li>New <b>Emberkai Islands Light</b> with warm paper
+    backgrounds, a bright orange accent, and the dark palette's syntax color roles.</li>
+    <li>New <b>Emberkai Light</b> and <b>Emberkai Light - No Italics</b> editor schemes
+    with matching diff, console, and semantic highlighting colors.</li>
+  </ul>
   <p>2.0.5 — Search highlights, scrollbars, and readability fixes.</p>
   <ul>
     <li>Find results in the editor are tinted yellow, and highlighted usages are blue for
@@ -90,6 +99,7 @@
     <themeProvider id="6d2e5f19-84f2-4590-a3b2-04c56e299c43" path="/islands/emberkai-teal.theme.json"/>
     <themeProvider id="68794a74-fbdf-4cc3-b010-23a06b405f54" path="/islands/emberkai-rose.theme.json"/>
     <themeProvider id="e549d25d-0a29-4583-aad9-1cfc5e874616" path="/islands/emberkai-ember.theme.json"/>
+    <themeProvider id="c36630a1-fe53-408b-acfb-13c52f14c21d" path="/islands/emberkai-light.theme.json"/>
 
     <!-- Register regular schemes independently of theme discovery so IDE/plugin
          reloads can resolve the scheme names stored by the active theme. -->
@@ -97,5 +107,7 @@
     <bundledColorScheme id="Emberkai Contrast" path="schemes/emberkai-contrast"/>
     <bundledColorScheme id="Emberkai - No Italics" path="schemes/emberkai-no-italics"/>
     <bundledColorScheme id="Emberkai Contrast - No Italics" path="schemes/emberkai-contrast-no-italics"/>
+    <bundledColorScheme id="Emberkai Light" path="schemes/emberkai-light"/>
+    <bundledColorScheme id="Emberkai Light - No Italics" path="schemes/emberkai-light-no-italics"/>
   </extensions>
 </idea-plugin>
