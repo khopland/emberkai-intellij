@@ -610,6 +610,20 @@ class ThemeCheck {
           for (var option : root.getChild(section).getChildren("option"))
             check(!option.getAttributeValue("name").matches("MT_.*|MARKDOWN_NAVIGATOR\\..*"),
                   "Unused plugin key: " + path + " / " + option.getAttributeValue("name"));
+        // Rainbow Brackets adds ten levels per bracket kind, and for indent guides, to Darcula and
+        // Default. It is not bundled, so the base scheme check below cannot see these keys.
+        var syntax = new HashSet<Color>();
+        schemeAttrs.forEach((key, value) -> { if (key.startsWith("DEFAULT_") && value.getForegroundColor() != null) syntax.add(value.getForegroundColor()); });
+        for (String kind : List.of("ROUND_BRACKETS", "SQUARE_BRACKETS", "SQUIGGLY_BRACKETS", "ANGLE_BRACKETS", "INDENT_GUIDES")) {
+          for (int level = 0; level < 10; level++) {
+            var value = schemeAttrs.get(kind + "_RAINBOW_COLOR" + level);
+            check(value != null && syntax.contains(value.getForegroundColor()),
+                  "Rainbow Brackets level uses a syntax color: " + path + " / " + kind + level);
+            if (level > 0)
+              check(!value.getForegroundColor().equals(schemeAttrs.get(kind + "_RAINBOW_COLOR" + (level - 1)).getForegroundColor()),
+                    "Adjacent Rainbow Brackets levels differ: " + path + " / " + kind + level);
+          }
+        }
         var defined = new HashSet<String>();
         for (var section : List.of("colors", "attributes"))
           for (var option : root.getChild(section).getChildren("option")) defined.add(option.getAttributeValue("name"));

@@ -39,6 +39,9 @@ progress needs two distinct colors, split editors need a divider, the default
 yellow and green file colors must stay subtle and differ from the selection,
 and editor scrollbars must change on hover. Info and "new" badge dots must use the preset accent, and checkbox
 palette keys must use the unsuffixed names that New UI themes expect.
+Rainbow Brackets isn't bundled, so its keys are listed in the check: all ten
+levels of each bracket kind and of the indent guides must use syntax colors,
+and neighboring levels must differ.
 Every editor scheme must also have an explicit `bundledColorScheme` registration
 whose ID matches the XML scheme name. This keeps schemes available independently
 of theme discovery when projects or plugins reload.
