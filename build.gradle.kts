@@ -158,9 +158,20 @@ tasks.register<Sync>("prepareRelease") {
 // contain no mouse pointer, popups, or other windows. Run `./gradlew screenshots`, or one
 // capture such as `./gradlew screenshotEmberkaiLight`. On a display without 2x scaling, such as
 // Xvfb in CI, add -PscreenshotScale=2 to keep the 2800 x 2000 size.
-data class Capture(val name: String, val theme: String, val scheme: String, val compact: Boolean = false)
+// `./gradlew marketplaceScreenshots` captures the 16:10 Marketplace media in upload order.
+data class Capture(
+    val name: String, val theme: String, val scheme: String, val compact: Boolean = false,
+    val marketplace: Boolean = false,
+) {
+    val taskName = (if (marketplace) "marketplace-" else "screenshot-") + name
+    // Window size in points. Marketplace media is 16:10; the gallery keeps its 7:5 images.
+    val width = if (marketplace) 1440 else 1400
+    val height = if (marketplace) 900 else 1000
+    // An empty line: the last one scrolls the shorter Marketplace window past the first line.
+    val caretLine = if (marketplace) 3 else 32
+}
 
-val captures = listOf(
+val galleryCaptures = listOf(
     Capture("emberkai-islands", "emberkai", "Emberkai"),
     Capture("emberkai-teal", "emberkai-teal", "Emberkai"),
     Capture("emberkai-rose", "emberkai-rose", "Emberkai"),
@@ -168,22 +179,32 @@ val captures = listOf(
     Capture("emberkai-contrast-compact", "emberkai-contrast", "Emberkai Contrast - No Italics", compact = true),
     Capture("emberkai-light", "emberkai-light", "Emberkai Light"),
 )
+val marketplaceCaptures = listOf(
+    Capture("1-emberkai-islands", "emberkai", "Emberkai", marketplace = true),
+    Capture("2-emberkai-light", "emberkai-light", "Emberkai Light", marketplace = true),
+    Capture("3-emberkai-contrast", "emberkai-contrast", "Emberkai Contrast - No Italics", compact = true, marketplace = true),
+    Capture("4-emberkai-teal", "emberkai-teal", "Emberkai", marketplace = true),
+    Capture("5-emberkai-rose", "emberkai-rose", "Emberkai", marketplace = true),
+    Capture("6-emberkai-ember", "emberkai-ember", "Emberkai", marketplace = true),
+)
 val themeIds = Regex("""<themeProvider id="([^"]+)" path="/islands/([^"]+)\.theme\.json"/>""")
     .findAll(file("src/main/resources/META-INF/plugin.xml").readText())
     .associate { it.groupValues[2] to it.groupValues[1] }
 val screenshotSamples = layout.projectDirectory.dir("docs/samples").asFile
 val screenshotOutput = layout.projectDirectory.dir("docs/screenshots").asFile
+val marketplaceOutput = layout.projectDirectory.dir("docs/marketplace").asFile
 val screenshotProject = layout.buildDirectory.dir("screenshot-project/samples")
 val screenshotJdk = providers.systemProperty("java.home")
 val screenshotScale = providers.gradleProperty("screenshotScale")
 
-val screenshotTaskNames = captures.map { capture ->
-    val taskName = "screenshot" + capture.name.split('-').joinToString("") { it.replaceFirstChar(Char::uppercase) }
+fun registerCapture(capture: Capture): String {
+    val taskName = capture.taskName.split('-').joinToString("") { it.replaceFirstChar(Char::uppercase) }.replaceFirstChar(Char::lowercase)
+    val output = if (capture.marketplace) marketplaceOutput else screenshotOutput
     val themeId = requireNotNull(themeIds[capture.theme]) { "No theme registered for ${capture.theme}" }
     intellijPlatformTesting.runIde.register(taskName) {
         task {
             group = "documentation"
-            description = "Captures docs/screenshots/${capture.name}.png in the development IDE."
+            description = "Captures docs/${output.name}/${capture.name}.png in the development IDE."
             val script = temporaryDir.resolve("capture.txt")
             val config = sandboxConfigDirectory
             val system = sandboxSystemDirectory
@@ -237,8 +258,8 @@ val screenshotTaskNames = captures.map { capture ->
                         laf.updateUI()
                         def colors = EditorColorsManager.instance
                         colors.setGlobalScheme(colors.getScheme("${capture.scheme}"))
-                        // 1400 x 1000 points, painted at the display's scale: 2800 x 2000 on a 2x display.
-                        WindowManager.instance.getFrame(IDE.project).setBounds(40, 40, 1400, 1000)
+                        // Points, painted at the display's scale: 2800 x 2000 for the gallery on a 2x display.
+                        WindowManager.instance.getFrame(IDE.project).setBounds(40, 40, ${capture.width}, ${capture.height})
                     }
                     // Keep the Project view narrow enough for the longest sample line.
                     ApplicationManager.application.invokeLater {
@@ -252,7 +273,7 @@ val screenshotTaskNames = captures.map { capture ->
                     %setupSDK "emberkai-jdk" "JavaSDK" "${screenshotJdk.get()}"
                     %waitForSmart
                     %openFile -file EmberkaiDemo.java
-                    %goto 32 1
+                    %goto ${capture.caretLine} 1
                     %sleep 3000
                     %takeScreenshot ${capture.name}
                     %exitApp true
@@ -273,17 +294,26 @@ val screenshotTaskNames = captures.map { capture ->
                 val shot = logs.get().asFile.resolve("screenshots").walkTopDown().filter { it.extension == "png" }
                     .maxByOrNull { javax.imageio.ImageIO.read(it).let { image -> image.width.toLong() * image.height } }
                     ?: throw GradleException("No screenshot for ${capture.name}; see ${logs.get().asFile}/idea.log")
-                val target = screenshotOutput.resolve("${capture.name}.png")
+                val target = output.apply { mkdirs() }.resolve("${capture.name}.png")
                 shot.copyTo(target, overwrite = true)
                 logger.lifecycle("Saved $target")
             }
         }
     }
-    taskName
+    return taskName
 }
+
+val galleryTasks = galleryCaptures.map(::registerCapture)
+val marketplaceTasks = marketplaceCaptures.map(::registerCapture)
 
 tasks.register("screenshots") {
     group = "documentation"
     description = "Captures every preset in docs/screenshots."
-    dependsOn(screenshotTaskNames)
+    dependsOn(galleryTasks)
+}
+
+tasks.register("marketplaceScreenshots") {
+    group = "documentation"
+    description = "Captures the 16:10 Marketplace media in docs/marketplace."
+    dependsOn(marketplaceTasks)
 }
