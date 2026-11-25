@@ -221,11 +221,14 @@ val screenshotTaskNames = captures.map { capture ->
                     import com.intellij.ide.ui.LafManager
                     import com.intellij.ide.ui.UIDensity
                     import com.intellij.ide.ui.UISettings
+                    import com.intellij.notification.impl.NotificationsConfigurationImpl
                     import com.intellij.openapi.application.ApplicationManager
                     import com.intellij.openapi.editor.colors.EditorColorsManager
                     import com.intellij.openapi.wm.ToolWindowManager
                     import com.intellij.openapi.wm.WindowManager
 
+                    // Notifications such as plugin update checks go to the tool window, not a balloon.
+                    NotificationsConfigurationImpl.instanceImpl.SHOW_BALLOONS = false
                     ApplicationManager.application.invokeAndWait {
                         def laf = LafManager.instance
                         laf.setCurrentLookAndFeel(laf.findLaf("$themeId"), false)
