@@ -399,7 +399,7 @@ class ThemeCheck {
       check(PROVIDERS.put(id, new String[]{id, path, bean.parentTheme == null ? "" : bean.parentTheme}) == null, "Duplicate provider id: " + id);
     }
     Set<String> expectedPaths = new HashSet<>();
-    for (String variant : List.of("", "-contrast", "-teal", "-rose", "-ember", "-light"))
+    for (String variant : List.of("", "-contrast", "-teal", "-rose", "-ember", "-light", "-light-contrast"))
       expectedPaths.add("islands/emberkai" + variant + ".theme.json");
     check(paths.equals(expectedPaths), "Complete Islands preset matrix");
     try (var files = Files.walk(RESOURCES)) {
@@ -440,9 +440,24 @@ class ThemeCheck {
       for (String key : List.of("STATIC_METHOD_ATTRIBUTES", "STATIC_METHOD_IMPORTED_ATTRIBUTES"))
         check(attrs.get("DEFAULT_STATIC_METHOD").equals(attrs.get(key)), "Java static methods follow palette/font style: " + key);
       check(background.equals(original.get("TEXT").getBackgroundColor()),"Preserved background: "+theme.getName());
+      // Light Contrast darkens the Light palette instead of keeping it: every syntax color keeps its
+      // style and maps to one darker color, so roles that shared a color still do.
+      var darkened = new HashMap<Color,Color>();
       for (String key : original.keySet()) {
-        if (key.startsWith("DEFAULT_") && !key.contains("COMMENT"))
-          check(original.get(key).equals(attrs.get(key)), "Preserved syntax: " + theme.getName() + " / " + key);
+        if (!key.startsWith("DEFAULT_") || key.contains("COMMENT")) continue;
+        var before = original.get(key);
+        var after = attrs.get(key);
+        if (!(isLight && isContrast)) {
+          check(before.equals(after), "Preserved syntax: " + theme.getName() + " / " + key);
+          continue;
+        }
+        check(after != null && before.getFontType() == after.getFontType() && before.getEffectType() == after.getEffectType()
+              && Objects.equals(before.getBackgroundColor(), after.getBackgroundColor()), "Light Contrast keeps syntax styles: " + key);
+        if (before.getForegroundColor() == null) continue;
+        var previous = darkened.putIfAbsent(before.getForegroundColor(), after.getForegroundColor());
+        check((previous == null || previous.equals(after.getForegroundColor()))
+              && luminance(after.getForegroundColor()) <= luminance(before.getForegroundColor()),
+              "Light Contrast darkens each syntax color consistently: " + key);
       }
       {
         for(String key:List.of("DIFF_INSERTED","DIFF_DELETED","DIFF_MODIFIED","DIFF_CONFLICT")) {
@@ -576,14 +591,16 @@ class ThemeCheck {
           check(!FOREIGN_COLORS.contains(String.format("%06x", entry.getValue().getRGB() & 0xffffff)),
                 "Scheme color must come from the palette: " + path + " / " + entry.getKey());
         // Text drawn straight on the editor must stay readable; only placeholders that
-        // IntelliJ shows on hover are meant to be invisible.
+        // IntelliJ shows on hover are meant to be invisible. Light Contrast meets WCAG AA throughout.
         var schemeAttrs = attributes(root);
         Color editor = schemeAttrs.get("TEXT").getBackgroundColor();
+        double textContrast = path.getFileName().toString().startsWith("emberkai-light-contrast") ? 4.5 : 3;
         for (var entry : schemeAttrs.entrySet()) {
           var value = entry.getValue();
           if (value.getForegroundColor() == null || value.getBackgroundColor() != null
               || entry.getKey().matches("INVISIBLE_INLAY_BUTTON|COMPOSE_INVISIBLE_PORT_BUTTON")) continue;
-          check(contrast(value.getForegroundColor(), editor) >= 3, "Editor text contrast below 3:1: " + path + " / " + entry.getKey());
+          check(contrast(value.getForegroundColor(), editor) >= textContrast,
+                "Editor text contrast below " + textContrast + ":1: " + path + " / " + entry.getKey());
         }
         // Ignored files are dimmed in the Project view and Changes lists, but must stay readable.
         var schemeColors = colors(root);
@@ -649,7 +666,7 @@ class ThemeCheck {
         noItalics++;
       }
     }
-    check(PROVIDERS.size()==6&&contrastThemes==1&&accentThemes==3&&lightThemes==1&&islandThemes==6&&noItalics==3&&semanticRanges==6,"Complete preset matrix");
+    check(PROVIDERS.size()==7&&contrastThemes==2&&accentThemes==3&&lightThemes==2&&islandThemes==7&&noItalics==4&&semanticRanges==8,"Complete preset matrix");
     System.out.printf("Validated %d inheritance chains, %d Contrast themes, %d accent themes, %d Light themes, and %d No Italics schemes.%n",PROVIDERS.size(),contrastThemes,accentThemes,lightThemes,noItalics);
     System.out.printf("Validated %d opt-in semantic ranges, including all 21 interpolated colors per scheme.%n",semanticRanges);
     System.out.printf("Validated normal and selected Symbols SVG fill and stroke colors in all %d presets.%n",PROVIDERS.size());

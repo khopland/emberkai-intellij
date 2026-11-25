@@ -105,8 +105,9 @@ the same aspect ratio, and requires theme plugins to show their own style. Run:
 ./gradlew marketplaceScreenshots
 ```
 
-It saves six 2880 × 1800 captures to `docs/marketplace/`, numbered in upload
-order: Islands, Light, Contrast in compact mode, then Teal, Rose, and Ember.
+It saves seven 2880 × 1800 captures to `docs/marketplace/`, numbered in upload
+order: Islands, Light, Contrast in compact mode, Light Contrast, then Teal,
+Rose, and Ember.
 Upload them in the plugin's Media section on JetBrains Marketplace, replacing
 the old images. The description comes from `plugin.xml`; if it was edited on
 the Marketplace, choose the `plugin.xml` description when uploading a version.
