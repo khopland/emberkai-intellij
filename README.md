@@ -67,7 +67,9 @@ Emberkai theme is selected, even without Symbols installed. See
 
 ## Development
 
-To preview in a development IDE, run `./gradlew runIde`.
+To preview in a development IDE, run `./gradlew runIde`. To regenerate the
+editor screenshots, run `./gradlew screenshots`; see
+[taking new screenshots](docs/screenshots/README.md#taking-new-screenshots).
 Checks: `./gradlew check verifyPluginStructure verifyPlugin`. See [validation](docs/validation.md)
 for the visual smoke test.
 
