@@ -249,6 +249,31 @@
         <option name="FOREGROUND" value="#fd9353" />
       </value>
     </option>
+    <option name="ANGLE_BRACKETS_RAINBOW_COLOR5">
+      <value>
+        <option name="FOREGROUND" value="#fc618d" />
+      </value>
+    </option>
+    <option name="ANGLE_BRACKETS_RAINBOW_COLOR6">
+      <value>
+        <option name="FOREGROUND" value="#fce566" />
+      </value>
+    </option>
+    <option name="ANGLE_BRACKETS_RAINBOW_COLOR7">
+      <value>
+        <option name="FOREGROUND" value="#948ae3" />
+      </value>
+    </option>
+    <option name="ANGLE_BRACKETS_RAINBOW_COLOR8">
+      <value>
+        <option name="FOREGROUND" value="#5ad4e6" />
+      </value>
+    </option>
+    <option name="ANGLE_BRACKETS_RAINBOW_COLOR9">
+      <value>
+        <option name="FOREGROUND" value="#7bd88f" />
+      </value>
+    </option>
     <option name="ANNOTATION_ATTRIBUTE_NAME_ATTRIBUTES">
       <value>
         <option name="FOREGROUND" value="#fd9353" />
@@ -1489,6 +1514,56 @@
         <option name="EFFECT_TYPE" value="1" />
       </value>
     </option>
+    <option name="INDENT_GUIDES_RAINBOW_COLOR0">
+      <value>
+        <option name="FOREGROUND" value="#fce566" />
+      </value>
+    </option>
+    <option name="INDENT_GUIDES_RAINBOW_COLOR1">
+      <value>
+        <option name="FOREGROUND" value="#948ae3" />
+      </value>
+    </option>
+    <option name="INDENT_GUIDES_RAINBOW_COLOR2">
+      <value>
+        <option name="FOREGROUND" value="#5ad4e6" />
+      </value>
+    </option>
+    <option name="INDENT_GUIDES_RAINBOW_COLOR3">
+      <value>
+        <option name="FOREGROUND" value="#7bd88f" />
+      </value>
+    </option>
+    <option name="INDENT_GUIDES_RAINBOW_COLOR4">
+      <value>
+        <option name="FOREGROUND" value="#fd9353" />
+      </value>
+    </option>
+    <option name="INDENT_GUIDES_RAINBOW_COLOR5">
+      <value>
+        <option name="FOREGROUND" value="#fc618d" />
+      </value>
+    </option>
+    <option name="INDENT_GUIDES_RAINBOW_COLOR6">
+      <value>
+        <option name="FOREGROUND" value="#fce566" />
+      </value>
+    </option>
+    <option name="INDENT_GUIDES_RAINBOW_COLOR7">
+      <value>
+        <option name="FOREGROUND" value="#948ae3" />
+      </value>
+    </option>
+    <option name="INDENT_GUIDES_RAINBOW_COLOR8">
+      <value>
+        <option name="FOREGROUND" value="#5ad4e6" />
+      </value>
+    </option>
+    <option name="INDENT_GUIDES_RAINBOW_COLOR9">
+      <value>
+        <option name="FOREGROUND" value="#7bd88f" />
+      </value>
+    </option>
     <option name="INFO_ATTRIBUTES">
       <value>
         <option name="EFFECT_COLOR" value="#948ae3" />
@@ -2720,6 +2795,31 @@
         <option name="FOREGROUND" value="#fd9353" />
       </value>
     </option>
+    <option name="ROUND_BRACKETS_RAINBOW_COLOR5">
+      <value>
+        <option name="FOREGROUND" value="#fc618d" />
+      </value>
+    </option>
+    <option name="ROUND_BRACKETS_RAINBOW_COLOR6">
+      <value>
+        <option name="FOREGROUND" value="#fce566" />
+      </value>
+    </option>
+    <option name="ROUND_BRACKETS_RAINBOW_COLOR7">
+      <value>
+        <option name="FOREGROUND" value="#948ae3" />
+      </value>
+    </option>
+    <option name="ROUND_BRACKETS_RAINBOW_COLOR8">
+      <value>
+        <option name="FOREGROUND" value="#5ad4e6" />
+      </value>
+    </option>
+    <option name="ROUND_BRACKETS_RAINBOW_COLOR9">
+      <value>
+        <option name="FOREGROUND" value="#7bd88f" />
+      </value>
+    </option>
     <option name="RUBY_BAD_CHARACTER">
       <value>
         <option name="EFFECT_COLOR" value="#fc618d" />
@@ -3184,6 +3284,31 @@
         <option name="FOREGROUND" value="#fd9353" />
       </value>
     </option>
+    <option name="SQUARE_BRACKETS_RAINBOW_COLOR5">
+      <value>
+        <option name="FOREGROUND" value="#fc618d" />
+      </value>
+    </option>
+    <option name="SQUARE_BRACKETS_RAINBOW_COLOR6">
+      <value>
+        <option name="FOREGROUND" value="#fce566" />
+      </value>
+    </option>
+    <option name="SQUARE_BRACKETS_RAINBOW_COLOR7">
+      <value>
+        <option name="FOREGROUND" value="#948ae3" />
+      </value>
+    </option>
+    <option name="SQUARE_BRACKETS_RAINBOW_COLOR8">
+      <value>
+        <option name="FOREGROUND" value="#5ad4e6" />
+      </value>
+    </option>
+    <option name="SQUARE_BRACKETS_RAINBOW_COLOR9">
+      <value>
+        <option name="FOREGROUND" value="#7bd88f" />
+      </value>
+    </option>
     <option name="SQUIGGLY_BRACKETS_RAINBOW_COLOR0">
       <value>
         <option name="FOREGROUND" value="#fce566" />
@@ -3207,6 +3332,31 @@
     <option name="SQUIGGLY_BRACKETS_RAINBOW_COLOR4">
       <value>
         <option name="FOREGROUND" value="#fd9353" />
+      </value>
+    </option>
+    <option name="SQUIGGLY_BRACKETS_RAINBOW_COLOR5">
+      <value>
+        <option name="FOREGROUND" value="#fc618d" />
+      </value>
+    </option>
+    <option name="SQUIGGLY_BRACKETS_RAINBOW_COLOR6">
+      <value>
+        <option name="FOREGROUND" value="#fce566" />
+      </value>
+    </option>
+    <option name="SQUIGGLY_BRACKETS_RAINBOW_COLOR7">
+      <value>
+        <option name="FOREGROUND" value="#948ae3" />
+      </value>
+    </option>
+    <option name="SQUIGGLY_BRACKETS_RAINBOW_COLOR8">
+      <value>
+        <option name="FOREGROUND" value="#5ad4e6" />
+      </value>
+    </option>
+    <option name="SQUIGGLY_BRACKETS_RAINBOW_COLOR9">
+      <value>
+        <option name="FOREGROUND" value="#7bd88f" />
       </value>
     </option>
     <option name="STATIC_FINAL_FIELD_ATTRIBUTES">

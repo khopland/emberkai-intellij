@@ -65,6 +65,12 @@ same source colors can also change. The replacements are active whenever an
 Emberkai theme is selected, even without Symbols installed. See
 [icon color support](docs/icon-colors.md) for the mappings and limitations.
 
+## Other plugins
+
+Rainbow Brackets follows the palette at every level. For plugins that keep
+their colors in their own settings, such as IdeaVim, see
+[third-party plugins](docs/third-party-plugins.md).
+
 ## Development
 
 To preview in a development IDE, run `./gradlew runIde`.

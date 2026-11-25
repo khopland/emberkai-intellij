@@ -2,6 +2,13 @@
 
 ## [Unreleased]
 
+- Rainbow Brackets uses the palette at every nesting level and for its rainbow
+  indent guides. Levels 6 to 10 and the indent guides showed the plugin's own
+  colors.
+- New [third-party plugins](docs/third-party-plugins.md) page, with palette
+  values for plugins that keep their colors in their own settings, such as
+  IdeaVim, AceJump, and Indent Rainbow.
+
 ## [2.1.0]
 
 - New **Emberkai Islands Light** theme, with colors:
