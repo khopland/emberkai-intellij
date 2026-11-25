@@ -151,3 +151,139 @@ tasks.register<Sync>("prepareRelease") {
         destinationDir.resolve("SHA256SUMS").writeText("$checksum  ${archive.name}\n")
     }
 }
+
+// Screenshots. Each capture starts the development IDE with a fresh config on a copy of
+// docs/samples outside Git, so no branch or author hints show. A Groovy startup script selects
+// the preset, and a Performance Testing script paints the IDE frame into a PNG, so captures
+// contain no mouse pointer, popups, or other windows. Run `./gradlew screenshots`, or one
+// capture such as `./gradlew screenshotEmberkaiLight`. On a display without 2x scaling, such as
+// Xvfb in CI, add -PscreenshotScale=2 to keep the 2800 x 2000 size.
+data class Capture(val name: String, val theme: String, val scheme: String, val compact: Boolean = false)
+
+val captures = listOf(
+    Capture("emberkai-islands", "emberkai", "Emberkai"),
+    Capture("emberkai-teal", "emberkai-teal", "Emberkai"),
+    Capture("emberkai-rose", "emberkai-rose", "Emberkai"),
+    Capture("emberkai-ember", "emberkai-ember", "Emberkai"),
+    Capture("emberkai-contrast-compact", "emberkai-contrast", "Emberkai Contrast - No Italics", compact = true),
+    Capture("emberkai-light", "emberkai-light", "Emberkai Light"),
+)
+val themeIds = Regex("""<themeProvider id="([^"]+)" path="/islands/([^"]+)\.theme\.json"/>""")
+    .findAll(file("src/main/resources/META-INF/plugin.xml").readText())
+    .associate { it.groupValues[2] to it.groupValues[1] }
+val screenshotSamples = layout.projectDirectory.dir("docs/samples").asFile
+val screenshotOutput = layout.projectDirectory.dir("docs/screenshots").asFile
+val screenshotProject = layout.buildDirectory.dir("screenshot-project/samples")
+val screenshotJdk = providers.systemProperty("java.home")
+val screenshotScale = providers.gradleProperty("screenshotScale")
+
+val screenshotTaskNames = captures.map { capture ->
+    val taskName = "screenshot" + capture.name.split('-').joinToString("") { it.replaceFirstChar(Char::uppercase) }
+    val themeId = requireNotNull(themeIds[capture.theme]) { "No theme registered for ${capture.theme}" }
+    intellijPlatformTesting.runIde.register(taskName) {
+        task {
+            group = "documentation"
+            description = "Captures docs/screenshots/${capture.name}.png in the development IDE."
+            val script = temporaryDir.resolve("capture.txt")
+            val config = sandboxConfigDirectory
+            val system = sandboxSystemDirectory
+            val logs = sandboxLogDirectory
+            jvmArgumentProviders += CommandLineArgumentProvider {
+                listOf(
+                    "-Dtestscript.filename=$script",
+                    "-Didea.trust.all.projects=true",
+                    "-Djb.consents.confirmation.enabled=false",
+                    "-Djb.privacy.policy.text=<!--999.999-->",
+                    "-Dide.show.tips.on.startup.default.value=false",
+                    "-Dide.newUsersOnboarding=false",
+                    "-Didea.initially.ask.config=never",
+                ) + screenshotScale.map { listOf("-Dsun.java2d.uiScale=$it") }.getOrElse(emptyList())
+            }
+            val projectDir = screenshotProject.get().asFile
+            args(projectDir.absolutePath)
+            doFirst {
+                projectDir.deleteRecursively()
+                screenshotSamples.listFiles { file -> file.name !in setOf(".idea", "target") }!!
+                    .forEach { it.copyRecursively(projectDir.resolve(it.name)) }
+                // Start from a fresh profile: cached project state would refer to an SDK that no
+                // longer exists. Recreate the directories, because the IDE falls back to other
+                // locations, such as the user's own caches, when a sandbox directory is missing.
+                val configDir = config.get().asFile
+                for (dir in listOf(system.get().asFile, configDir, logs.get().asFile)) {
+                    dir.deleteRecursively()
+                    dir.mkdirs()
+                }
+                // The IDE keeps the theme in its internal state database, so select it from a
+                // startup script instead of a settings file.
+                val startup = configDir.resolve("extensions/com.intellij/startup").apply { mkdirs() }
+                startup.resolve("emberkai-screenshot.groovy").writeText(
+                    """
+                    import com.intellij.ide.ui.LafManager
+                    import com.intellij.ide.ui.UIDensity
+                    import com.intellij.ide.ui.UISettings
+                    import com.intellij.notification.impl.NotificationsConfigurationImpl
+                    import com.intellij.openapi.application.ApplicationManager
+                    import com.intellij.openapi.editor.colors.EditorColorsManager
+                    import com.intellij.openapi.wm.ToolWindowManager
+                    import com.intellij.openapi.wm.WindowManager
+
+                    // Notifications such as plugin update checks go to the tool window, not a balloon.
+                    NotificationsConfigurationImpl.instanceImpl.SHOW_BALLOONS = false
+                    ApplicationManager.application.invokeAndWait {
+                        def laf = LafManager.instance
+                        laf.setCurrentLookAndFeel(laf.findLaf("$themeId"), false)
+                        UISettings.instance.uiDensity = UIDensity.${if (capture.compact) "COMPACT" else "DEFAULT"}
+                        laf.applyDensity()
+                        laf.updateUI()
+                        def colors = EditorColorsManager.instance
+                        colors.setGlobalScheme(colors.getScheme("${capture.scheme}"))
+                        // 1400 x 1000 points, painted at the display's scale: 2800 x 2000 on a 2x display.
+                        WindowManager.instance.getFrame(IDE.project).setBounds(40, 40, 1400, 1000)
+                    }
+                    // Keep the Project view narrow enough for the longest sample line.
+                    ApplicationManager.application.invokeLater {
+                        def project = ToolWindowManager.getInstance(IDE.project).getToolWindow("Project")
+                        project.stretchWidth(340 - project.component.width)
+                    }
+                    """.trimIndent() + "\n"
+                )
+                script.writeText(
+                    """
+                    %setupSDK "emberkai-jdk" "JavaSDK" "${screenshotJdk.get()}"
+                    %waitForSmart
+                    %openFile -file EmberkaiDemo.java
+                    %goto 32 1
+                    %sleep 3000
+                    %takeScreenshot ${capture.name}
+                    %exitApp true
+                    """.trimIndent() + "\n"
+                )
+            }
+            doLast {
+                // Fail if the IDE still left the sandbox for its settings, caches, or logs.
+                val sandbox = config.get().asFile.parentFile
+                val log = logs.get().asFile.resolve("idea.log")
+                if (!log.exists()) throw GradleException("The IDE did not log to $log")
+                val paths = Regex("""-Didea\.(?:config|system|log)\.path=([^,\]]+)""")
+                    .findAll(log.readText()).map { it.groupValues[1].trim() }.toList()
+                if (paths.isEmpty() || paths.any { !File(it).startsWith(sandbox) })
+                    throw GradleException("The IDE used settings or caches outside the sandbox: $paths")
+                // One PNG per window; the project frame is the largest. Which frame number it gets
+                // depends on the platform (macOS frame0, Linux frame1).
+                val shot = logs.get().asFile.resolve("screenshots").walkTopDown().filter { it.extension == "png" }
+                    .maxByOrNull { javax.imageio.ImageIO.read(it).let { image -> image.width.toLong() * image.height } }
+                    ?: throw GradleException("No screenshot for ${capture.name}; see ${logs.get().asFile}/idea.log")
+                val target = screenshotOutput.resolve("${capture.name}.png")
+                shot.copyTo(target, overwrite = true)
+                logger.lifecycle("Saved $target")
+            }
+        }
+    }
+    taskName
+}
+
+tasks.register("screenshots") {
+    group = "documentation"
+    description = "Captures every preset in docs/screenshots."
+    dependsOn(screenshotTaskNames)
+}

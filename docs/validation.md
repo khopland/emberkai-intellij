@@ -63,7 +63,10 @@ with reports under `build/reports/pluginVerifier/`.
 GitHub Actions runs these checks on IntelliJ
 2026.1, 2026.2, and 2026.3. The newest target also uploads an installable ZIP.
 
-These checks are headless. Use `./gradlew runIde` for a visual smoke test:
+These checks are headless. The **Screenshots** workflow renders every preset
+on pull requests that change the themes, schemes, or samples, so changes can be
+compared as images; run `./gradlew screenshots` to do the same locally. Use
+`./gradlew runIde` for a visual smoke test:
 
 Open `docs/samples/pom.xml` as a Maven project to run `EmberkaiDemo.main()`
 and inspect ANSI output in the Run console. The sample requires Java 21+.
