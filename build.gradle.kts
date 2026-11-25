@@ -268,8 +268,10 @@ val screenshotTaskNames = captures.map { capture ->
                     .findAll(log.readText()).map { it.groupValues[1].trim() }.toList()
                 if (paths.isEmpty() || paths.any { !File(it).startsWith(sandbox) })
                     throw GradleException("The IDE used settings or caches outside the sandbox: $paths")
-                // frame0 is the project window; the Welcome screen is not open.
-                val shot = logs.get().asFile.resolve("screenshots").walkTopDown().singleOrNull { it.name == "frame0.png" }
+                // One PNG per window; the project frame is the largest. Which frame number it gets
+                // depends on the platform (macOS frame0, Linux frame1).
+                val shot = logs.get().asFile.resolve("screenshots").walkTopDown().filter { it.extension == "png" }
+                    .maxByOrNull { javax.imageio.ImageIO.read(it).let { image -> image.width.toLong() * image.height } }
                     ?: throw GradleException("No screenshot for ${capture.name}; see ${logs.get().asFile}/idea.log")
                 val target = screenshotOutput.resolve("${capture.name}.png")
                 shot.copyTo(target, overwrite = true)
