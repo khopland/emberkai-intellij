@@ -6,17 +6,23 @@
 
   <description>
   <![CDATA[
-  <p>Emberkai is a warm, high-color dark theme for IntelliJ-based IDEs, with a light
-  variant.</p>
-  <p>Built on the Islands layout, with a Contrast option for brighter
-  comments and secondary text, Teal, Rose, and Ember accents, and a Light theme
-  on warm paper backgrounds. Buttons, run and
-  stop controls, badges, and file icons all follow the same palette.</p>
-  <p>Includes optional No Italics editor schemes, coordinated diff and console
-  colors, and palette-matched semantic highlighting for parameters and local
-  variables. Semantic highlighting is off by default.</p>
-  <p>Requires IntelliJ Platform 2026.1 or newer. Select a theme under
-  Settings &gt; Appearance &amp; Behavior &gt; Appearance.</p>
+  <p>Warm, high-color dark and light themes for the Islands layout, with one palette for
+  syntax, UI controls, diff, console, and file icons.</p>
+  <ul>
+    <li><b>Emberkai Islands</b>: the dark theme, with a yellow accent.</li>
+    <li><b>Emberkai Islands Contrast</b>: brighter comments, line numbers, and secondary
+    text.</li>
+    <li><b>Emberkai Islands Teal</b>, <b>Rose</b>, and <b>Ember</b>: other accent colors
+    with the same syntax colors.</li>
+    <li><b>Emberkai Islands Light</b>: warm paper backgrounds, a bright orange accent, and
+    its own editor scheme.</li>
+    <li><b>No Italics</b> versions of every editor scheme.</li>
+    <li>Diff, merge, and 16 ANSI console colors from the palette, and opt-in semantic
+    highlighting for parameters and local variables.</li>
+  </ul>
+  <p><b>Getting started:</b> choose a theme under Settings &gt; Appearance &amp; Behavior &gt;
+  Appearance. For no italics, choose the matching scheme under Settings &gt; Editor &gt;
+  Color Scheme. Requires IntelliJ Platform 2026.1 or newer.</p>
   <p><a href="https://github.com/khopland/emberkai-intellij/issues">Report an issue</a> |
   <a href="https://github.com/khopland/emberkai-intellij">Source code</a> |
   <a href="https://github.com/khopland/emberkai-intellij/blob/main/LICENSE">Apache 2.0 license</a></p>

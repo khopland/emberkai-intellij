@@ -96,6 +96,21 @@ Recommended settings:
 - In the `marketplace` environment, allow deployments only from `main` (for
   recovery runs) and from tags matching `v*`.
 
+## Marketplace media
+
+JetBrains recommends 16:10 screenshots of at least 1280 × 800 pixels, all with
+the same aspect ratio, and requires theme plugins to show their own style. Run:
+
+```sh
+./gradlew marketplaceScreenshots
+```
+
+It saves six 2880 × 1800 captures to `docs/marketplace/`, numbered in upload
+order: Islands, Light, Contrast in compact mode, then Teal, Rose, and Ember.
+Upload them in the plugin's Media section on JetBrains Marketplace, replacing
+the old images. The description comes from `plugin.xml`; if it was edited on
+the Marketplace, choose the `plugin.xml` description when uploading a version.
+
 ## First Marketplace upload
 
 The first version can be uploaded by the release workflow, or
@@ -111,7 +126,7 @@ Use the plugin description and change notes from `plugin.xml`, and set:
 - Issue tracker: `https://github.com/khopland/emberkai-intellij/issues`
 - Documentation: `https://github.com/khopland/emberkai-intellij#readme`
 - License: Apache 2.0, with the [inherited MIT notices](../NOTICE).
-- Screenshots: the [native IDE captures](screenshots/README.md), with Emberkai Islands first.
+- Screenshots: the [Marketplace media](#marketplace-media).
 
 Review the [Marketplace requirements](https://plugins.jetbrains.com/docs/marketplace/jetbrains-marketplace-approval-guidelines.html)
 when submitting. After approval, add the Marketplace installation link to the README.

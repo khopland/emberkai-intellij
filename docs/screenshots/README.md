@@ -13,14 +13,21 @@ The Java fixture in the Islands layout.
 
 [![Emberkai Islands](emberkai-islands.png)](emberkai-islands.png)
 
-## Teal and Rose accents
+## Emberkai Islands Light
+
+Warm paper backgrounds, a bright orange accent, and the **Emberkai Light**
+editor scheme, which uses darker versions of the dark palette's hues.
+
+[![Emberkai Islands Light](emberkai-light.png)](emberkai-light.png)
+
+## Teal, Rose, and Ember accents
 
 Accent presets change the selected controls and tabs while keeping the same
 syntax colors.
 
-| Teal | Rose |
-| --- | --- |
-| [![Emberkai Islands Teal accent](emberkai-teal.png)](emberkai-teal.png) | [![Emberkai Islands Rose accent](emberkai-rose.png)](emberkai-rose.png) |
+| Teal | Rose | Ember |
+| --- | --- | --- |
+| [![Emberkai Islands Teal accent](emberkai-teal.png)](emberkai-teal.png) | [![Emberkai Islands Rose accent](emberkai-rose.png)](emberkai-rose.png) | [![Emberkai Islands Ember accent](emberkai-ember.png)](emberkai-ember.png) |
 
 ## Contrast and No Italics
 
@@ -56,6 +63,7 @@ their references. See the [setup guide](../semantic-highlighting.md).
 ```sh
 ./gradlew screenshots                 # every editor capture
 ./gradlew screenshotEmberkaiLight     # one capture
+./gradlew marketplaceScreenshots      # 16:10 Marketplace media in docs/marketplace
 ```
 
 Each capture starts the development IDE with a fresh profile on a copy of the

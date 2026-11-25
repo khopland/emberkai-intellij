@@ -2,25 +2,33 @@
 
 <img src="src/main/resources/META-INF/pluginIcon.svg" alt="Emberkai ember logo" width="64" height="64">
 
-A warm, high-color dark theme for IntelliJ-based IDEs, using the Islands layout.
+Warm, high-color dark and light themes for IntelliJ-based IDEs, using the
+Islands layout. Requires **IntelliJ Platform 2026.1 or newer**.
 
-Comes with a **Contrast** option with brighter comments and secondary text,
-**Teal**, **Rose**, and **Ember** Islands accents, a **Light** theme, and optional
-**No Italics** editor schemes.
-Accent presets keep the same syntax colors. Buttons, run and stop controls,
-badges, diff, console, and file icon colors all come from one palette.
+| Theme | |
+| --- | --- |
+| **Emberkai Islands** | The dark theme, with a yellow accent. |
+| **Emberkai Islands Contrast** | Brighter comments, line numbers, and secondary text. |
+| **Emberkai Islands Teal**, **Rose**, **Ember** | Other accent colors, with the same syntax colors. |
+| **Emberkai Islands Light** | Warm paper backgrounds, a bright orange accent, and its own editor scheme. |
 
-**Emberkai Islands Light** uses warm paper backgrounds, a bright orange accent, and its
-own **Emberkai Light** editor scheme.
-
-Requires **IntelliJ Platform 2026.1 or newer**.
+Each editor scheme has a **No Italics** version. Buttons, run and stop
+controls, badges, diff, console, and file icon colors all come from one palette.
 
 ## Preview
 
 Direct IntelliJ IDEA captures, with no mouse pointer. See the
-[full screenshot gallery](docs/screenshots/README.md) for accents and features.
+[full screenshot gallery](docs/screenshots/README.md) for more.
 
-[![Emberkai Islands](docs/screenshots/emberkai-islands.png)](docs/screenshots/emberkai-islands.png)
+| Emberkai Islands | Emberkai Islands Light |
+| --- | --- |
+| [![Emberkai Islands](docs/screenshots/emberkai-islands.png)](docs/screenshots/emberkai-islands.png) | [![Emberkai Islands Light](docs/screenshots/emberkai-light.png)](docs/screenshots/emberkai-light.png) |
+
+Accents change the selected tabs, controls, and links:
+
+| Teal | Rose | Ember |
+| --- | --- | --- |
+| [![Emberkai Islands Teal](docs/screenshots/emberkai-teal.png)](docs/screenshots/emberkai-teal.png) | [![Emberkai Islands Rose](docs/screenshots/emberkai-rose.png)](docs/screenshots/emberkai-rose.png) | [![Emberkai Islands Ember](docs/screenshots/emberkai-ember.png)](docs/screenshots/emberkai-ember.png) |
 
 ### Features
 
@@ -35,8 +43,6 @@ Emberkai Islands Teal in the diff viewer:
 | ANSI console colors | Optional semantic highlighting |
 | --- | --- |
 | [![Emberkai Teal normal and bright ANSI console colors](docs/screenshots/emberkai-teal-console.png)](docs/screenshots/emberkai-teal-console.png) | [![Emberkai Contrast semantic highlighting for parameters and local variables](docs/screenshots/emberkai-semantic-highlighting.png)](docs/screenshots/emberkai-semantic-highlighting.png) |
-
-The gallery also compares [Teal and Rose accents](docs/screenshots/README.md#teal-and-rose-accents).
 
 ## Build and install
 
