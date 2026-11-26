@@ -2,6 +2,24 @@
 
 ## [Unreleased]
 
+- Languages use the same colors for the same roles as Java:
+  - Kotlin and JavaScript class names are cyan italic instead of the green used
+    for functions, and TypeScript primitive types such as `string` match them.
+  - Top-level JavaScript and TypeScript functions are green instead of cyan
+    italic, which looked like a type.
+  - TypeScript and Python type parameters match Java's, and Kotlin and
+    TypeScript enum members are orange like other constants.
+  - Python decorators are cyan like JavaScript decorators, and type hints are
+    cyan like other type references.
+  - Variables captured in a Kotlin lambda are no longer green.
+  - YAML values, `|` blocks, and `>` blocks are all strings, and TOML booleans
+    match JSON's.
+- Emberkai Light: JavaScript parameters are orange italic instead of plain
+  underlined text, and numbers in user-defined file types are no longer
+  IntelliJ Light's pure blue.
+- New language samples in `docs/samples/languages/`: Python, TypeScript, TSX,
+  Go, Kotlin, YAML, and Markdown.
+
 - New **Emberkai Islands Light Contrast** theme, with **Emberkai Light
   Contrast** and **Emberkai Light Contrast - No Italics** editor schemes. Light
   reaches about 3.2:1 to 3.9:1 for its syntax colors; Light Contrast darkens

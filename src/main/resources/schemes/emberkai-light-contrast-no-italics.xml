@@ -775,6 +775,7 @@
     </option>
     <option name="CUSTOM_LINE_COMMENT_ATTRIBUTES" baseAttributes="DEFAULT_LINE_COMMENT" />
     <option name="CUSTOM_MULTI_LINE_COMMENT_ATTRIBUTES" baseAttributes="DEFAULT_BLOCK_COMMENT" />
+    <option name="CUSTOM_NUMBER_ATTRIBUTES" baseAttributes="DEFAULT_NUMBER"/>
     <option name="CUSTOM_STRING_ATTRIBUTES" baseAttributes="DEFAULT_STRING"/>
     <option name="CUSTOM_VALID_STRING_ESCAPE_ATTRIBUTES" baseAttributes="DEFAULT_VALID_STRING_ESCAPE"/>
     <option name="Closure braces">
@@ -1792,6 +1793,12 @@
         <option name="EFFECT_TYPE" value="1" />
       </value>
     </option>
+    <option name="JS.CLASS">
+      <value>
+        <option name="FOREGROUND" value="#00758f" />
+        <option name="FONT_TYPE" value="0" />
+      </value>
+    </option>
     <option name="JS.CONSOLE">
       <value>
         <option name="FOREGROUND" value="#00758f" />
@@ -1815,10 +1822,7 @@
     </option>
     <option name="JS.GLOBAL_FUNCTION">
       <value>
-        <option name="FOREGROUND" value="#00758f" />
-        
-        <option name="FONT_TYPE" value="0" />
-        
+        <option name="FOREGROUND" value="#007b4e" />
       </value>
     </option>
     <option name="JS.GLOBAL_VARIABLE">
@@ -1849,6 +1853,7 @@
         <option name="FOREGROUND" value="#7357c7" />
       </value>
     </option>
+    <option name="JS.PARAMETER" baseAttributes="DEFAULT_PARAMETER"/>
     <option name="JS.REGEXP">
       <value>
         <option name="FOREGROUND" value="#975e00" />
@@ -1896,6 +1901,12 @@
         <option name="BACKGROUND" value="#ede7e5" />
       </value>
     </option>
+    <option name="KOTLIN_ABSTRACT_CLASS">
+      <value>
+        <option name="FOREGROUND" value="#00758f" />
+        <option name="FONT_TYPE" value="0" />
+      </value>
+    </option>
     <option name="KOTLIN_ANNOTATION">
       <value>
         <option name="FOREGROUND" value="#00758f" />
@@ -1911,6 +1922,12 @@
     </option>
     <option name="KOTLIN_BACKING_FIELD_VARIABLE">
       <value />
+    </option>
+    <option name="KOTLIN_CLASS">
+      <value>
+        <option name="FOREGROUND" value="#00758f" />
+        <option name="FONT_TYPE" value="0" />
+      </value>
     </option>
     <option name="KOTLIN_COLON">
       <value>
@@ -1948,6 +1965,11 @@
     <option name="KOTLIN_DYNAMIC_PROPERTY_CALL">
       <value>
         <option name="FOREGROUND" value="#29242a" />
+      </value>
+    </option>
+    <option name="KOTLIN_ENUM_ENTRY">
+      <value>
+        <option name="FOREGROUND" value="#bf400d" />
       </value>
     </option>
     <option name="KOTLIN_EXCLEXCL">
@@ -2009,6 +2031,11 @@
         
         <option name="FONT_TYPE" value="0" />
         
+      </value>
+    </option>
+    <option name="KOTLIN_WRAPPED_INTO_REF">
+      <value>
+        <option name="FOREGROUND" value="#29242a" />
       </value>
     </option>
     <option name="KUBERNETES_POD_STATUS_ERROR">
@@ -2595,6 +2622,12 @@
         
       </value>
     </option>
+    <option name="org.toml.BOOLEAN">
+      <value>
+        <option name="FOREGROUND" value="#7357c7" />
+        <option name="FONT_TYPE" value="0" />
+      </value>
+    </option>
     <option name="PHP.FUNCTION">
       <value>
         <option name="FOREGROUND" value="#00758f" />
@@ -2756,6 +2789,11 @@
         <option name="FOREGROUND" value="#00758f" />
       </value>
     </option>
+    <option name="PY.ANNOTATION">
+      <value>
+        <option name="FOREGROUND" value="#00758f" />
+      </value>
+    </option>
     <option name="PY.BUILTIN_NAME">
       <value>
         <option name="FOREGROUND" value="#00758f" />
@@ -2766,7 +2804,7 @@
     </option>
     <option name="PY.DECORATOR">
       <value>
-        <option name="FOREGROUND" value="#007b4e" />
+        <option name="FOREGROUND" value="#00758f" />
       </value>
     </option>
     <option name="PY.KEYWORD">
@@ -2815,6 +2853,12 @@
     <option name="PY.STRING.B">
       <value>
         <option name="FOREGROUND" value="#975e00" />
+      </value>
+    </option>
+    <option name="PY.TYPE_PARAMETER">
+      <value>
+        <option name="FOREGROUND" value="#00758f" />
+        <option name="FONT_TYPE" value="0" />
       </value>
     </option>
     <option name="RDOC_DIRECTIVE">
@@ -3703,12 +3747,23 @@
         <option name="ERROR_STRIPE_COLOR" value="#0086a3" />
       </value>
     </option>
+    <option name="TS.ENUM_MEMBER">
+      <value>
+        <option name="FOREGROUND" value="#bf400d" />
+      </value>
+    </option>
     <option name="TS.MODULE_NAME">
       <value>
         <option name="FOREGROUND" value="#975e00" />
         
         <option name="FONT_TYPE" value="0" />
         
+      </value>
+    </option>
+    <option name="TS.PRIMITIVE.TYPES">
+      <value>
+        <option name="FOREGROUND" value="#00758f" />
+        <option name="FONT_TYPE" value="0" />
       </value>
     </option>
     <option name="TS.PRIVATE_PUBLIC">
@@ -3726,7 +3781,8 @@
     </option>
     <option name="TS.TYPE_PARAMETER">
       <value>
-        <option name="FOREGROUND" value="#975e00" />
+        <option name="FOREGROUND" value="#00758f" />
+        <option name="FONT_TYPE" value="0" />
       </value>
     </option>
     <option name="TWIG_BACKGROUND">
@@ -3893,8 +3949,7 @@
     </option>
     <option name="YAML_SCALAR_LIST">
       <value>
-        <option name="FOREGROUND" value="#524d50" />
-        <option name="EFFECT_TYPE" value="5" />
+        <option name="FOREGROUND" value="#975e00" />
       </value>
     </option>
     <option name="YAML_SCALAR_VALUE">
@@ -4011,6 +4066,11 @@
       <value>
         <option name="FOREGROUND" value="#00794c" />
         <option name="FONT_TYPE" value="1" />
+      </value>
+    </option>
+    <option name="YAML_TEXT">
+      <value>
+        <option name="FOREGROUND" value="#975e00" />
       </value>
     </option>
   </attributes>

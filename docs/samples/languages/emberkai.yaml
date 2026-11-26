@@ -1,0 +1,20 @@
+# Check YAML colors: keys, strings, numbers, booleans, anchors and aliases, and block scalars.
+defaults: &defaults
+  tone: warm
+  italic: true
+  contrast: 4.5
+
+presets:
+  - name: "Emberkai Islands"
+    <<: *defaults
+  - name: Emberkai Light
+    <<: *defaults
+    tone: paper
+    italic: false
+
+description: |
+  Warm dark and light themes,
+  with matching editor schemes.
+summary: >
+  Folded text keeps
+  a single line.
