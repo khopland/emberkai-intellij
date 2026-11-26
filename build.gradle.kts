@@ -178,14 +178,16 @@ val galleryCaptures = listOf(
     Capture("emberkai-ember", "emberkai-ember", "Emberkai"),
     Capture("emberkai-contrast-compact", "emberkai-contrast", "Emberkai Contrast - No Italics", compact = true),
     Capture("emberkai-light", "emberkai-light", "Emberkai Light"),
+    Capture("emberkai-light-contrast", "emberkai-light-contrast", "Emberkai Light Contrast"),
 )
 val marketplaceCaptures = listOf(
     Capture("1-emberkai-islands", "emberkai", "Emberkai", marketplace = true),
     Capture("2-emberkai-light", "emberkai-light", "Emberkai Light", marketplace = true),
     Capture("3-emberkai-contrast", "emberkai-contrast", "Emberkai Contrast - No Italics", compact = true, marketplace = true),
-    Capture("4-emberkai-teal", "emberkai-teal", "Emberkai", marketplace = true),
-    Capture("5-emberkai-rose", "emberkai-rose", "Emberkai", marketplace = true),
-    Capture("6-emberkai-ember", "emberkai-ember", "Emberkai", marketplace = true),
+    Capture("4-emberkai-light-contrast", "emberkai-light-contrast", "Emberkai Light Contrast", marketplace = true),
+    Capture("5-emberkai-teal", "emberkai-teal", "Emberkai", marketplace = true),
+    Capture("6-emberkai-rose", "emberkai-rose", "Emberkai", marketplace = true),
+    Capture("7-emberkai-ember", "emberkai-ember", "Emberkai", marketplace = true),
 )
 val themeIds = Regex("""<themeProvider id="([^"]+)" path="/islands/([^"]+)\.theme\.json"/>""")
     .findAll(file("src/main/resources/META-INF/plugin.xml").readText())

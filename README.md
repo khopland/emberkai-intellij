@@ -11,6 +11,7 @@ Islands layout. Requires **IntelliJ Platform 2026.1 or newer**.
 | **Emberkai Islands Contrast** | Brighter comments, line numbers, and secondary text. |
 | **Emberkai Islands Teal**, **Rose**, **Ember** | Other accent colors, with the same syntax colors. |
 | **Emberkai Islands Light** | Warm paper backgrounds, a bright orange accent, and its own editor scheme. |
+| **Emberkai Islands Light Contrast** | Light with darker syntax colors, comments, and secondary text: all editor text reaches 4.5:1 (WCAG AA). |
 
 Each editor scheme has a **No Italics** version. Buttons, run and stop
 controls, badges, diff, console, and file icon colors all come from one palette.

@@ -9,7 +9,8 @@ from the Marketplace are not bundled, so they are listed here.
 - **[Rainbow Brackets](https://plugins.jetbrains.com/plugin/10080-rainbow-brackets)**:
   all ten levels of round, square, curly, and angle brackets, and the rainbow
   indent guides, cycle through the palette: yellow, violet, cyan, green, orange,
-  rose, then yellow again. Light uses its darker versions of the same hues.
+  rose, then yellow again. Light uses its darker versions of the same hues,
+  and Light Contrast darkens them further to match its syntax colors.
   Rainbow variables use the IDE's
   [semantic highlighting](semantic-highlighting.md) colors, which Emberkai sets.
 - **[Symbols Icons](https://github.com/joansgarcia/jetbrains-symbols)**: see

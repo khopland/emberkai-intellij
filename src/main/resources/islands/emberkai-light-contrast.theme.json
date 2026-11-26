@@ -1,0 +1,44 @@
+{
+  "name": "Emberkai Islands Light Contrast",
+  "dark": false,
+  "author": "khopland",
+  "parentTheme": "c36630a1-fe53-408b-acfb-13c52f14c21d",
+  "editorScheme": "/schemes/emberkai-light-contrast.xml",
+  "colors": {
+    "text-muted": "#605c5f",
+    "text-secondary": "#605c5f",
+    "text-disabled": "#7a7477",
+    "border": "#bbb2b1",
+    "layer-1-border": "#bbb2b1",
+    "control-border": "#bbb2b1",
+    "button-border": "#918b8f",
+    "popup-border": "#ada5aa",
+    "popup-border-windows": "#ada5aa",
+    "control-border-raised": "#a69d9f",
+    "control-bg-small": "#bbb2b1",
+    "tab-selected-border-inactive": "#bbb2b1",
+    "tree-indent-guide-border": "#ddd2ce",
+    "icon-default-stroke": "#605c5f",
+    "icon-red": "#ce1e59",
+    "icon-yellow": "#975e00",
+    "icon-blue": "#316cb6",
+    "icon-cyan": "#00758f",
+    "icon-purple": "#7357c7",
+    "icon-green": "#007b4e",
+    "BorderLight": "#bbb2b1",
+    "PopupBorder": "#ada5aa",
+    "TooltipBorder": "#ada5aa"
+  },
+  "ui": {
+    "ToolWindow.Button.selectedBackground": "accent",
+    "ToolWindow.Button.selectedForeground": "text-over-accent",
+    "EditorTabs.underlinedTabForeground": "foreground",
+    "Label.infoForeground": "text-secondary",
+    "StatusBar": {
+      "Widget.foreground": "text-secondary",
+      "Breadcrumbs.foreground": "text-secondary"
+    },
+    "Component.disabledBorderColor": "border",
+    "ToolWindow.Button.foreground": "text-secondary"
+  }
+}

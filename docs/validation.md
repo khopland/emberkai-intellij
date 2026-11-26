@@ -9,7 +9,10 @@ loads the IDE's libraries before optional module jars, which can contain
 conflicting library copies such as JSVG in the charts module. It
 checks all theme registrations and inheritance chains, matching No Italics
 schemes, preserved syntax colors, 16 distinct ANSI colors, diff readability,
-Contrast text thresholds, and Islands geometry and selected controls.
+Contrast text thresholds, and Islands geometry and selected controls. Light
+Contrast must keep each Light syntax style, map each Light syntax color to one
+darker color, and reach 4.5:1 for all editor text. `scripts/light_contrast.py`
+derives both Light Contrast schemes from Emberkai Light.
 Run/stop and plugin install buttons must use the palette's green and red with
 4.5:1 foregrounds, every Islands color ramp must be replaced by the palette,
 secondary text must reach 4.5:1, editor text without its own background must

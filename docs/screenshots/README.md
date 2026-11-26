@@ -20,6 +20,13 @@ editor scheme, which uses darker versions of the dark palette's hues.
 
 [![Emberkai Islands Light](emberkai-light.png)](emberkai-light.png)
 
+## Emberkai Islands Light Contrast
+
+The same hues, darkened until all editor text reaches 4.5:1 and comments and
+line numbers 5.5:1, with darker secondary text and borders.
+
+[![Emberkai Islands Light Contrast](emberkai-light-contrast.png)](emberkai-light-contrast.png)
+
 ## Teal, Rose, and Ember accents
 
 Accent presets change the selected controls and tabs while keeping the same

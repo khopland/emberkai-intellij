@@ -2,6 +2,16 @@
 
 ## [Unreleased]
 
+- New **Emberkai Islands Light Contrast** theme, with **Emberkai Light
+  Contrast** and **Emberkai Light Contrast - No Italics** editor schemes. Light
+  reaches about 3.2:1 to 3.9:1 for its syntax colors; Light Contrast darkens
+  each one along its own hue until all editor text reaches 4.5:1 (WCAG AA), and
+  comments, line numbers, and semantic highlighting 5.5:1. Secondary text,
+  borders, and file icons are darker to match.
+- Theme validation requires 4.5:1 for all Light Contrast editor text, and
+  checks that each Light syntax color maps to one darker color with the same
+  style.
+
 - The README and Marketplace description show Emberkai Islands Light next to
   the dark theme, and every accent. The description lists the presets and how
   to choose them.
