@@ -28,6 +28,13 @@
   values for plugins that keep their colors in their own settings, such as
   IdeaVim, AceJump, and Indent Rainbow.
 
+- Red-green colorblind support: with **Adjust colors for red-green vision
+  deficiency** turned on under Settings → Appearance → Accessibility, added
+  lines and files are cyan and modified ones violet instead of green and cyan,
+  in the gutter, diff viewer, file status colors, and coverage. Deleted stays
+  rose. Inserted and deleted diff backgrounds were hard to tell apart with
+  deuteranopia, especially in Light; they now differ clearly in every scheme.
+
 ## [2.1.0]
 
 - New **Emberkai Islands Light** theme, with colors:

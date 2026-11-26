@@ -8,7 +8,7 @@
     <property name="originalScheme">Darcula</property>
   </metaInfo>
   <colors>
-    <option name="ADDED_LINES_COLOR" value="#7bd88f" />
+    <option name="ADDED_LINES_COLOR" value="#7bd88f" deuteranopia="#5ad4e6" protanopia="#5ad4e6" />
     <option name="ANNOTATIONS_COLOR" value="#8b888f" />
     <option name="ActionButton.hoverBackground" value="#363537" />
     <option name="ActionButton.iconTextForeground" value="#8b888f" />
@@ -64,8 +64,8 @@
     <option name="DOCUMENTATION_COLOR" value="#2e2d2f" />
     <option name="DOC_COMMENT_GUIDE" value="#363537" />
     <option name="DOC_COMMENT_LINK" value="#5ad4e6" />
-    <option name="FILESTATUS_ADDED" value="#7bd88f" />
-    <option name="FILESTATUS_COPIED" value="#7bd88f" />
+    <option name="FILESTATUS_ADDED" value="#7bd88f" deuteranopia="#5ad4e6" protanopia="#5ad4e6" />
+    <option name="FILESTATUS_COPIED" value="#7bd88f" deuteranopia="#5ad4e6" protanopia="#5ad4e6" />
     <option name="FILESTATUS_DELETED" value="#69676c" />
     <option name="FILESTATUS_HIJACKED" value="#fce566" />
     <option name="FILESTATUS_IDEA_FILESTATUS_DELETED_FROM_FILE_SYSTEM" value="#69676c" />
@@ -73,24 +73,24 @@
     <option name="FILESTATUS_IDEA_FILESTATUS_MERGED_WITH_BOTH_CONFLICTS" value="#fd9353" />
     <option name="FILESTATUS_IDEA_FILESTATUS_MERGED_WITH_CONFLICTS" value="#fd9353" />
     <option name="FILESTATUS_IDEA_FILESTATUS_MERGED_WITH_PROPERTY_CONFLICTS" value="#fd9353" />
-    <option name="FILESTATUS_IDEA_SVN_FILESTATUS_EXTERNAL" value="#7bd88f" />
+    <option name="FILESTATUS_IDEA_SVN_FILESTATUS_EXTERNAL" value="#7bd88f" deuteranopia="#5ad4e6" protanopia="#5ad4e6" />
     <option name="FILESTATUS_IGNORE.PROJECT_VIEW.IGNORED" value="#78767b" />
     <option name="FILESTATUS_MERGED" value="#948ae3" />
-    <option name="FILESTATUS_MODIFIED" value="#5ad4e6" />
-    <option name="FILESTATUS_NOT_CHANGED_IMMEDIATE" value="#5ad4e6" />
-    <option name="FILESTATUS_NOT_CHANGED_RECURSIVE" value="#5ad4e6" />
-    <option name="FILESTATUS_RENAMED" value="#5ad4e6" />
+    <option name="FILESTATUS_MODIFIED" value="#5ad4e6" deuteranopia="#948ae3" protanopia="#948ae3" />
+    <option name="FILESTATUS_NOT_CHANGED_IMMEDIATE" value="#5ad4e6" deuteranopia="#948ae3" protanopia="#948ae3" />
+    <option name="FILESTATUS_NOT_CHANGED_RECURSIVE" value="#5ad4e6" deuteranopia="#948ae3" protanopia="#948ae3" />
+    <option name="FILESTATUS_RENAMED" value="#5ad4e6" deuteranopia="#948ae3" protanopia="#948ae3" />
     <option name="FILESTATUS_SUPPRESSED" value="#69676c" />
     <option name="FILESTATUS_SWITCHED" value="#948ae3" />
     <option name="FILESTATUS_UNKNOWN" value="#fd9353" />
-    <option name="FILESTATUS_addedOutside" value="#7bd88f" />
+    <option name="FILESTATUS_addedOutside" value="#7bd88f" deuteranopia="#5ad4e6" protanopia="#5ad4e6" />
     <option name="FILESTATUS_changelistConflict" value="#fd9353" />
-    <option name="FILESTATUS_modifiedOutside" value="#5ad4e6" />
+    <option name="FILESTATUS_modifiedOutside" value="#5ad4e6" deuteranopia="#948ae3" protanopia="#948ae3" />
     <option name="FOLDED_TEXT_BORDER_COLOR" value="#525053" />
     <option name="GUTTER_BACKGROUND" value="#222222" />
-    <option name="IGNORED_ADDED_LINES_BORDER_COLOR" value="#7bd88f" />
+    <option name="IGNORED_ADDED_LINES_BORDER_COLOR" value="#7bd88f" deuteranopia="#5ad4e6" protanopia="#5ad4e6" />
     <option name="IGNORED_DELETED_LINES_BORDER_COLOR" value="#fc618d" />
-    <option name="IGNORED_MODIFIED_LINES_BORDER_COLOR" value="#5ad4e6" />
+    <option name="IGNORED_MODIFIED_LINES_BORDER_COLOR" value="#5ad4e6" deuteranopia="#948ae3" protanopia="#948ae3" />
     <option name="INDENT_GUIDE" value="#363537" />
     <option name="INFORMATION_HINT" value="#363537" />
     <option name="INLINE_REFACTORING_SETTINGS_DEFAULT" value="#3e3d3f8c" />
@@ -107,7 +107,7 @@
     <option name="LINE_NUMBER_ON_CARET_ROW_COLOR" value="#bab6c0" />
     <option name="LOOKUP_COLOR" value="#2e2d2f" />
     <option name="METHOD_SEPARATORS_COLOR" value="#525053" />
-    <option name="MODIFIED_LINES_COLOR" value="#5ad4e6" />
+    <option name="MODIFIED_LINES_COLOR" value="#5ad4e6" deuteranopia="#948ae3" protanopia="#948ae3" />
     <option name="MODIFIED_TAB_ICON" value="#5ad4e6" />
     <option name="NEXT_EDIT.DIFF_ADD_BACKGROUND" value="#324336" />
     <option name="NEXT_EDIT.DIFF_AFTER_BACKGROUND" value="#2b342d" />
@@ -1119,16 +1119,16 @@
     </option>
     <option name="DIFF_INSERTED">
       <value>
-        <option name="BACKGROUND" value="344638" />
-        <option name="ERROR_STRIPE_COLOR" value="7bd88f" />
-        <option name="FOREGROUND" value="2b342d" />
+        <option name="BACKGROUND" value="344638" deuteranopia="#366067" protanopia="#366067" />
+        <option name="ERROR_STRIPE_COLOR" value="7bd88f" deuteranopia="#5ad4e6" protanopia="#5ad4e6" />
+        <option name="FOREGROUND" value="2b342d" deuteranopia="#283436" protanopia="#283436" />
       </value>
     </option>
     <option name="DIFF_MODIFIED">
       <value>
-        <option name="BACKGROUND" value="2d4649" />
-        <option name="ERROR_STRIPE_COLOR" value="5ad4e6" />
-        <option name="FOREGROUND" value="283436" />
+        <option name="BACKGROUND" value="2d4649" deuteranopia="#464360" protanopia="#464360" />
+        <option name="ERROR_STRIPE_COLOR" value="5ad4e6" deuteranopia="#948ae3" protanopia="#948ae3" />
+        <option name="FOREGROUND" value="283436" deuteranopia="#2d2c35" protanopia="#2d2c35" />
       </value>
     </option>
     <option name="DOC_TIPS_SHORTCUT">
@@ -1925,7 +1925,7 @@
     </option>
     <option name="LINE_FULL_COVERAGE">
       <value>
-        <option name="BACKGROUND" value="#324336" />
+        <option name="BACKGROUND" value="#324336" deuteranopia="#2c4246" protanopia="#2c4246" />
       </value>
     </option>
     <option name="LINE_NONE_COVERAGE">

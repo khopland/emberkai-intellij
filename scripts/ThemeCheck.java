@@ -101,18 +101,58 @@ class ThemeCheck {
     return com.intellij.openapi.util.JDOMUtil.load(Files.readAllBytes(path));
   }
   static Map<String,com.intellij.openapi.editor.markup.TextAttributes> attributes(org.jdom.Element root) {
+    return attributes(root, null);
+  }
+  static Map<String,Color> colors(org.jdom.Element root) {
+    return colors(root, null);
+  }
+  // A color blindness setting, such as "deuteranopia", reads that attribute instead of "value"
+  // where an option has one, as IntelliJ does when its vision deficiency option is on.
+  static com.intellij.openapi.editor.colors.impl.TextAttributesReader reader(String deficiency) {
+    var reader = new com.intellij.openapi.editor.colors.impl.TextAttributesReader();
+    if (deficiency != null) reader.setAttribute(deficiency);
+    return reader;
+  }
+  static Map<String,com.intellij.openapi.editor.markup.TextAttributes> attributes(org.jdom.Element root, String deficiency) {
     var result = new HashMap<String,com.intellij.openapi.editor.markup.TextAttributes>();
     for (org.jdom.Element option : root.getChild("attributes").getChildren("option")) {
-      result.put(option.getAttributeValue("name"),new com.intellij.openapi.editor.colors.impl.TextAttributesReader().readAttributes(option.getChild("value"), null));
+      result.put(option.getAttributeValue("name"),reader(deficiency).readAttributes(option.getChild("value"), null));
     }
     return result;
   }
-  static Map<String,Color> colors(org.jdom.Element root) {
+  static Map<String,Color> colors(org.jdom.Element root, String deficiency) {
     var result = new HashMap<String,Color>();
     for (org.jdom.Element option : root.getChild("colors").getChildren("option")) {
-      result.put(option.getAttributeValue("name"),new com.intellij.openapi.editor.colors.impl.TextAttributesReader().read(Color.class, option));
+      result.put(option.getAttributeValue("name"),reader(deficiency).read(Color.class, option));
     }
     return result;
+  }
+
+  // Red-green vision deficiency simulation (Machado, Oliveira, and Fernandes 2009, severity 1)
+  // in linear RGB, compared as OKLab distance x 100.
+  static final Map<String,double[][]> DEFICIENCIES = Map.of(
+    "deuteranopia", new double[][]{{0.367322, 0.860646, -0.227968}, {0.280085, 0.672501, 0.047413}, {-0.011820, 0.042940, 0.968881}},
+    "protanopia", new double[][]{{0.152286, 1.052583, -0.204868}, {0.114503, 0.786281, 0.099216}, {-0.003882, -0.048116, 1.051998}});
+  static double[] oklab(Color color, double[][] matrix) {
+    double[] linear = new double[3];
+    int[] channels = {color.getRed(), color.getGreen(), color.getBlue()};
+    for (int i = 0; i < 3; i++) {
+      double value = channels[i] / 255.0;
+      linear[i] = value <= 0.04045 ? value / 12.92 : Math.pow((value + 0.055) / 1.055, 2.4);
+    }
+    double[] seen = new double[3];
+    for (int i = 0; i < 3; i++)
+      seen[i] = Math.max(0, Math.min(1, matrix[i][0] * linear[0] + matrix[i][1] * linear[1] + matrix[i][2] * linear[2]));
+    double l = Math.cbrt(0.4122214708 * seen[0] + 0.5363325363 * seen[1] + 0.0514459929 * seen[2]);
+    double m = Math.cbrt(0.2119034982 * seen[0] + 0.6806995451 * seen[1] + 0.1073969566 * seen[2]);
+    double s = Math.cbrt(0.0883024619 * seen[0] + 0.2817188376 * seen[1] + 0.6299787005 * seen[2]);
+    return new double[]{0.2104542553 * l + 0.7936177850 * m - 0.0040720468 * s,
+                        1.9779984951 * l - 2.4285922050 * m + 0.4505937099 * s,
+                        0.0259040371 * l + 0.7827717662 * m - 0.8086757660 * s};
+  }
+  static double seenDistance(Color a, Color b, double[][] matrix) {
+    double[] first = oklab(a, matrix), second = oklab(b, matrix);
+    return 100 * Math.sqrt(Math.pow(first[0] - second[0], 2) + Math.pow(first[1] - second[1], 2) + Math.pow(first[2] - second[2], 2));
   }
 
   static final Set<String> JETBRAINS_COLORS = Set.of(
@@ -619,6 +659,36 @@ class ThemeCheck {
         check(distance(schemeAttrs.get("SEARCH_RESULT_ATTRIBUTES").getBackgroundColor(),
                        schemeAttrs.get("WRITE_SEARCH_RESULT_ATTRIBUTES").getBackgroundColor()) >= 30, "Write usages must differ from read usages: " + path);
         check(schemeAttrs.get("RUNTIME_ERROR").getEffectColor() != null, "Runtime errors need a visible underline: " + path);
+        // With Accessibility > "Adjust colors for red-green vision deficiency" on, added, modified, and
+        // deleted changes must stay apart as seen with that deficiency, and diff text must stay readable.
+        for (var deficiency : DEFICIENCIES.entrySet()) {
+          var seenColors = colors(root, deficiency.getKey());
+          var seenAttrs = attributes(root, deficiency.getKey());
+          var matrix = deficiency.getValue();
+          var groups = new LinkedHashMap<String,Object[]>();
+          groups.put("gutter", new Object[]{8.0, seenColors.get("ADDED_LINES_COLOR"), seenColors.get("MODIFIED_LINES_COLOR"), seenColors.get("DELETED_LINES_COLOR")});
+          groups.put("file status", new Object[]{8.0, seenColors.get("FILESTATUS_ADDED"), seenColors.get("FILESTATUS_MODIFIED"), seenColors.get("FILESTATUS_IDEA_FILESTATUS_MERGED_WITH_CONFLICTS")});
+          groups.put("diff", new Object[]{3.0, seenAttrs.get("DIFF_INSERTED").getBackgroundColor(), seenAttrs.get("DIFF_MODIFIED").getBackgroundColor(), seenAttrs.get("DIFF_DELETED").getBackgroundColor()});
+          for (var group : groups.entrySet())
+            for (int i = 1; i < 4; i++)
+              for (int j = i + 1; j < 4; j++)
+                check(seenDistance((Color)group.getValue()[i], (Color)group.getValue()[j], matrix) >= (double)group.getValue()[0],
+                      "Changes stay apart with " + deficiency.getKey() + ": " + path + " / " + group.getKey() + " " + i + "-" + j);
+          check(seenDistance(seenAttrs.get("DIFF_INSERTED").getBackgroundColor(), seenAttrs.get("DIFF_DELETED").getBackgroundColor(), matrix) >= 5,
+                "Inserted and deleted lines stay apart with " + deficiency.getKey() + ": " + path);
+          for (String key : List.of("DIFF_INSERTED", "DIFF_DELETED", "DIFF_MODIFIED", "DIFF_CONFLICT"))
+            check(contrast(seenAttrs.get(key).getBackgroundColor(), seenAttrs.get("TEXT").getForegroundColor()) >= 4.5,
+                  "Diff readability with " + deficiency.getKey() + ": " + path + " / " + key);
+          check(seenColors.get("MODIFIED_LINES_COLOR").equals(seenAttrs.get("DIFF_MODIFIED").getErrorStripeColor()),
+                "Matching diff/gutter color with " + deficiency.getKey() + ": " + path);
+        }
+        // Both settings give the same alternate, as in IntelliJ's own schemes.
+        var withAlternates = new ArrayList<org.jdom.Element>(root.getChild("colors").getChildren("option"));
+        for (var option : root.getChild("attributes").getChildren("option"))
+          if (option.getChild("value") != null) withAlternates.addAll(option.getChild("value").getChildren("option"));
+        for (var element : withAlternates)
+          check(Objects.equals(element.getAttributeValue("deuteranopia"), element.getAttributeValue("protanopia")),
+                "Matching deuteranopia and protanopia colors: " + path + " / " + element.getAttributeValue("name"));
         // Dimmed code must not read as a comment.
         Color comment = schemeAttrs.get("DEFAULT_LINE_COMMENT").getForegroundColor();
         for (String key : List.of("NOT_USED_ELEMENT_ATTRIBUTES", "DEPRECATED_ATTRIBUTES"))
