@@ -4,6 +4,7 @@ Every text color below its target is darkened along its own hue (HLS lightness o
 reaches the target against both the editor and caret-row backgrounds: 4.6:1 for code, 5.4:1 for
 bright ANSI colors, and 5.6:1 for comments, line numbers, and semantic highlighting stops.
 Backgrounds, effects drawn in other colors, and invisible placeholders keep Light's colors.
+Red-green deficiency colors (see colorblind_alternates.py) are darkened with the color they replace.
 
 Run after changing emberkai-light.xml, then copy any new icon colors into
 emberkai-light-contrast.theme.json:
@@ -47,11 +48,12 @@ attrs_start = text.index('<attributes>')
 STRONG_COLORS = {'LINE_NUMBERS_COLOR'}
 TEXT_COLORS = re.compile(r'FILESTATUS_.*|VCS_ANNOTATIONS_COLOR_\d|DOC_COMMENT_LINK|JUPYTER\.GUTTER_.*_EXECUTION_COUNT|ANNOTATIONS_COLOR|LINE_NUMBER_ON_CARET_ROW_COLOR')
 def fix_color(m):
-    name, value = m.group(1), m.group(2)
-    if name in STRONG_COLORS: return m.group(0).replace(value, darken(value, STRONG))
-    if TEXT_COLORS.fullmatch(name): return m.group(0).replace(value, darken(value, CODE))
-    return m.group(0)
-colors = re.sub(r'<option name="([^"]+)" value="(#[0-9a-fA-F]{6,8})" />', fix_color, text[colors_start:colors_end])
+    name, value, alternates = m.group(1), m.group(2), m.group(3)
+    target = STRONG if name in STRONG_COLORS else CODE if TEXT_COLORS.fullmatch(name) else None
+    if target is None: return m.group(0)
+    alternates = re.sub(r'"(#[0-9a-fA-F]{6,8})"', lambda a: '"%s"' % darken(a.group(1), target), alternates)
+    return '<option name="%s" value="%s"%s />' % (name, darken(value, target), alternates)
+colors = re.sub(r'<option name="([^"]+)" value="(#[0-9a-fA-F]{6,8})"((?: (?:deuteranopia|protanopia)="#[0-9a-fA-F]{6,8}")*) />', fix_color, text[colors_start:colors_end])
 
 # Foregrounds drawn on the editor background. Comments and semantic stops get the stronger target.
 STRONG_ATTRS = re.compile(r'DEFAULT_(LINE|BLOCK|DOC)_COMMENT|RAINBOW_COLOR\d')
@@ -65,6 +67,7 @@ def fix_attr(m):
     target = TARGETS.get(name, STRONG if STRONG_ATTRS.fullmatch(name) else 5.4 if re.fullmatch(r'CONSOLE_\w+_BRIGHT_OUTPUT', name) else CODE)
     fg = re.search(r'name="FOREGROUND" value="(#?[0-9a-fA-F]{6,8})"', body)
     if not fg: return m.group(0)
+    assert 'deuteranopia' not in body, 'darken the deficiency colors of ' + name
     old, new = fg.group(1), darken('#' + fg.group(1).lstrip('#'), target)
     body = body.replace('name="FOREGROUND" value="%s"' % old, 'name="FOREGROUND" value="%s"' % new)
     # Underlines drawn in the text color follow it; other effects keep their color.

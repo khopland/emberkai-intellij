@@ -59,6 +59,11 @@ Emberkai Islands Teal in the diff viewer:
 Optional [semantic highlighting](docs/semantic-highlighting.md) gives individual
 parameters and local variables colors from a range matched to your palette.
 
+With red-green color vision deficiency, turn on **Settings → Appearance &
+Behavior → Appearance → Accessibility → Adjust colors for red-green vision
+deficiency**. Added lines and files then turn cyan and modified ones violet,
+while deleted stays rose, in the gutter, diff viewer, file colors, and coverage.
+
 ## Optional file icons
 
 Install [Symbols Icons](https://github.com/joansgarcia/jetbrains-symbols) separately

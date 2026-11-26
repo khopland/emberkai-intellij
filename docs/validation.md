@@ -36,6 +36,14 @@ popup, like stock Islands Dark. Ignored file colors must reach 3:1, and
 parameter hints must reach 4.5:1 on their chip without using the code's text
 color. The current parameter in parameter info, Presentation Assistant popups,
 progress counters, and plugin tags must reach 4.5:1 on their own backgrounds.
+Each scheme has red-green deficiency colors, read by the IDE when Accessibility →
+Adjust colors for red-green vision deficiency is on. Under simulated deuteranopia
+and protanopia, the added, modified, and deleted gutter and file status colors
+must differ clearly, inserted and deleted diff backgrounds must stay apart, and
+text on them must keep 4.5:1. `scripts/colorblind_alternates.py` writes these
+colors; run it again after changing a scheme's VCS, diff, or coverage colors.
+`scripts/light_contrast.py` carries Light's alternates into Light Contrast, darkened
+like the colors they replace.
 Find results, highlighted usages, and breakpoints need a visible background and
 a scrollbar mark, and write usages must differ from read usages. Indeterminate
 progress needs two distinct colors, split editors need a divider, the default
@@ -90,6 +98,9 @@ and inspect ANSI output in the Run console. The sample requires Java 21+.
   can still be recolored.
 - Open a diff with additions, deletions, and modifications; inspect conflict
   colors in Editor → Color Scheme → Diff & Merge.
+- Turn on Accessibility → Adjust colors for red-green vision deficiency and
+  check the same diff, the gutter, and changed files in the Project view: added
+  is cyan, modified violet, and deleted rose. Turn it off again.
 - Run `bash docs/samples/ansi-colors.sh` in the IDE terminal. Inspect normal and
   bright colors in Editor → Color Scheme → Console Colors too: terminal palettes
   can be customized separately from the console scheme.

@@ -2,7 +2,7 @@
 <scheme name="Emberkai Light" version="142" parent_scheme="Default">
   <option name="FONT_SCALE" value="1.0" />
   <colors>
-    <option name="ADDED_LINES_COLOR" value="#00935e" />
+    <option name="ADDED_LINES_COLOR" value="#00935e" deuteranopia="#0086a3" protanopia="#0086a3" />
     <option name="ANNOTATIONS_COLOR" value="#706b6e" />
     <option name="ActionButton.hoverBackground" value="#ede7e5" />
     <option name="ActionButton.iconTextForeground" value="#706b6e" />
@@ -58,8 +58,8 @@
     <option name="DOCUMENTATION_COLOR" value="#fefaf8" />
     <option name="DOC_COMMENT_GUIDE" value="#ede7e5" />
     <option name="DOC_COMMENT_LINK" value="#0086a3" />
-    <option name="FILESTATUS_ADDED" value="#00935e" />
-    <option name="FILESTATUS_COPIED" value="#00935e" />
+    <option name="FILESTATUS_ADDED" value="#00935e" deuteranopia="#0086a3" protanopia="#0086a3" />
+    <option name="FILESTATUS_COPIED" value="#00935e" deuteranopia="#0086a3" protanopia="#0086a3" />
     <option name="FILESTATUS_DELETED" value="#9a9598" />
     <option name="FILESTATUS_HIJACKED" value="#c27800" />
     <option name="FILESTATUS_IDEA_FILESTATUS_DELETED_FROM_FILE_SYSTEM" value="#9a9598" />
@@ -67,26 +67,26 @@
     <option name="FILESTATUS_IDEA_FILESTATUS_MERGED_WITH_BOTH_CONFLICTS" value="#e74e10" />
     <option name="FILESTATUS_IDEA_FILESTATUS_MERGED_WITH_CONFLICTS" value="#e74e10" />
     <option name="FILESTATUS_IDEA_FILESTATUS_MERGED_WITH_PROPERTY_CONFLICTS" value="#e74e10" />
-    <option name="FILESTATUS_IDEA_SVN_FILESTATUS_EXTERNAL" value="#00935e" />
+    <option name="FILESTATUS_IDEA_SVN_FILESTATUS_EXTERNAL" value="#00935e" deuteranopia="#0086a3" protanopia="#0086a3" />
     <option name="FILESTATUS_IGNORE.PROJECT_VIEW.IGNORED" value="#857f82" />
     <option name="FILESTATUS_MERGED" value="#7459c8" />
-    <option name="FILESTATUS_MODIFIED" value="#0086a3" />
-    <option name="FILESTATUS_NOT_CHANGED_IMMEDIATE" value="#0086a3" />
-    <option name="FILESTATUS_NOT_CHANGED_RECURSIVE" value="#0086a3" />
+    <option name="FILESTATUS_MODIFIED" value="#0086a3" deuteranopia="#7459c8" protanopia="#7459c8" />
+    <option name="FILESTATUS_NOT_CHANGED_IMMEDIATE" value="#0086a3" deuteranopia="#7459c8" protanopia="#7459c8" />
+    <option name="FILESTATUS_NOT_CHANGED_RECURSIVE" value="#0086a3" deuteranopia="#7459c8" protanopia="#7459c8" />
     <option name="FILESTATUS_OBSOLETE" value="#e74e10" />
-    <option name="FILESTATUS_RENAMED" value="#0086a3" />
+    <option name="FILESTATUS_RENAMED" value="#0086a3" deuteranopia="#7459c8" protanopia="#7459c8" />
     <option name="FILESTATUS_SUPPRESSED" value="#9a9598" />
     <option name="FILESTATUS_SWITCHED" value="#7459c8" />
     <option name="FILESTATUS_UNKNOWN" value="#e74e10" />
-    <option name="FILESTATUS_addedOutside" value="#00935e" />
+    <option name="FILESTATUS_addedOutside" value="#00935e" deuteranopia="#0086a3" protanopia="#0086a3" />
     <option name="FILESTATUS_changelistConflict" value="#e74e10" />
-    <option name="FILESTATUS_modifiedOutside" value="#0086a3" />
+    <option name="FILESTATUS_modifiedOutside" value="#0086a3" deuteranopia="#7459c8" protanopia="#7459c8" />
     <option name="FOLDED_TEXT_BORDER_COLOR" value="#d3cdcc" />
     <option name="GRID_STRIPE_COLOR" value="#f4eeeb" />
     <option name="GUTTER_BACKGROUND" value="#faf4f2" />
-    <option name="IGNORED_ADDED_LINES_BORDER_COLOR" value="#00935e" />
+    <option name="IGNORED_ADDED_LINES_BORDER_COLOR" value="#00935e" deuteranopia="#0086a3" protanopia="#0086a3" />
     <option name="IGNORED_DELETED_LINES_BORDER_COLOR" value="#e1346e" />
-    <option name="IGNORED_MODIFIED_LINES_BORDER_COLOR" value="#0086a3" />
+    <option name="IGNORED_MODIFIED_LINES_BORDER_COLOR" value="#0086a3" deuteranopia="#7459c8" protanopia="#7459c8" />
     <option name="INDENT_GUIDE" value="#ede7e5" />
     <option name="INFORMATION_HINT" value="#ede7e5" />
     <option name="INLINE_REFACTORING_SETTINGS_DEFAULT" value="#e1dbd98c" />
@@ -103,7 +103,7 @@
     <option name="LINE_NUMBER_ON_CARET_ROW_COLOR" value="#524d50" />
     <option name="LOOKUP_COLOR" value="#fefaf8" />
     <option name="METHOD_SEPARATORS_COLOR" value="#d3cdcc" />
-    <option name="MODIFIED_LINES_COLOR" value="#0086a3" />
+    <option name="MODIFIED_LINES_COLOR" value="#0086a3" deuteranopia="#7459c8" protanopia="#7459c8" />
     <option name="MODIFIED_TAB_ICON" value="#0086a3" />
     <option name="NEXT_EDIT.DIFF_ADD_BACKGROUND" value="#d0eedc" />
     <option name="NEXT_EDIT.DIFF_AFTER_BACKGROUND" value="#e1f3e8" />
@@ -1170,16 +1170,16 @@
     </option>
     <option name="DIFF_INSERTED">
       <value>
-        <option name="BACKGROUND" value="c6ebd5" />
-        <option name="ERROR_STRIPE_COLOR" value="00935e" />
-        <option name="FOREGROUND" value="e1f3e8" />
+        <option name="BACKGROUND" value="c6ebd5" deuteranopia="#a2ced6" protanopia="#a2ced6" />
+        <option name="ERROR_STRIPE_COLOR" value="00935e" deuteranopia="#0086a3" protanopia="#0086a3" />
+        <option name="FOREGROUND" value="e1f3e8" deuteranopia="#e1e9ea" protanopia="#e1e9ea" />
       </value>
     </option>
     <option name="DIFF_MODIFIED">
       <value>
-        <option name="BACKGROUND" value="c9e8f3" />
-        <option name="ERROR_STRIPE_COLOR" value="0086a3" />
-        <option name="FOREGROUND" value="e0f1f7" />
+        <option name="BACKGROUND" value="c9e8f3" deuteranopia="#dbd0e8" protanopia="#dbd0e8" />
+        <option name="ERROR_STRIPE_COLOR" value="0086a3" deuteranopia="#7459c8" protanopia="#7459c8" />
+        <option name="FOREGROUND" value="e0f1f7" deuteranopia="#ede4ee" protanopia="#ede4ee" />
       </value>
     </option>
     <option name="DIFF_UNKNOWN">
@@ -2043,7 +2043,7 @@
     </option>
     <option name="LINE_FULL_COVERAGE">
       <value>
-        <option name="BACKGROUND" value="#d0eedc" />
+        <option name="BACKGROUND" value="#d0eedc" deuteranopia="#d0e2e5" protanopia="#d0e2e5" />
       </value>
     </option>
     <option name="LINE_NONE_COVERAGE">
