@@ -173,6 +173,29 @@ class ThemeCheck {
     "c7c8f5", "219598", "39adb5", "c4b3a3", "536c46", "fcfafa", "646877", "a2a2a2", "727272",
     "808080", "dbdbdb", "404040", "fffbf7", "19181a", "7867e7", "5789dd");
 
+  // Language keys that share a role with Java or Language Defaults, so that classes, type
+  // parameters, decorators, and constants look alike in every language. Python and Go are not
+  // bundled, so the base scheme check cannot see their keys.
+  static final Map<String,String> LANGUAGE_ROLES = new LinkedHashMap<>() {{
+    put("KOTLIN_CLASS", "CLASS_NAME_ATTRIBUTES");
+    put("KOTLIN_ABSTRACT_CLASS", "CLASS_NAME_ATTRIBUTES");
+    put("JS.CLASS", "CLASS_NAME_ATTRIBUTES");
+    put("TS.PRIMITIVE.TYPES", "CLASS_NAME_ATTRIBUTES");
+    put("TS.TYPE_PARAMETER", "TYPE_PARAMETER_NAME_ATTRIBUTES");
+    put("PY.TYPE_PARAMETER", "TYPE_PARAMETER_NAME_ATTRIBUTES");
+    put("KOTLIN_ENUM_ENTRY", "DEFAULT_CONSTANT");
+    put("TS.ENUM_MEMBER", "DEFAULT_CONSTANT");
+    put("KOTLIN_WRAPPED_INTO_REF", "DEFAULT_LOCAL_VARIABLE");
+    put("JS.GLOBAL_FUNCTION", "DEFAULT_FUNCTION_DECLARATION");
+    put("JS.PARAMETER", "DEFAULT_PARAMETER");
+    put("PY.DECORATOR", "DEFAULT_METADATA");
+    put("PY.ANNOTATION", "DEFAULT_CLASS_REFERENCE");
+    put("YAML_SCALAR_LIST", "DEFAULT_STRING");
+    put("YAML_TEXT", "DEFAULT_STRING");
+    put("org.toml.BOOLEAN", "JSON.KEYWORD");
+    put("CUSTOM_NUMBER_ATTRIBUTES", "DEFAULT_NUMBER");
+  }};
+
   static final java.util.regex.Pattern HEX_COLOR = java.util.regex.Pattern.compile("#?[0-9a-fA-F]{6}([0-9a-fA-F]{2})?");
   static final java.util.regex.Pattern DARCULA_ADDITION = java.util.regex.Pattern.compile("<additionalTextAttributes\\b[^>]*>");
   static final java.util.regex.Pattern ADDITION_FILE = java.util.regex.Pattern.compile("\\bfile=\"/?([^\"]+)\"");
@@ -710,6 +733,15 @@ class ThemeCheck {
               check(!value.getForegroundColor().equals(schemeAttrs.get(kind + "_RAINBOW_COLOR" + (level - 1)).getForegroundColor()),
                     "Adjacent Rainbow Brackets levels differ: " + path + " / " + kind + level);
           }
+        }
+        // A key either copies its role's attributes or, where the role is its own fallback, inherits it.
+        for (var role : LANGUAGE_ROLES.entrySet()) {
+          var option = root.getChild("attributes").getChildren("option").stream()
+            .filter(o -> role.getKey().equals(o.getAttributeValue("name"))).findFirst();
+          check(option.isPresent(), "Language key has a color: " + path + " / " + role.getKey());
+          if (role.getValue().equals(option.get().getAttributeValue("baseAttributes"))) continue;
+          check(schemeAttrs.get(role.getValue()).equals(schemeAttrs.get(role.getKey())),
+                "Language key matches " + role.getValue() + ": " + path + " / " + role.getKey());
         }
         var defined = new HashSet<String>();
         for (var section : List.of("colors", "attributes"))

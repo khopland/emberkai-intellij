@@ -44,6 +44,11 @@ text on them must keep 4.5:1. `scripts/colorblind_alternates.py` writes these
 colors; run it again after changing a scheme's VCS, diff, or coverage colors.
 `scripts/light_contrast.py` carries Light's alternates into Light Contrast, darkened
 like the colors they replace.
+Language keys that share a role with Java or Language Defaults must match it in
+every scheme: Kotlin and JavaScript class names and TypeScript primitive types
+use Java's class color, type parameters Java's type parameter color, enum
+members the constant color, Python decorators and type hints the metadata and
+class reference colors, and YAML values the string color.
 Find results, highlighted usages, and breakpoints need a visible background and
 a scrollbar mark, and write usages must differ from read usages. Indeterminate
 progress needs two distinct colors, split editors need a divider, the default
@@ -111,6 +116,11 @@ and inspect ANSI output in the Run console. The sample requires Java 21+.
   error in a comment.
 - Open `emberkai.sql` with a PostgreSQL dialect and check keywords, aliases, and
   the outer-query column inside the correlated subquery.
+- Open the files in `docs/samples/languages/` and check that classes, type
+  parameters, enum members, decorators, and strings match the Java sample.
+  Python needs PyCharm or the Python plugin, and Go needs GoLand or the Go
+  plugin. The Maven sample has no Kotlin library, so ignore unresolved standard
+  library calls in `Emberkai.kt`.
 - In RustRover, open `emberkai.rs` and check lifetimes, type parameters, macros,
   mutable bindings, the `unsafe` block, and the `cfg`-disabled function. Rust
   isn't bundled with IntelliJ IDEA, so the headless checks don't cover these keys.

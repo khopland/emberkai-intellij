@@ -226,7 +226,8 @@ fun registerCapture(capture: Capture): String {
             args(projectDir.absolutePath)
             doFirst {
                 projectDir.deleteRecursively()
-                screenshotSamples.listFiles { file -> file.name !in setOf(".idea", "target") }!!
+                // The language samples would add a folder to the Project view in every capture.
+                screenshotSamples.listFiles { file -> file.name !in setOf(".idea", "target", "languages") }!!
                     .forEach { it.copyRecursively(projectDir.resolve(it.name)) }
                 // Start from a fresh profile: cached project state would refer to an SDK that no
                 // longer exists. Recreate the directories, because the IDE falls back to other
