@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [2.2.0]
+
 - Languages use the same colors for the same roles as Java:
   - Kotlin and JavaScript class names are cyan italic instead of the green used
     for functions, and TypeScript primitive types such as `string` match them.
